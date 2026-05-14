@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s \"http://127.0.0.1:8000/api/data/majors?keyword=计算机\")",
+      "Bash(python -m json.tool)",
+      "Bash(python *)"
+    ]
+  }
+}

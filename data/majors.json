@@ -1,0 +1,1286 @@
+[
+  {
+    "id": "cs",
+    "name": "计算机科学与技术",
+    "category": "工学",
+    "employment_rate": 0.92,
+    "salary_median_5yr": 18000,
+    "salary_entry": 12000,
+    "requires_grad_school": false,
+    "irreplaceability": 85,
+    "tags": [
+      "热门",
+      "高薪",
+      "技术壁垒"
+    ],
+    "description": "就业面最广的工科专业之一，AI时代需求持续增长。",
+    "risk_factors": [
+      "行业竞争加剧",
+      "AI对低端岗位的替代"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "ai",
+    "name": "人工智能",
+    "category": "工学",
+    "employment_rate": 0.88,
+    "salary_median_5yr": 22000,
+    "salary_entry": 15000,
+    "requires_grad_school": true,
+    "irreplaceability": 90,
+    "tags": [
+      "前沿",
+      "高薪",
+      "需深造"
+    ],
+    "description": "薪资天花板高，但对数学和学历要求高，本科就业竞争力弱。",
+    "risk_factors": [
+      "泡沫风险",
+      "学历门槛极高"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "ee",
+    "name": "电子信息工程",
+    "category": "工学",
+    "employment_rate": 0.9,
+    "salary_median_5yr": 16000,
+    "salary_entry": 10000,
+    "requires_grad_school": false,
+    "irreplaceability": 80,
+    "tags": [
+      "热门",
+      "芯片",
+      "硬件"
+    ],
+    "description": "芯片/半导体行业核心专业，国家战略扶持。",
+    "risk_factors": [
+      "学习难度大"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "news",
+    "name": "新闻学",
+    "category": "文学",
+    "employment_rate": 0.55,
+    "salary_median_5yr": 8000,
+    "salary_entry": 5000,
+    "requires_grad_school": false,
+    "irreplaceability": 30,
+    "tags": [
+      "天坑",
+      "转行率高"
+    ],
+    "description": "80%毕业生未从事本行业，传统媒体萎缩，自媒体门槛低。",
+    "risk_factors": [
+      "行业萎缩",
+      "门槛低导致内卷",
+      "AI替代内容生产"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "finance",
+    "name": "金融学",
+    "category": "经济学",
+    "employment_rate": 0.75,
+    "salary_median_5yr": 15000,
+    "salary_entry": 7000,
+    "requires_grad_school": true,
+    "irreplaceability": 60,
+    "tags": [
+      "看背景",
+      "两极分化"
+    ],
+    "description": "极其依赖家庭背景和资源，普通人进去是柜员，有资源的进投行。",
+    "risk_factors": [
+      "行业收缩",
+      "高度依赖人脉",
+      "学历内卷"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "med",
+    "name": "临床医学",
+    "category": "医学",
+    "employment_rate": 0.95,
+    "salary_median_5yr": 20000,
+    "salary_entry": 6000,
+    "requires_grad_school": true,
+    "irreplaceability": 95,
+    "tags": [
+      "稳定",
+      "长周期",
+      "高壁垒"
+    ],
+    "description": "越老越吃香，但培养周期长（5+3+X），需持续学习。",
+    "risk_factors": [
+      "周期长",
+      "工作强度大",
+      "医患关系"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "law",
+    "name": "法学",
+    "category": "法学",
+    "employment_rate": 0.65,
+    "salary_median_5yr": 12000,
+    "salary_entry": 5000,
+    "requires_grad_school": false,
+    "irreplaceability": 70,
+    "tags": [
+      "考证",
+      "两极分化"
+    ],
+    "description": "必须通过法考，通过率低。红圈所和普通律所差距巨大。",
+    "risk_factors": [
+      "法考门槛",
+      "饱和",
+      "二八定律严重"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "bio",
+    "name": "生物科学",
+    "category": "理学",
+    "employment_rate": 0.5,
+    "salary_median_5yr": 9000,
+    "salary_entry": 5500,
+    "requires_grad_school": true,
+    "irreplaceability": 75,
+    "tags": [
+      "天坑",
+      "需深造"
+    ],
+    "description": "本科几乎无法就业，必须读到博士。研发岗位周期长但稳定。",
+    "risk_factors": [
+      "学历门槛极高",
+      "就业面窄",
+      "薪资回报慢"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "civil",
+    "name": "土木工程",
+    "category": "工学",
+    "employment_rate": 0.7,
+    "salary_median_5yr": 10000,
+    "salary_entry": 6000,
+    "requires_grad_school": false,
+    "irreplaceability": 55,
+    "tags": [
+      "传统行业",
+      "下行"
+    ],
+    "description": "房地产行业下行，传统土木就业受冲击，但基建仍有需求。",
+    "risk_factors": [
+      "行业下行",
+      "工作环境艰苦",
+      "薪资天花板低"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "math",
+    "name": "数学与应用数学",
+    "category": "理学",
+    "employment_rate": 0.85,
+    "salary_median_5yr": 17000,
+    "salary_entry": 11000,
+    "requires_grad_school": false,
+    "irreplaceability": 88,
+    "tags": [
+      "基础学科",
+      "转行万金油"
+    ],
+    "description": "基础学科，转行计算机/金融/AI都容易，壁垒高。",
+    "risk_factors": [
+      "学习难度大",
+      "本科直接对口岗位少"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "geo",
+    "name": "地理科学",
+    "category": "理学",
+    "employment_rate": 0.78,
+    "salary_median_5yr": 9000,
+    "salary_entry": 5500,
+    "requires_grad_school": false,
+    "irreplaceability": 62,
+    "tags": [
+      "师范",
+      "考编",
+      "政史地适配"
+    ],
+    "description": "适合政史地组合，主要去向是地理教师、自然资源/规划相关单位、GIS与文旅规划等方向。普通家庭更适合优先看师范底色和考编通道。",
+    "risk_factors": [
+      "岗位地域性强",
+      "非师范方向就业面偏窄",
+      "高薪岗位需要GIS/数据能力"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "history",
+    "name": "历史学",
+    "category": "历史学",
+    "employment_rate": 0.72,
+    "salary_median_5yr": 8500,
+    "salary_entry": 5000,
+    "requires_grad_school": false,
+    "irreplaceability": 58,
+    "tags": [
+      "师范",
+      "考编",
+      "政史地适配"
+    ],
+    "description": "适合政史地组合，普通家庭优先选择师范方向，核心出路是历史教师、考公考编、文博档案等岗位。",
+    "risk_factors": [
+      "市场化岗位少",
+      "强依赖教师编制和公职考试",
+      "非师范历史学就业确定性较弱"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "chinese",
+    "name": "汉语言文学",
+    "category": "文学",
+    "employment_rate": 0.8,
+    "salary_median_5yr": 9500,
+    "salary_entry": 5500,
+    "requires_grad_school": false,
+    "irreplaceability": 64,
+    "tags": [
+      "师范",
+      "考编",
+      "文科稳妥"
+    ],
+    "description": "文科里相对稳的专业之一，适合教师编、公务员、事业单位和内容岗位。普通家庭要优先看师范认证和当地编制机会。",
+    "risk_factors": [
+      "高薪岗位少",
+      "竞争人数多",
+      "需要写作和表达能力长期积累"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "se",
+    "name": "软件工程",
+    "category": "工学",
+    "employment_rate": 0.91,
+    "salary_median_5yr": 17500,
+    "salary_entry": 11500,
+    "requires_grad_school": false,
+    "irreplaceability": 82,
+    "tags": [
+      "热门",
+      "高薪",
+      "技术壁垒"
+    ],
+    "description": "比计算机更偏工程实践，就业直接对口程序员岗位，起薪高。",
+    "risk_factors": [
+      "技术更新快",
+      "35岁危机",
+      "AI对基础编程的替代"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "ce",
+    "name": "通信工程",
+    "category": "工学",
+    "employment_rate": 0.88,
+    "salary_median_5yr": 15500,
+    "salary_entry": 9500,
+    "requires_grad_school": false,
+    "irreplaceability": 78,
+    "tags": [
+      "热门",
+      "5G",
+      "技术壁垒"
+    ],
+    "description": "5G/6G和物联网时代核心专业，华为中兴等大厂招聘主力。",
+    "risk_factors": [
+      "学习难度大",
+      "部分岗位需要硕士学历"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "elec",
+    "name": "电气工程及其自动化",
+    "category": "工学",
+    "employment_rate": 0.89,
+    "salary_median_5yr": 14000,
+    "salary_entry": 8500,
+    "requires_grad_school": false,
+    "irreplaceability": 75,
+    "tags": [
+      "稳定",
+      "电网",
+      "体制内"
+    ],
+    "description": "进国家电网最对口的专业之一，工作稳定，福利好。",
+    "risk_factors": [
+      "非电网方向薪资一般",
+      "部分岗位需要关系"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "mech",
+    "name": "机械设计制造及其自动化",
+    "category": "工学",
+    "employment_rate": 0.82,
+    "salary_median_5yr": 11000,
+    "salary_entry": 6500,
+    "requires_grad_school": false,
+    "irreplaceability": 65,
+    "tags": [
+      "传统工科",
+      "制造业"
+    ],
+    "description": "制造业基础专业，就业面广但起薪不高，智能制造方向有前景。",
+    "risk_factors": [
+      "起薪偏低",
+      "工作环境可能一般",
+      "需要持续学习新技术"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "auto",
+    "name": "自动化",
+    "category": "工学",
+    "employment_rate": 0.87,
+    "salary_median_5yr": 14500,
+    "salary_entry": 9000,
+    "requires_grad_school": false,
+    "irreplaceability": 76,
+    "tags": [
+      "热门",
+      "跨领域",
+      "技术壁垒"
+    ],
+    "description": "万金油工科，可转计算机/机器人/控制，就业面极广。",
+    "risk_factors": [
+      "课程杂而不精",
+      "需要自学确定方向"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "ds",
+    "name": "数据科学与大数据技术",
+    "category": "工学",
+    "employment_rate": 0.86,
+    "salary_median_5yr": 16500,
+    "salary_entry": 10000,
+    "requires_grad_school": false,
+    "irreplaceability": 83,
+    "tags": [
+      "热门",
+      "高薪",
+      "技术壁垒"
+    ],
+    "description": "大数据时代刚需，数据分析师/算法工程师对口专业。",
+    "risk_factors": [
+      "数学要求高",
+      "学校层次影响就业"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "sec",
+    "name": "信息安全",
+    "category": "工学",
+    "employment_rate": 0.9,
+    "salary_median_5yr": 17000,
+    "salary_entry": 10500,
+    "requires_grad_school": false,
+    "irreplaceability": 87,
+    "tags": [
+      "热门",
+      "高薪",
+      "技术壁垒"
+    ],
+    "description": "网络安全国家战略，人才缺口大，政企刚需。",
+    "risk_factors": [
+      "技术更新快",
+      "需要持续考证"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "iot",
+    "name": "物联网工程",
+    "category": "工学",
+    "employment_rate": 0.83,
+    "salary_median_5yr": 13000,
+    "salary_entry": 8000,
+    "requires_grad_school": false,
+    "irreplaceability": 72,
+    "tags": [
+      "热门",
+      "交叉学科"
+    ],
+    "description": "软硬件结合，智能家居/智慧城市/工业互联网方向。",
+    "risk_factors": [
+      "课程杂",
+      "部分学校师资不足"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "energy",
+    "name": "能源与动力工程",
+    "category": "工学",
+    "employment_rate": 0.8,
+    "salary_median_5yr": 11500,
+    "salary_entry": 7000,
+    "requires_grad_school": false,
+    "irreplaceability": 68,
+    "tags": [
+      "新能源",
+      "传统工科"
+    ],
+    "description": "新能源方向前景好，传统火电方向稳定但增长有限。",
+    "risk_factors": [
+      "传统方向下行",
+      "新能源方向需深造"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "arch",
+    "name": "建筑学",
+    "category": "工学",
+    "employment_rate": 0.65,
+    "salary_median_5yr": 12000,
+    "salary_entry": 6000,
+    "requires_grad_school": false,
+    "irreplaceability": 70,
+    "tags": [
+      "长周期",
+      "下行"
+    ],
+    "description": "房地产行业下行，设计院加班严重，传统建筑学需谨慎。",
+    "risk_factors": [
+      "行业下行",
+      "加班严重",
+      "薪资天花板"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "vehicle",
+    "name": "车辆工程",
+    "category": "工学",
+    "employment_rate": 0.84,
+    "salary_median_5yr": 13500,
+    "salary_entry": 8500,
+    "requires_grad_school": false,
+    "irreplaceability": 73,
+    "tags": [
+      "新能源汽车",
+      "制造业"
+    ],
+    "description": "新能源汽车方向火热，传统车企方向稳定。",
+    "risk_factors": [
+      "行业竞争激烈",
+      "部分岗位需要硕士"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "aero",
+    "name": "航空航天工程",
+    "category": "工学",
+    "employment_rate": 0.88,
+    "salary_median_5yr": 15000,
+    "salary_entry": 9000,
+    "requires_grad_school": true,
+    "irreplaceability": 85,
+    "tags": [
+      "高壁垒",
+      "国家战略",
+      "需深造"
+    ],
+    "description": "国防/航天系统核心专业，门槛高，就业稳定但选择面窄。",
+    "risk_factors": [
+      "就业面窄",
+      "深造几乎是必须",
+      "地域限制大"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "material",
+    "name": "材料科学与工程",
+    "category": "工学",
+    "employment_rate": 0.75,
+    "salary_median_5yr": 10500,
+    "salary_entry": 6500,
+    "requires_grad_school": true,
+    "irreplaceability": 72,
+    "tags": [
+      "天坑",
+      "需深造"
+    ],
+    "description": "新能源材料/半导体材料方向有前景，传统材料方向一般。",
+    "risk_factors": [
+      "传统方向薪资低",
+      "本科就业弱",
+      "需读到硕士以上"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "chem_eng",
+    "name": "化学工程与工艺",
+    "category": "工学",
+    "employment_rate": 0.78,
+    "salary_median_5yr": 10000,
+    "salary_entry": 6000,
+    "requires_grad_school": false,
+    "irreplaceability": 65,
+    "tags": [
+      "传统行业",
+      "制造业"
+    ],
+    "description": "化工/制药/能源行业基础专业，工作环境需注意。",
+    "risk_factors": [
+      "工作环境可能有害",
+      "起薪偏低",
+      "地域性强"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "bme",
+    "name": "生物医学工程",
+    "category": "工学",
+    "employment_rate": 0.76,
+    "salary_median_5yr": 12000,
+    "salary_entry": 7000,
+    "requires_grad_school": true,
+    "irreplaceability": 78,
+    "tags": [
+      "交叉学科",
+      "医疗",
+      "需深造"
+    ],
+    "description": "医疗器械/医学影像方向，交叉学科，需深造才有竞争力。",
+    "risk_factors": [
+      "交叉学科课程杂",
+      "本科就业竞争力弱",
+      "需硕士以上"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "ic",
+    "name": "集成电路设计与集成系统",
+    "category": "工学",
+    "employment_rate": 0.9,
+    "salary_median_5yr": 18500,
+    "salary_entry": 12000,
+    "requires_grad_school": true,
+    "irreplaceability": 88,
+    "tags": [
+      "热门",
+      "芯片",
+      "国家战略"
+    ],
+    "description": "芯片设计核心专业，国家大力扶持，薪资高但门槛高。",
+    "risk_factors": [
+      "学习难度极大",
+      "硕士几乎是标配",
+      "行业周期性波动"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "physics",
+    "name": "物理学",
+    "category": "理学",
+    "employment_rate": 0.8,
+    "salary_median_5yr": 14000,
+    "salary_entry": 8500,
+    "requires_grad_school": true,
+    "irreplaceability": 86,
+    "tags": [
+      "基础学科",
+      "高壁垒",
+      "转行优势"
+    ],
+    "description": "基础学科，转行金融/计算机/芯片都有优势，但本科就业面窄。",
+    "risk_factors": [
+      "本科对口岗位少",
+      "深造几乎是必须",
+      "学习难度极大"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "chemistry",
+    "name": "化学",
+    "category": "理学",
+    "employment_rate": 0.72,
+    "salary_median_5yr": 9500,
+    "salary_entry": 5500,
+    "requires_grad_school": true,
+    "irreplaceability": 70,
+    "tags": [
+      "天坑",
+      "需深造"
+    ],
+    "description": "四大天坑之一，本科就业差，必须读到博士才有好出路。",
+    "risk_factors": [
+      "本科就业差",
+      "工作环境可能有害",
+      "薪资回报慢"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "stats",
+    "name": "应用统计学",
+    "category": "理学",
+    "employment_rate": 0.84,
+    "salary_median_5yr": 15000,
+    "salary_entry": 9000,
+    "requires_grad_school": false,
+    "irreplaceability": 80,
+    "tags": [
+      "热门",
+      "数据驱动",
+      "转行优势"
+    ],
+    "description": "大数据时代核心技能，转行金融/互联网/咨询都受欢迎。",
+    "risk_factors": [
+      "数学要求高",
+      "需要自学编程"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "psych",
+    "name": "心理学",
+    "category": "理学",
+    "employment_rate": 0.68,
+    "salary_median_5yr": 9000,
+    "salary_entry": 5000,
+    "requires_grad_school": true,
+    "irreplaceability": 65,
+    "tags": [
+      "需深造",
+      "小众"
+    ],
+    "description": "用户体验/心理咨询/人力资源方向，但国内市场需求仍在培育。",
+    "risk_factors": [
+      "国内市场需求有限",
+      "需硕士以上",
+      "考证门槛"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "econ",
+    "name": "经济学",
+    "category": "经济学",
+    "employment_rate": 0.78,
+    "salary_median_5yr": 13000,
+    "salary_entry": 7000,
+    "requires_grad_school": true,
+    "irreplaceability": 68,
+    "tags": [
+      "考公友好",
+      "理论性强"
+    ],
+    "description": "理论性强，考公务员岗位多，但直接就业竞争力不如金融/会计。",
+    "risk_factors": [
+      "理论偏抽象",
+      "本科就业竞争力弱",
+      "深造几乎是必须"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "trade",
+    "name": "国际经济与贸易",
+    "category": "经济学",
+    "employment_rate": 0.7,
+    "salary_median_5yr": 10000,
+    "salary_entry": 6000,
+    "requires_grad_school": false,
+    "irreplaceability": 55,
+    "tags": [
+      "下行",
+      "英语要求高"
+    ],
+    "description": "受国际贸易环境影响大，英语不好慎选，岗位饱和。",
+    "risk_factors": [
+      "行业波动大",
+      "英语门槛高",
+      "岗位饱和"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "accounting",
+    "name": "会计学",
+    "category": "管理学",
+    "employment_rate": 0.82,
+    "salary_median_5yr": 11000,
+    "salary_entry": 5500,
+    "requires_grad_school": false,
+    "irreplaceability": 72,
+    "tags": [
+      "稳定",
+      "考公友好",
+      "考证"
+    ],
+    "description": "每个企业都需要会计，就业稳定，但起薪低，CPA是分水岭。",
+    "risk_factors": [
+      "起薪低",
+      "基层饱和",
+      "考证压力大"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "fiscal",
+    "name": "财政学",
+    "category": "经济学",
+    "employment_rate": 0.76,
+    "salary_median_5yr": 11500,
+    "salary_entry": 6000,
+    "requires_grad_school": false,
+    "irreplaceability": 70,
+    "tags": [
+      "考公友好",
+      "体制内"
+    ],
+    "description": "税务局/财政局对口专业，考公岗位多，体制外就业面窄。",
+    "risk_factors": [
+      "体制外就业面窄",
+      "薪资天花板明显"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "mba_base",
+    "name": "工商管理",
+    "category": "管理学",
+    "employment_rate": 0.75,
+    "salary_median_5yr": 10500,
+    "salary_entry": 5500,
+    "requires_grad_school": false,
+    "irreplaceability": 50,
+    "tags": [
+      "万金油",
+      "门槛低"
+    ],
+    "description": "课程杂而不精，就业靠学校牌子，普通家庭慎选。",
+    "risk_factors": [
+      "课程杂",
+      "门槛低导致内卷",
+      "名校才有竞争力"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "em",
+    "name": "工程管理",
+    "category": "管理学",
+    "employment_rate": 0.78,
+    "salary_median_5yr": 11000,
+    "salary_entry": 6000,
+    "requires_grad_school": false,
+    "irreplaceability": 62,
+    "tags": [
+      "交叉学科",
+      "建筑业"
+    ],
+    "description": "工程+管理的交叉学科，建筑行业下行影响就业。",
+    "risk_factors": [
+      "建筑业下行",
+      "课程杂",
+      "需实习经验"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "hr",
+    "name": "人力资源管理",
+    "category": "管理学",
+    "employment_rate": 0.74,
+    "salary_median_5yr": 9500,
+    "salary_entry": 5000,
+    "requires_grad_school": false,
+    "irreplaceability": 55,
+    "tags": [
+      "门槛低",
+      "内卷"
+    ],
+    "description": "门槛低，任何专业都能做HR，专业壁垒弱。",
+    "risk_factors": [
+      "门槛低",
+      "可替代性强",
+      "薪资天花板低"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "ecommerce",
+    "name": "电子商务",
+    "category": "管理学",
+    "employment_rate": 0.8,
+    "salary_median_5yr": 10500,
+    "salary_entry": 6000,
+    "requires_grad_school": false,
+    "irreplaceability": 60,
+    "tags": [
+      "互联网",
+      "门槛低"
+    ],
+    "description": "运营/产品经理方向，偏实践，学校层次影响大。",
+    "risk_factors": [
+      "课程偏理论",
+      "实践靠自学",
+      "学校层次影响大"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "logistics",
+    "name": "物流管理",
+    "category": "管理学",
+    "employment_rate": 0.78,
+    "salary_median_5yr": 9500,
+    "salary_entry": 5500,
+    "requires_grad_school": false,
+    "irreplaceability": 58,
+    "tags": [
+      "供应链",
+      "稳定"
+    ],
+    "description": "电商/制造业供应链刚需，但起薪不高，发展空间中等。",
+    "risk_factors": [
+      "起薪偏低",
+      "工作环境可能一般"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "english",
+    "name": "英语",
+    "category": "文学",
+    "employment_rate": 0.72,
+    "salary_median_5yr": 9000,
+    "salary_entry": 5000,
+    "requires_grad_school": false,
+    "irreplaceability": 50,
+    "tags": [
+      "师范",
+      "考编",
+      "工具属性"
+    ],
+    "description": "纯语言专业壁垒弱，教师编是主要出路，翻译市场饱和。",
+    "risk_factors": [
+      "纯语言壁垒弱",
+      "AI翻译冲击",
+      "岗位饱和"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "newmedia",
+    "name": "网络与新媒体",
+    "category": "文学",
+    "employment_rate": 0.75,
+    "salary_median_5yr": 10000,
+    "salary_entry": 5500,
+    "requires_grad_school": false,
+    "irreplaceability": 55,
+    "tags": [
+      "互联网",
+      "门槛低"
+    ],
+    "description": "运营/内容/策划方向，偏实践，能力比学历重要。",
+    "risk_factors": [
+      "门槛低导致内卷",
+      "工作不稳定",
+      "加班多"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "advert",
+    "name": "广告学",
+    "category": "文学",
+    "employment_rate": 0.68,
+    "salary_median_5yr": 9500,
+    "salary_entry": 5000,
+    "requires_grad_school": false,
+    "irreplaceability": 58,
+    "tags": [
+      "创意",
+      "加班多"
+    ],
+    "description": "创意/策划方向，广告公司加班多，行业波动大。",
+    "risk_factors": [
+      "加班严重",
+      "行业波动",
+      "创意靠天赋"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "ip",
+    "name": "知识产权",
+    "category": "法学",
+    "employment_rate": 0.7,
+    "salary_median_5yr": 11000,
+    "salary_entry": 5500,
+    "requires_grad_school": false,
+    "irreplaceability": 72,
+    "tags": [
+      "交叉学科",
+      "新兴"
+    ],
+    "description": "法律+技术的交叉方向，科技企业需求增长中。",
+    "risk_factors": [
+      "市场仍在培育",
+      "需要复合背景",
+      "法考仍是加分项"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "socio",
+    "name": "社会学",
+    "category": "法学",
+    "employment_rate": 0.65,
+    "salary_median_5yr": 8500,
+    "salary_entry": 5000,
+    "requires_grad_school": true,
+    "irreplaceability": 55,
+    "tags": [
+      "理论",
+      "需深造"
+    ],
+    "description": "理论研究为主，本科就业面窄，考公/继续深造是主路。",
+    "risk_factors": [
+      "本科就业面窄",
+      "市场化岗位少",
+      "需硕士以上"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "edu",
+    "name": "教育学",
+    "category": "教育学",
+    "employment_rate": 0.78,
+    "salary_median_5yr": 9000,
+    "salary_entry": 5000,
+    "requires_grad_school": false,
+    "irreplaceability": 60,
+    "tags": [
+      "师范",
+      "考编",
+      "稳定"
+    ],
+    "description": "理论研究+教育管理，考教师编是主要出路。",
+    "risk_factors": [
+      "不直接对应学科教学",
+      "竞争教师编需额外考证"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "preschool",
+    "name": "学前教育",
+    "category": "教育学",
+    "employment_rate": 0.8,
+    "salary_median_5yr": 7000,
+    "salary_entry": 4000,
+    "requires_grad_school": false,
+    "irreplaceability": 55,
+    "tags": [
+      "师范",
+      "稳定",
+      "低薪"
+    ],
+    "description": "幼儿园教师对口专业，工作稳定但薪资低，受出生率影响。",
+    "risk_factors": [
+      "薪资低",
+      "出生率下降影响岗位",
+      "工作琐碎"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "primary_edu",
+    "name": "小学教育",
+    "category": "教育学",
+    "employment_rate": 0.82,
+    "salary_median_5yr": 8500,
+    "salary_entry": 4500,
+    "requires_grad_school": false,
+    "irreplaceability": 62,
+    "tags": [
+      "师范",
+      "考编",
+      "稳定"
+    ],
+    "description": "小学教师对口专业，考编竞争相对中学小，工作稳定。",
+    "risk_factors": [
+      "薪资天花板低",
+      "出生率下降长期影响"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "dentistry",
+    "name": "口腔医学",
+    "category": "医学",
+    "employment_rate": 0.93,
+    "salary_median_5yr": 25000,
+    "salary_entry": 7000,
+    "requires_grad_school": true,
+    "irreplaceability": 92,
+    "tags": [
+      "高薪",
+      "稳定",
+      "高壁垒"
+    ],
+    "description": "医学里性价比最高的方向之一，可自主创业开诊所。",
+    "risk_factors": [
+      "分数极高",
+      "培养周期长",
+      "动手要求高"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "nursing",
+    "name": "护理学",
+    "category": "医学",
+    "employment_rate": 0.92,
+    "salary_median_5yr": 9000,
+    "salary_entry": 5000,
+    "requires_grad_school": false,
+    "irreplaceability": 75,
+    "tags": [
+      "稳定",
+      "刚需",
+      "工作强度大"
+    ],
+    "description": "医院刚需岗位，就业稳定，但工作强度大、轮班制。",
+    "risk_factors": [
+      "工作强度大",
+      "轮班制",
+      "薪资天花板"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "pharmacy",
+    "name": "药学",
+    "category": "医学",
+    "employment_rate": 0.82,
+    "salary_median_5yr": 11000,
+    "salary_entry": 5500,
+    "requires_grad_school": true,
+    "irreplaceability": 78,
+    "tags": [
+      "制药",
+      "需深造"
+    ],
+    "description": "制药企业/医院药房/药监局，研发岗需硕士以上。",
+    "risk_factors": [
+      "研发岗需深造",
+      "本科岗位薪资一般"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "tcm",
+    "name": "中医学",
+    "category": "医学",
+    "employment_rate": 0.85,
+    "salary_median_5yr": 12000,
+    "salary_entry": 5000,
+    "requires_grad_school": true,
+    "irreplaceability": 88,
+    "tags": [
+      "稳定",
+      "长周期",
+      "体制内"
+    ],
+    "description": "中医院/社区卫生服务中心对口，越老越吃香，但培养周期长。",
+    "risk_factors": [
+      "培养周期长",
+      "西医体系下发展空间受限",
+      "需硕士以上"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "agri",
+    "name": "农学",
+    "category": "农学",
+    "employment_rate": 0.75,
+    "salary_median_5yr": 8000,
+    "salary_entry": 4500,
+    "requires_grad_school": true,
+    "irreplaceability": 65,
+    "tags": [
+      "传统行业",
+      "需深造"
+    ],
+    "description": "农业科研/种子企业/农技推广，情怀和热爱是前提。",
+    "risk_factors": [
+      "薪资偏低",
+      "工作环境艰苦",
+      "城市化导致岗位减少"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "vet",
+    "name": "动物医学",
+    "category": "农学",
+    "employment_rate": 0.88,
+    "salary_median_5yr": 12000,
+    "salary_entry": 5500,
+    "requires_grad_school": false,
+    "irreplaceability": 80,
+    "tags": [
+      "宠物经济",
+      "稳定",
+      "高壁垒"
+    ],
+    "description": "宠物经济爆发，兽医需求大增，可自主创业开宠物医院。",
+    "risk_factors": [
+      "工作环境有异味",
+      "需考取执业兽医资格证"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "design",
+    "name": "视觉传达设计",
+    "category": "艺术学",
+    "employment_rate": 0.72,
+    "salary_median_5yr": 9500,
+    "salary_entry": 5000,
+    "requires_grad_school": false,
+    "irreplaceability": 65,
+    "tags": [
+      "创意",
+      "加班多"
+    ],
+    "description": "平面/UI/品牌设计方向，能力比学历重要，作品集是关键。",
+    "risk_factors": [
+      "AI设计工具冲击",
+      "加班严重",
+      "吃天赋和审美"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  },
+  {
+    "id": "digital_art",
+    "name": "数字媒体艺术",
+    "category": "艺术学",
+    "employment_rate": 0.78,
+    "salary_median_5yr": 11000,
+    "salary_entry": 6000,
+    "requires_grad_school": false,
+    "irreplaceability": 70,
+    "tags": [
+      "互联网",
+      "游戏",
+      "影视"
+    ],
+    "description": "游戏/影视/交互设计方向，互联网大厂需求稳定。",
+    "risk_factors": [
+      "加班严重",
+      "项目制不稳定",
+      "技术更新快"
+    ],
+    "data_source": "基于行业经验的估算值，非官方统计，仅供参考",
+    "data_reliability": "estimate"
+  }
+]

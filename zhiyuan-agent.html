@@ -1,0 +1,2539 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>志愿智选 Agent</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&family=LXGW+WenKai:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f4fa',
+                            100: '#d9e2f3',
+                            200: '#b3c5e7',
+                            300: '#8aa3d4',
+                            400: '#5a7fc0',
+                            500: '#3d62a4',
+                            600: '#2e4c82',
+                            700: '#1e3a5f',
+                            800: '#152a47',
+                            900: '#0d1a2e',
+                        },
+                        zxf: {
+                            red: '#e63946',
+                            dark: '#0a0a0a',
+                            card: '#111111',
+                            border: '#2a2a2a',
+                        },
+                        accent: {
+                            orange: '#e8983a',
+                            green: '#2a9d6c',
+                            blue: '#3b82c9',
+                            red: '#e63946',
+                        },
+                        surface: {
+                            DEFAULT: '#fafaf9',
+                            elevated: '#ffffff',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"LXGW WenKai"', '"Noto Sans SC"', 'serif'],
+                        body: ['"Noto Sans SC"', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        anton: ['"Anton"', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --ink-900: #0f172a;
+            --ink-700: #334155;
+            --ink-500: #64748b;
+            --ink-300: #cbd5e1;
+            --ink-100: #f1f5f9;
+            --warm-50: #fafaf9;
+            --warm-100: #f5f5f4;
+            --chong: #e8983a;
+            --wen: #3b82c9;
+            --bao: #2a9d6c;
+            --zxf-red: #e63946;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            background: var(--warm-50);
+            color: var(--ink-900);
+            overflow-x: hidden;
+        }
+        ::selection { background: rgba(230, 57, 70, 0.2); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--ink-300); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--ink-500); }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.015;
+            z-index: 9999;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(230,57,70,0.3); }
+            50% { border-color: rgba(230,57,70,0.8); }
+        }
+        @keyframes sieve-shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
+        }
+        @keyframes progressFill {
+            from { width: 0; }
+        }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--zxf-red); }
+        }
+
+        .animate-fade-in-up { animation: fadeInUp 0.7s ease-out forwards; }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        .animate-pulse-border { animation: pulse-border 2s infinite; }
+        .animate-sieve { animation: sieve-shake 0.5s ease-in-out; }
+        .progress-animate { animation: progressFill 1.2s ease-out forwards; }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.12);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ZXF style message bubbles */
+        .zxf-message {
+            position: relative;
+        }
+        .zxf-message::before {
+            content: '鈻?;
+            position: absolute;
+            left: -16px;
+            top: 0;
+            color: var(--zxf-red);
+            font-size: 8px;
+        }
+
+        /* Sieve visualization */
+        .sieve-mesh {
+            background-image:
+                linear-gradient(90deg, var(--ink-300) 1px, transparent 1px),
+                linear-gradient(var(--ink-300) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Median badge */
+        .median-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, #e63946 0%, #8b1a1a 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+        }
+
+        /* Typing effect for ZXF quotes */
+        .zxf-typing {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--zxf-red);
+            animation: typewriter 3s steps(40, end), blink-caret 0.75s step-end infinite;
+            max-width: fit-content;
+        }
+
+        /* Dark section for mental models */
+        .dark-section {
+            background: var(--zxf-dark);
+            color: #f0f0f0;
+            position: relative;
+        }
+        .dark-section::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(230, 57, 70, 0.015) 2px,
+                rgba(230, 57, 70, 0.015) 4px
+            );
+            pointer-events: none;
+        }
+
+        /* Card accent bar */
+        .card-accent-bar {
+            position: relative;
+            overflow: hidden;
+        }
+        .card-accent-bar::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--zxf-red);
+            transform: scaleY(0);
+            transition: transform 0.3s;
+            transform-origin: top;
+        }
+        .card-accent-bar:hover::before {
+            transform: scaleY(1);
+        }
+
+        /* Mobile sidebar */
+        .sidebar-mobile {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .sidebar-mobile.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ============================================
+        // Icons (Lucide)
+        // ============================================
+        let lucideRefreshQueued = false;
+        const scheduleLucideRefresh = () => {
+            lucideRefreshQueued = false;
+        };
+
+        const Icon = ({ name, size = 20, className = '' }) => {
+            const toPascalCase = (value) => String(value || '')
+                .split('-')
+                .map(part => part ? part.charAt(0).toUpperCase() + part.slice(1) : '')
+                .join('');
+            const normalizeSvgAttrs = (attrs = {}) => {
+                const attrMap = {
+                    'stroke-linecap': 'strokeLinecap',
+                    'stroke-linejoin': 'strokeLinejoin',
+                    'stroke-width': 'strokeWidth',
+                    'fill-rule': 'fillRule',
+                    'clip-rule': 'clipRule',
+                    'class': 'className'
+                };
+                return Object.entries(attrs).reduce((next, [key, value]) => {
+                    next[attrMap[key] || key] = value;
+                    return next;
+                }, {});
+            };
+            const renderIconNode = (node, idx) => {
+                if (!Array.isArray(node)) return null;
+                const [tag, attrs, children] = node;
+                return React.createElement(
+                    tag,
+                    { key: idx, ...normalizeSvgAttrs(attrs) },
+                    Array.isArray(children) ? children.map(renderIconNode) : null
+                );
+            };
+            const iconNode = window.lucide && window.lucide.icons
+                ? window.lucide.icons[toPascalCase(name)]
+                : null;
+            if (!iconNode) {
+                return (
+                    <span
+                        aria-hidden="true"
+                        className={`inline-block align-middle ${className}`}
+                        style={{ width: size, height: size }}
+                    />
+                );
+            }
+            return (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={size}
+                    height={size}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={`lucide lucide-${name} ${className}`}
+                    aria-hidden="true"
+                >
+                    {iconNode.map(renderIconNode)}
+                </svg>
+            );
+        };
+
+        class ErrorBoundary extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { hasError: false, errorMessage: '' };
+            }
+
+            static getDerivedStateFromError(error) {
+                return {
+                    hasError: true,
+                    errorMessage: error && error.message ? error.message : '鏈煡鍓嶇閿欒'
+                };
+            }
+
+            componentDidCatch(error, info) {
+                console.error('椤甸潰娓叉煋寮傚父锛屽凡琚敊璇竟鐣屾嫤鎴?', error, info);
+            }
+
+            render() {
+                if (this.state.hasError) {
+                    return (
+                        <div className="min-h-screen bg-warm-50 flex items-center justify-center px-4">
+                            <div className="max-w-lg w-full bg-white border border-red-100 rounded-2xl shadow-sm p-6">
+                                <div className="w-11 h-11 rounded-full bg-zxf-red text-white flex items-center justify-center mb-4">
+                                    <span className="font-bold">!</span>
+                                </div>
+                                <h1 className="text-xl font-bold text-ink-900 mb-2">鍓嶇娓叉煋閬囧埌闂</h1>
+                                <p className="text-sm text-ink-500 leading-relaxed mb-4">
+                                    椤甸潰娌℃湁鐧藉睆閫€鍑猴紝閿欒宸茶鎷︽埅銆傝鍒锋柊椤甸潰閲嶈瘯锛屾垨鏌ョ湅鎺у埗鍙板畾浣嶅叿浣撶粍浠躲€?
+                                </p>
+                                <pre className="text-xs bg-ink-50 text-ink-600 rounded-lg p-3 overflow-auto mb-4">{this.state.errorMessage}</pre>
+                                <button
+                                    onClick={() => window.location.reload()}
+                                    className="w-full py-2.5 bg-zxf-red text-white rounded-lg text-sm font-bold hover:bg-red-700 transition-colors"
+                                >
+                                    鍒锋柊椤甸潰
+                                </button>
+                            </div>
+                        </div>
+                    );
+                }
+                return this.props.children;
+            }
+        }
+
+        // ============================================
+        // API 鍩虹閰嶇疆
+        // ============================================
+        const getApiBaseUrl = () => {
+            if (window.location.protocol === 'file:') return 'http://127.0.0.1:8000';
+            if (window.location.port === '8000') return '';
+            return 'http://127.0.0.1:8000';
+        };
+
+        // ============================================
+        // Local synced recommendation plans
+        // ============================================
+        const SYNCED_PLANS_STORAGE_KEY = 'zxf_synced_recommendation_plans_v1';
+        const SYNCED_PLANS_EVENT = 'zxf:synced-plans-updated';
+        const MAX_SYNCED_PLANS = 10;
+
+        const normalizeProfileValue = (value) => String(value || '').trim() || '未填';
+
+        const getProfileStorageKey = (profile = {}) => [
+            normalizeProfileValue(profile.province),
+            normalizeProfileValue(profile.score),
+            normalizeProfileValue(profile.rank),
+            normalizeProfileValue(profile.subjects),
+            normalizeProfileValue(profile.family),
+            normalizeProfileValue(profile.cityPref),
+            normalizeProfileValue(profile.majorPref),
+            normalizeProfileValue(profile.risk),
+        ].join('|');
+
+        const getProfileLabel = (profile = {}) => {
+            const pieces = [
+                normalizeProfileValue(profile.province),
+                `${normalizeProfileValue(profile.score)}分`,
+                `浣嶆${normalizeProfileValue(profile.rank)}`,
+                normalizeProfileValue(profile.subjects),
+                normalizeProfileValue(profile.family),
+            ];
+            return pieces.filter(piece => piece && !piece.includes('未填')).join(' · ') || '当前考生画像';
+        };
+
+        const readSyncedPlanStore = () => {
+            try {
+                const raw = window.localStorage.getItem(SYNCED_PLANS_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : {};
+            } catch (error) {
+                console.warn('璇诲彇鏈湴鍚屾鏂规澶辫触', error);
+                return {};
+            }
+        };
+
+        const readSyncedPlansForProfile = (profile = {}) => {
+            const store = readSyncedPlanStore();
+            return store[getProfileStorageKey(profile)] || null;
+        };
+
+        const saveSyncedPlansForProfile = (profile = {}, plans = []) => {
+            const key = getProfileStorageKey(profile);
+            const store = readSyncedPlanStore();
+            const payload = {
+                profileKey: key,
+                profileLabel: getProfileLabel(profile),
+                updatedAt: new Date().toISOString(),
+                plans: plans.slice(0, MAX_SYNCED_PLANS).map((plan, index) => ({ ...plan, order: index + 1 })),
+            };
+            store[key] = payload;
+            window.localStorage.setItem(SYNCED_PLANS_STORAGE_KEY, JSON.stringify(store));
+            window.dispatchEvent(new CustomEvent(SYNCED_PLANS_EVENT, { detail: payload }));
+            return payload;
+        };
+
+        const parseRecommendationPlansFromText = (content = '') => {
+            const text = String(content || '');
+            const schoolRegex = /([\u4e00-\u9fa5A-Za-z0-9·（）()]{2,}(?:大学|学院))/g;
+            const schools = Array.from(text.matchAll(schoolRegex))
+                .map(match => match[1].trim())
+                .filter((school, index, arr) => school.length >= 4 && arr.indexOf(school) === index)
+                .slice(0, MAX_SYNCED_PLANS);
+
+            return schools.map((school, index) => ({
+                order: index + 1,
+                school,
+                major: '专业待核验',
+                group: index < 3 ? '冲刺方案' : index < 7 ? '稳妥方案' : '保底方案',
+                reason: '从回答文本中识别出的院校，专业组和录取位次需要回到官方数据核验。',
+                risk: index < 3 ? '冲' : index < 7 ? '稳' : '保',
+                riskLevel: index < 3 ? '中高风险' : index < 7 ? '中低风险' : '低风险',
+                prob: '待核验',
+                medianSalary: '待核验',
+                irreplaceability: '待核验',
+                fortune500: false,
+                probabilityBasis: '文本兜底识别，最终以省考试院投档表和学校招生网为准。',
+                salaryBasis: '收入与就业数据需以学校就业质量报告和真实行业去向核验。',
+                syncedAt: new Date().toISOString(),
+            }));
+        };
+
+        const normalizeBackendRecommendationPlans = (plans = []) => {
+            if (!Array.isArray(plans)) return [];
+            return plans.slice(0, MAX_SYNCED_PLANS).map((plan, index) => {
+                const probability = Number.isFinite(Number(plan.probability))
+                    ? `${Number(plan.probability)}%`
+                    : '待核验';
+                const salaryDisplay = plan.median_salary_display
+                    || (plan.median_salary_5yr ? `${Math.round(plan.median_salary_5yr / 1000)}K` : '待核验');
+                const risk = plan.risk_level || '稳';
+                return {
+                    order: index + 1,
+                    school: plan.school || '院校待核验',
+                    major: plan.major || '专业待核验',
+                    group: risk === '冲' ? '冲刺方案' : risk === '保' ? '保底方案' : '稳妥方案',
+                    overview: plan.overview || '',
+                    reason: plan.recommendation_reason || '后端未给出明确推荐理由，需要回到官方数据核验。',
+                    risk,
+                    riskLevel: risk === '冲' ? '中高风险' : risk === '保' ? '低风险' : '中低风险',
+                    prob: probability,
+                    medianSalary: salaryDisplay,
+                    irreplaceability: plan.irreplaceability ?? '待核验',
+                    fortune500: false,
+                    probabilityBasis: plan.probability_basis || `模拟估计值 ${probability}，需结合省考试院投档表、学校招生网和专业组位次核验。`,
+                    salaryBasis: plan.salary_basis || `模拟估计值 ${salaryDisplay}，需结合学校就业质量报告、专业去向和城市行业机会核验。`,
+                    dataBasis: plan.data_basis || '规则模拟/本地估算，仅供排序参考。',
+                    citations: Array.isArray(plan.citations) ? plan.citations : [],
+                    syncedAt: new Date().toISOString(),
+                };
+            });
+        };
+
+        // ============================================
+        // ZXF Expression DNA - 璇綍搴擄紙API 涓嶅彲鐢ㄦ椂鍏滃簳锛?
+        const ZXF_QUOTES_FALLBACK = [
+            "选择比努力更重要，但前提是你得先够努力。",
+            "普通家庭填志愿，先谋生，再谈热爱。",
+            "别光看学校宣传册，要看就业数据和真实去向。",
+            "理工科看专业壁垒，文科看学校平台和城市资源。",
+            "看专业别只看名字，要看十年后还能不能吃饭。",
+            "冲稳保不是口号，是防止滑档的基本盘。",
+        ];
+
+        const ZXF_GREETINGS = [
+            "我跟你说，志愿填报这事，先把基本情况弄清楚。",
+            "你听我说，填志愿不是拍脑袋，得看数据。",
+            "先别急着问推荐，关键画像要先补齐。",
+            "咱们先看分数、位次、城市和专业出口。",
+        ];
+
+        // ============================================
+        // 1. Navbar
+        // ============================================
+        const Navbar = () => {
+            const [scrolled, setScrolled] = useState(false);
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 20);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const navItems = [
+                { label: '智能咨询', href: '#chat' },
+                { label: '鍐崇瓥宸ュ叿', href: '#tools' },
+                { label: '鏂规瀵规瘮', href: '#compare' },
+                { label: '鏁版嵁娲炲療', href: '#data' },
+                { label: '楂樻牎鍚嶅綍', href: '#universities' },
+            ];
+
+            return (
+                <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass shadow-sm' : 'bg-transparent'}`}>
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex items-center justify-between h-16">
+                            <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 rounded-lg bg-zxf-red flex items-center justify-center">
+                                    <Icon name="filter" size={16} className="text-white" />
+                                </div>
+                                <div>
+                                    <span className="font-display text-lg font-bold text-ink-900">志愿智选 Agent</span>
+                                    <span className="hidden sm:inline text-xs text-zxf-red ml-2 font-mono tracking-wider">ZXF.OS MODE</span>
+                                </div>
+                            </div>
+
+                            <div className="hidden md:flex items-center gap-1">
+                                {navItems.map((item) => (
+                                    <a
+                                        key={item.label}
+                                        href={item.href}
+                                        onClick={(e) => {
+                                            if (item.action) {
+                                                e.preventDefault();
+                                                item.action();
+                                            }
+                                        }}
+                                        className="px-4 py-2 text-sm text-ink-700 hover:text-zxf-red rounded-lg hover:bg-red-50 transition-all duration-200"
+                                    >
+                                        {item.label}
+                                    </a>
+                                ))}
+                            </div>
+
+                            <div className="hidden md:flex items-center gap-3">
+                                <button className="px-4 py-2 text-sm text-zxf-red border border-zxf-red/30 hover:bg-red-50 rounded-lg transition-all font-mono text-xs tracking-wider">
+                                    鏁版嵁椹卞姩
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        window.scrollTo({
+                                            top: document.getElementById('chat').offsetTop - 80,
+                                            behavior: 'smooth'
+                                        });
+                                        setShowSoulQuery(true);
+                                    }}
+                                    className="px-5 py-2 text-sm bg-zxf-red text-white rounded-lg hover:bg-red-700 transition-all shadow-sm hover:shadow-md font-medium"
+                                >
+                                    寮€濮嬬伒榄傝拷闂?
+                                </button>
+                            </div>
+
+                            <button className="md:hidden p-2 text-ink-700" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                                <Icon name={mobileMenuOpen ? 'x' : 'menu'} size={24} />
+                            </button>
+                        </div>
+                    </div>
+
+                    {mobileMenuOpen && (
+                        <div className="md:hidden glass border-t border-ink-100">
+                            <div className="px-4 py-3 space-y-1">
+                                {navItems.map((item) => (
+                                    <a key={item.label} href={item.href} className="block px-4 py-2.5 text-sm text-ink-700 hover:bg-red-50 rounded-lg"
+                                        onClick={() => setMobileMenuOpen(false)}>{item.label}</a>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </nav>
+            );
+        };
+
+        // ============================================
+        // 2. Hero Section - 寮犻洩宄伴鏍间富瑙嗚
+        // ============================================
+        const HeroSection = () => {
+            const stats = [
+                { label: '服务普通家庭', value: '4000W+', desc: '粉丝基础' },
+                { label: '核心法则', value: '5+8', desc: '心智模型 + 决策启发' },
+                { label: '数据原则', value: '中位数', desc: '看普通人的真实出口' },
+                { label: '筛选逻辑', value: '三重筛', desc: '学历 · 城市 · 专业' },
+            ];
+
+            return (
+                <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-warm-50 to-red-50/20"></div>
+                    <div className="absolute top-24 right-0 w-96 h-96 bg-zxf-red/5 rounded-full blur-3xl"></div>
+                    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-2 gap-12 items-center">
+                        <div className="space-y-8">
+                            <div>
+                                <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-zxf-red/10 text-zxf-red text-xs font-bold rounded-full mb-6 border border-zxf-red/20 font-mono tracking-wider uppercase">
+                                    <Icon name="brain" size={14} /> 张雪峰思维操作系统 · 数据驱动
+                                </span>
+                                <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-ink-900 leading-tight">
+                                    选择比努力
+                                    <span className="text-zxf-red block mt-2">更重要</span>
+                                </h1>
+                            </div>
+                            <p className="text-lg text-ink-500 max-w-lg leading-relaxed">
+                                社会就是一个大筛子。用学校、城市、专业和家庭条件一起筛，帮普通家庭把志愿填报从拍脑袋变成可验证的决策。
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-3">
+                                <a href="#chat" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-zxf-red text-white rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                                    开始咨询 <Icon name="message-circle" size={18} />
+                                </a>
+                                <a href="#tools" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-ink-800 border border-ink-200 rounded-lg font-semibold hover:border-zxf-red/40 transition-colors">
+                                    看决策工具 <Icon name="arrow-down" size={18} />
+                                </a>
+                            </div>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+                                {stats.map((item) => (
+                                    <div key={item.label} className="bg-white border border-ink-100 rounded-lg p-4 shadow-sm">
+                                        <div className="text-2xl font-bold text-ink-900">{item.value}</div>
+                                        <div className="text-sm font-semibold text-ink-700 mt-1">{item.label}</div>
+                                        <div className="text-xs text-ink-400 mt-1">{item.desc}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="relative">
+                            <div className="bg-white border border-ink-100 rounded-2xl shadow-xl overflow-hidden">
+                                <div className="px-5 py-4 border-b border-ink-100 flex items-center justify-between">
+                                    <div className="font-bold text-ink-900">志愿决策筛选器</div>
+                                    <span className="text-xs text-zxf-red font-mono">冲 · 稳 · 保</span>
+                                </div>
+                                <div className="p-5 space-y-3">
+                                    <div className="p-4 bg-amber-50 border border-amber-100 rounded-lg flex items-center gap-3">
+                                        <Icon name="target" className="text-amber-600" size={22} />
+                                        <div>
+                                            <div className="font-semibold text-ink-900">第一重筛：分数位次</div>
+                                            <div className="text-sm text-ink-500">先看能不能进，再看值不值得去。</div>
+                                        </div>
+                                    </div>
+                                    <div className="p-4 bg-blue-50 border border-blue-100 rounded-lg flex items-center gap-3">
+                                        <Icon name="map" className="text-blue-600" size={22} />
+                                        <div>
+                                            <div className="font-semibold text-ink-900">第二重筛：城市平台</div>
+                                            <div className="text-sm text-ink-500">城市决定实习、视野和就业半径。</div>
+                                        </div>
+                                    </div>
+                                    <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-lg flex items-center gap-3">
+                                        <Icon name="briefcase" className="text-emerald-600" size={22} />
+                                        <div>
+                                            <div className="font-semibold text-ink-900">第三重筛：专业壁垒</div>
+                                            <div className="text-sm text-ink-500">看技术门槛、就业出口和普通人中位数。</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="px-5 py-3 border-t border-ink-100 text-xs text-ink-500 flex items-center justify-between">
+                                    <span className="flex items-center gap-1"><Icon name="database" size={12} /> 基于画像与数据粗排</span>
+                                    <span className="font-mono text-zxf-red">最终回官方核验</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // ============================================
+        // 3. Soul Query Modal - 鐏甸瓊杩介棶鍚戝
+        // ============================================
+        const SoulQueryModal = ({ isOpen, onClose, onComplete }) => {
+            const [step, setStep] = useState(0);
+            const [data, setData] = useState({
+                province: '', score: '', rank: '', subjects: '',
+                family: '', cityPref: '', majorPref: '', risk: '均衡'
+            });
+
+            if (!isOpen) return null;
+
+            const steps = [
+                {
+                    title: '灵魂追问 · 基本信息',
+                    subtitle: '孩子多少分？哪个省？先把这些弄清楚再说。',
+                    fields: [
+                        { key: 'province', label: '省份', placeholder: '例如：山东省', icon: 'map-pin' },
+                        { key: 'score', label: '高考分数', placeholder: '例如：623', icon: 'award' },
+                        { key: 'rank', label: '位次排名', placeholder: '例如：12456', icon: 'bar-chart' },
+                        { key: 'subjects', label: '选科组合', placeholder: '例如：物化生', icon: 'book-open' },
+                    ]
+                },
+                {
+                    title: '灵魂追问 · 家庭条件',
+                    subtitle: '同一个问题，有试错成本和没有试错成本，策略完全不同。',
+                    options: [
+                        { key: 'family', value: '普通', label: '普通家庭', desc: '先谋生再谈热爱，追求确定性', icon: 'home' },
+                        { key: 'family', value: '中产', label: '中产家庭', desc: '可以承担一定试错成本', icon: 'building' },
+                        { key: 'family', value: '富裕', label: '富裕家庭', desc: '有资源支持理想追求', icon: 'crown' },
+                    ]
+                },
+                {
+                    title: '灵魂追问 · 意向确认',
+                    subtitle: '想去哪个城市？能接受什么行业？',
+                    fields: [
+                        { key: 'cityPref', label: '意向城市', placeholder: '例如：南京、杭州、苏州', icon: 'building-2' },
+                        { key: 'majorPref', label: '兴趣方向', placeholder: '例如：计算机、电子信息', icon: 'heart' },
+                    ],
+                    riskOptions: ['稳妥', '均衡', '激进']
+                }
+            ];
+
+            const currentStep = steps[step];
+
+            const handleNext = () => {
+                if (step < steps.length - 1) setStep(step + 1);
+                else { onComplete(data); onClose(); }
+            };
+
+            const canProceed = () => {
+                if (step === 0) return data.province && data.score && data.rank && data.subjects;
+                if (step === 1) return data.family;
+                if (step === 2) return data.cityPref && data.majorPref;
+                return false;
+            };
+
+            return (
+                <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
+                    <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+                        <div className="px-6 py-4 border-b border-ink-100 flex items-center justify-between bg-gradient-to-r from-red-50 to-white">
+                            <div>
+                                <h3 className="font-bold text-ink-900">{currentStep.title}</h3>
+                                <p className="text-xs text-ink-500 mt-0.5">{currentStep.subtitle}</p>
+                            </div>
+                            <button onClick={onClose} className="p-2 hover:bg-ink-50 rounded-lg">
+                                <Icon name="x" size={18} />
+                            </button>
+                        </div>
+
+                        <div className="p-6">
+                            {/* Progress */}
+                            <div className="flex gap-2 mb-6">
+                                {steps.map((_, idx) => (
+                                    <div key={idx} className={`flex-1 h-1.5 rounded-full transition-colors ${
+                                        idx <= step ? 'bg-zxf-red' : 'bg-ink-100'
+                                    }`}></div>
+                                ))}
+                            </div>
+
+                            {/* Step 0 & 2: Text fields */}
+                            {(step === 0 || step === 2) && currentStep.fields && (
+                                <div className="space-y-4">
+                                    {currentStep.fields.map((field) => (
+                                        <div key={field.key}>
+                                            <label className="text-sm text-ink-700 mb-1.5 flex items-center gap-1.5 font-medium">
+                                                <Icon name={field.icon} size={14} />
+                                                {field.label}
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={data[field.key]}
+                                                onChange={(e) => setData({...data, [field.key]: e.target.value})}
+                                                placeholder={field.placeholder}
+                                                className="w-full px-4 py-2.5 text-sm bg-ink-50 border border-ink-200 rounded-lg text-ink-700 focus:outline-none focus:border-zxf-red focus:ring-2 focus:ring-red-100 transition-all"
+                                            />
+                                        </div>
+                                    ))}
+                                    {step === 2 && (
+                                        <div>
+                                            <label className="text-sm text-ink-700 mb-2 flex items-center gap-1.5 font-medium">
+                                                <Icon name="shield" size={14} /> 椋庨櫓鍋忓ソ
+                                            </label>
+                                            <div className="grid grid-cols-3 gap-2">
+                                                {currentStep.riskOptions.map((risk) => (
+                                                    <button
+                                                        key={risk}
+                                                        onClick={() => setData({...data, risk})}
+                                                        className={`py-2.5 text-sm font-medium rounded-lg border transition-all ${
+                                                            data.risk === risk
+                                                                ? 'bg-zxf-red text-white border-zxf-red'
+                                                                : 'bg-white text-ink-600 border-ink-200 hover:border-zxf-red/50'
+                                                        }`}
+                                                    >
+                                                        {risk}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Step 1: Family background selection */}
+                            {step === 1 && currentStep.options && (
+                                <div className="space-y-3">
+                                    {currentStep.options.map((opt) => (
+                                        <button
+                                            key={opt.value}
+                                            onClick={() => setData({...data, family: opt.value})}
+                                            className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left ${
+                                                data.family === opt.value
+                                                    ? 'border-zxf-red bg-red-50'
+                                                    : 'border-ink-100 hover:border-ink-200 bg-white'
+                                            }`}
+                                        >
+                                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                                                data.family === opt.value ? 'bg-zxf-red text-white' : 'bg-ink-100 text-ink-500'
+                                            }`}>
+                                                <Icon name={opt.icon} size={24} />
+                                            </div>
+                                            <div>
+                                                <div className="font-bold text-ink-900">{opt.label}</div>
+                                                <div className="text-xs text-ink-500 mt-0.5">{opt.desc}</div>
+                                            </div>
+                                            {data.family === opt.value && (
+                                                <Icon name="check-circle" size={20} className="text-zxf-red ml-auto" />
+                                            )}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="px-6 py-4 border-t border-ink-100 flex justify-between">
+                            {step > 0 ? (
+                                <button onClick={() => setStep(step - 1)} className="px-4 py-2 text-sm text-ink-600 hover:bg-ink-50 rounded-lg transition-colors">
+                                    涓婁竴姝?
+                                </button>
+                            ) : (
+                                <div></div>
+                            )}
+                            <button
+                                onClick={handleNext}
+                                disabled={!canProceed()}
+                                className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all ${
+                                    canProceed()
+                                        ? 'bg-zxf-red text-white hover:bg-red-700 shadow-md'
+                                        : 'bg-ink-100 text-ink-400 cursor-not-allowed'
+                                }`}
+                            >
+                                {step === steps.length - 1 ? '完成，开始分析' : '下一步'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ============================================
+        // 4. Chat Section - 寮犻洩宄伴鏍糀I瀵硅瘽
+        // ============================================
+        const ChatSection = ({ userProfile }) => {
+            const [sidebarOpen, setSidebarOpen] = useState(false);
+            const [sessions, setSessions] = useState([]);
+            const [currentSessionId, setCurrentSessionId] = useState(null);
+            const [isLoadingSessions, setIsLoadingSessions] = useState(false);
+            const [messages, setMessages] = useState([
+                {
+                    type: 'ai',
+                    style: 'zxf',
+                    content: '我跟你说，志愿填报这事不能拍脑袋。先把分数、位次、省份、选科和家庭条件说清楚，我再按冲稳保给你看。',
+                    cards: []
+                }
+            ]);
+            const [inputValue, setInputValue] = useState('');
+            const [isSending, setIsSending] = useState(false);
+
+            // ========== 浼氳瘽绠＄悊 ==========
+            const loadSessions = async () => {
+                setIsLoadingSessions(true);
+                try {
+                    const res = await fetch(`${getApiBaseUrl()}/api/sessions`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        setSessions(Array.isArray(data) ? data : []);
+                    }
+                } catch (e) {
+                    console.error('鍔犺浇浼氳瘽澶辫触', e);
+                } finally {
+                    setIsLoadingSessions(false);
+                }
+            };
+
+            const createNewSession = async () => {
+                try {
+                    const now = new Date();
+                    const title = `咨询 ${now.getMonth() + 1}-${now.getDate()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+                    const res = await fetch(`${getApiBaseUrl()}/api/sessions`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            title: title,
+                            user_profile: buildConsultContext()
+                        })
+                    });
+                    if (res.ok) {
+                        const session = await res.json();
+                        setSessions(prev => [session, ...prev]);
+                        setCurrentSessionId(session.id);
+                        setMessages([{
+                            type: 'ai',
+                            style: 'zxf',
+                            content: '我跟你说，志愿填报这事不能拍脑袋。先把分数、位次、省份、选科和家庭条件说清楚，我再按冲稳保给你看。',
+                            cards: []
+                        }]);
+                    }
+                } catch (e) {
+                    console.error('鍒涘缓浼氳瘽澶辫触', e);
+                }
+            };
+
+            const switchSession = async (sessionId) => {
+                setCurrentSessionId(sessionId);
+                const session = sessions.find(s => s.id === sessionId);
+                const sessionMessages = Array.isArray(session && session.messages) ? session.messages : [];
+                if (sessionMessages.length > 0) {
+                    const historyMessages = sessionMessages.map((msg, msgIndex) => ({
+                        id: `${sessionId}-${msgIndex}`,
+                        type: msg.role === 'user' ? 'user' : 'ai',
+                        style: 'zxf',
+                        content: msg.content
+                    }));
+                    setMessages(historyMessages);
+                } else {
+                    setMessages([{
+                        type: 'ai',
+                        style: 'zxf',
+                        content: '我跟你说，志愿填报这事不能拍脑袋。先把分数、位次、省份、选科和家庭条件说清楚，我再按冲稳保给你看。',
+                        cards: []
+                    }]);
+                }
+                setSidebarOpen(false);
+            };
+
+            const deleteSession = async (e, sessionId) => {
+                e.stopPropagation();
+                try {
+                    const res = await fetch(`${getApiBaseUrl()}/api/sessions/${sessionId}`, {
+                        method: 'DELETE'
+                    });
+                    if (res.ok) {
+                        setSessions(prev => prev.filter(s => s.id !== sessionId));
+                        if (currentSessionId === sessionId) {
+                            setCurrentSessionId(null);
+                            setMessages([{
+                                type: 'ai',
+                                style: 'zxf',
+                                content: '我跟你说，志愿填报这事不能拍脑袋。先把分数、位次、省份、选科和家庭条件说清楚，我再按冲稳保给你看。',
+                                cards: []
+                            }]);
+                        }
+                    }
+                } catch (e) {
+                    console.error('鍒犻櫎浼氳瘽澶辫触', e);
+                }
+            };
+
+            const clearAllSessions = async () => {
+                if (!Array.isArray(sessions) || !sessions.length || isLoadingSessions) return;
+                try {
+                    const sessionList = Array.isArray(sessions) ? sessions : [];
+                    await Promise.all(sessionList.map(session =>
+                        fetch(`${getApiBaseUrl()}/api/sessions/${session.id}`, { method: 'DELETE' })
+                    ));
+                    setSessions([]);
+                    setCurrentSessionId(null);
+                    setMessages([{
+                        type: 'ai',
+                        style: 'zxf',
+                        content: '我跟你说，志愿填报这事不能拍脑袋。先把分数、位次、省份、选科和家庭条件说清楚，我再按冲稳保给你看。',
+                        cards: []
+                    }]);
+                } catch (e) {
+                    console.error('娓呯┖浼氳瘽澶辫触', e);
+                }
+            };
+
+            React.useEffect(() => {
+                loadSessions();
+            }, []);
+
+            const quickQuestions = [
+                '我该冲哪些学校？',
+                '用就业倒推法帮我分析',
+                '这个专业的中位数收入多少？',
+                '做10年后压力测试',
+                '500强去哪些学校招聘？',
+                '我的专业壁垒够不够高？',
+            ];
+
+            const sampleResponse = {
+                type: 'ai',
+                style: 'zxf',
+                content: `收到。先按冲稳保把学校和专业粗排出来，再提醒你回到省考试院投档表和学校招生网核验。`,
+                cards: [
+                    {
+                        name: '山东大学',
+                        city: '济南',
+                        level: '985 / 双一流',
+                        type: '冲',
+                        typeColor: 'chong',
+                        probability: 65,
+                        medianSalary: '18.5K',
+                        irreplaceability: 92,
+                        trend: [11000, 11500, 12000],
+                        majors: ['计算机科学与技术', '软件工程', '人工智能'],
+                        risk: '位次接近往年录取线，需要关注专业组内调剂风险',
+                        tags: ['强基计划', '保研率高'],
+                        fortune500: true,
+                        reason: '985平台 + 工科基础较强，适合作为冲刺方案'
+                    },
+                    {
+                        name: '吉林大学',
+                        city: '长春',
+                        level: '985 / 双一流',
+                        type: '稳',
+                        typeColor: 'wen',
+                        probability: 82,
+                        medianSalary: '15.2K',
+                        irreplaceability: 88,
+                        trend: [13000, 12800, 12500],
+                        majors: ['计算机科学与技术', '物联网工程'],
+                        risk: '城市实习机会相对少，但学校层次和专业壁垒较强',
+                        tags: ['学科基础好'],
+                        fortune500: true,
+                        reason: '985兜底属性较强，位次匹配度高'
+                    },
+                    {
+                        name: '青岛大学',
+                        city: '青岛',
+                        level: '省属重点',
+                        type: '保',
+                        typeColor: 'bao',
+                        probability: 95,
+                        medianSalary: '11.5K',
+                        irreplaceability: 72,
+                        trend: [18000, 17000, 16000],
+                        majors: ['计算机科学与技术', '软件工程'],
+                        risk: '层次相对低一些，但本地就业和保底稳定性较好',
+                        tags: ['青岛本地就业'],
+                        fortune500: false,
+                        reason: '保底方案，先保证有学上，再看专业出口'
+                    }
+                ]
+            };
+
+            const typeColors = {
+                chong: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200', bar: 'bg-amber-400', light: 'bg-amber-400/20', badge: 'bg-amber-100' },
+                wen: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200', bar: 'bg-accent-blue', light: 'bg-accent-blue/20', badge: 'bg-blue-100' },
+                bao: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200', bar: 'bg-accent-green', light: 'bg-accent-green/20', badge: 'bg-emerald-100' },
+            };
+
+            const getApiBaseUrl = () => {
+                if (window.location.protocol === 'file:') return 'http://localhost:8000';
+                if (window.location.port === '8000') return '';
+                return 'http://localhost:8000';
+            };
+
+            const parseNumber = (value) => {
+                if (value === undefined || value === null) return undefined;
+                const parsed = parseInt(String(value).replace(/[^\d]/g, ''), 10);
+                return Number.isNaN(parsed) ? undefined : parsed;
+            };
+
+            const splitPreference = (value) => {
+                if (!value) return undefined;
+                const raw = String(value).trim();
+                const knownRegions = [
+                    '北京', '天津', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '上海', '江苏', '浙江',
+                    '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '重庆',
+                    '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新疆',
+                    '南京', '苏州', '杭州', '宁波', '广州', '深圳', '成都', '武汉', '西安', '济南', '青岛'
+                ];
+                const items = raw
+                    .split(/[、，,\s]+/)
+                    .map(item => item.trim())
+                    .filter(Boolean);
+                if (items.length === 1) {
+                    const gluedRegions = knownRegions
+                        .map(region => ({ region, index: raw.indexOf(region) }))
+                        .filter(item => item.index >= 0 && raw !== item.region)
+                        .sort((a, b) => a.index - b.index)
+                        .map(item => item.region);
+                    if (gluedRegions.length > 1) return [...new Set(gluedRegions)];
+                }
+                return items.length ? items : undefined;
+            };
+
+            const formatPreference = (value) => {
+                const items = splitPreference(value);
+                return items ? items.join('、') : (value || '未填写');
+            };
+
+            const buildConsultContext = () => {
+                const familyMap = {
+                    '普通': '普通家庭',
+                    '中产': '中产',
+                    '富裕': '富裕'
+                };
+                const context = {
+                    province: userProfile.province,
+                    score: parseNumber(userProfile.score),
+                    rank: parseNumber(userProfile.rank),
+                    subjects: userProfile.subjects,
+                    family_background: familyMap[userProfile.family] || userProfile.family || '普通家庭',
+                    city_preference: splitPreference(userProfile.cityPref),
+                    major_preference: splitPreference(userProfile.majorPref),
+                    risk_appetite: userProfile.risk,
+                    willing_grad_school: userProfile.willingGradSchool
+                };
+                Object.keys(context).forEach(key => context[key] === undefined && delete context[key]);
+                return context;
+            };
+
+            const sendConsultMessage = async (question) => {
+                const trimmed = question.trim();
+                if (!trimmed || isSending) return;
+                const loadingId = `loading-${Date.now()}`;
+                setIsSending(true);
+                setMessages(prev => [
+                    ...prev,
+                    { type: 'user', content: trimmed },
+                    {
+                        id: loadingId,
+                        type: 'ai',
+                        style: 'zxf',
+                        loading: true,
+                        content: '我跟你说，志愿填报这事不能拍脑袋。先把分数、位次、省份、选科和家庭条件说清楚，我再按冲稳保给你看。',
+                    }
+                ]);
+
+                try {
+                    // 濡傛灉娌℃湁褰撳墠浼氳瘽锛岃嚜鍔ㄥ垱寤轰竴涓?
+                    let activeSessionId = currentSessionId;
+                    if (!activeSessionId) {
+                        const now = new Date();
+                        const title = `咨询 ${now.getMonth() + 1}-${now.getDate()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+                        const createRes = await fetch(`${getApiBaseUrl()}/api/sessions`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ title: title, user_profile: buildConsultContext() })
+                        });
+                        if (createRes.ok) {
+                            const newSession = await createRes.json();
+                            setSessions(prev => [newSession, ...prev]);
+                            setCurrentSessionId(newSession.id);
+                            activeSessionId = newSession.id;
+                        }
+                    }
+
+                    const response = await fetch(`${getApiBaseUrl()}/api/consult/stream`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            session_id: activeSessionId,
+                            question: trimmed,
+                            context: buildConsultContext()
+                        })
+                    });
+                    if (!response.ok) {
+                        const detail = await response.text();
+                        throw new Error(detail || `璇锋眰澶辫触锛?{response.status}`);
+                    }
+                    if (response.body) {
+                        const reader = response.body.getReader();
+                        const decoder = new TextDecoder('utf-8');
+                        let buffer = '';
+                        let streamedText = '';
+                        let finalData = null;
+
+                        const applyStreamFinal = (data) => {
+                            const followUpQuestions = Array.isArray(data.follow_up_questions) ? data.follow_up_questions : [];
+                            const citationList = Array.isArray(data.citations) ? data.citations : [];
+                            const structuredPlans = normalizeBackendRecommendationPlans(data.recommendation_plans);
+                            const followUps = followUpQuestions.length
+                                ? `\n\n缂佈呯敾鏉╀粙妫堕敍姝昻${followUpQuestions.map(q => `- ${q}`).join('\n')}`
+                                : '';
+                            const citations = citationList.length
+                                ? `\n\n閺佺増宓侀弶銉︾爱閿涙瓡n${citationList.slice(0, 5).map((url, idx) => `${idx + 1}. ${url}`).join('\n')}`
+                                : '';
+                            setMessages(prev => prev.map(msg => (
+                                msg.id === loadingId
+                                    ? {
+                                        id: loadingId,
+                                        type: 'ai',
+                                        style: 'zxf',
+                                        content: `${data.answer || streamedText || '后端暂时没有给出明确回答。'}${followUps}${citations}`,
+                                        cards: [],
+                                        syncPlans: structuredPlans.length ? structuredPlans : parseRecommendationPlansFromText(data.answer || streamedText || '')
+                                    }
+                                    : msg
+                            )));
+                        };
+
+                        const handleSseBlock = (block) => {
+                            const eventLine = block.split('\n').find(line => line.startsWith('event:'));
+                            const dataLines = block.split('\n').filter(line => line.startsWith('data:'));
+                            if (!eventLine || !dataLines.length) return;
+                            const event = eventLine.slice(6).trim();
+                            const rawData = dataLines.map(line => line.slice(5).trim()).join('\n');
+                            const data = rawData ? JSON.parse(rawData) : {};
+
+                            if (event === 'status' && !streamedText) {
+                                setMessages(prev => prev.map(msg => (
+                                    msg.id === loadingId ? { ...msg, content: data.message || msg.content } : msg
+                                )));
+                            } else if (event === 'delta' && data.text) {
+                                streamedText += data.text;
+                                setMessages(prev => prev.map(msg => (
+                                    msg.id === loadingId
+                                        ? { ...msg, loading: false, content: streamedText, cards: [] }
+                                        : msg
+                                )));
+                            } else if (event === 'final') {
+                                finalData = data;
+                                applyStreamFinal(data);
+                            } else if (event === 'error') {
+                                throw new Error(data.message || 'stream error');
+                            }
+                        };
+
+                        while (true) {
+                            const { value, done } = await reader.read();
+                            if (done) break;
+                            buffer += decoder.decode(value, { stream: true });
+                            const blocks = buffer.split('\n\n');
+                            buffer = blocks.pop() || '';
+                            blocks.forEach(handleSseBlock);
+                        }
+                        if (buffer.trim()) handleSseBlock(buffer);
+                        if (!finalData && streamedText) {
+                            setMessages(prev => prev.map(msg => (
+                                msg.id === loadingId
+                                    ? { ...msg, loading: false, content: streamedText, cards: [], syncPlans: parseRecommendationPlansFromText(streamedText) }
+                                    : msg
+                            )));
+                        }
+                        return;
+                    }
+
+                    const data = await response.json();
+                    const followUpQuestions = Array.isArray(data.follow_up_questions) ? data.follow_up_questions : [];
+                    const citationList = Array.isArray(data.citations) ? data.citations : [];
+                    const structuredPlans = normalizeBackendRecommendationPlans(data.recommendation_plans);
+                    const followUps = followUpQuestions.length
+                        ? `\n\n缁х画杩介棶锛歕n${followUpQuestions.map(q => `- ${q}`).join('\n')}`
+                        : '';
+                    const citations = citationList.length
+                        ? `\n\n鏁版嵁鏉ユ簮锛歕n${citationList.slice(0, 5).map((url, idx) => `${idx + 1}. ${url}`).join('\n')}`
+                        : '';
+                    setMessages(prev => prev.map(msg => (
+                        msg.id === loadingId
+                            ? {
+                                id: loadingId,
+                                type: 'ai',
+                                style: 'zxf',
+                                content: `${data.answer || '后端暂时没有给出明确回答。'}${followUps}${citations}`,
+                                cards: [],
+                                syncPlans: structuredPlans.length ? structuredPlans : parseRecommendationPlansFromText(data.answer || '')
+                            }
+                            : msg
+                    )));
+                } catch (error) {
+                    setMessages(prev => prev.map(msg => (
+                        msg.id === loadingId
+                            ? {
+                                id: loadingId,
+                                type: 'ai',
+                                style: 'zxf',
+                                content: `后端现在没接上：${error.message}。请确认服务在 http://127.0.0.1:8000 跑着，再试一次。`,
+                                cards: []
+                            }
+                            : msg
+                    )));
+                } finally {
+                    setIsSending(false);
+                }
+            };
+
+            const handleSend = () => {
+                if (!inputValue.trim() || isSending) return;
+                const question = inputValue;
+                setInputValue('');
+                sendConsultMessage(question);
+            };
+
+            const handleQuickQuestion = (q) => {
+                sendConsultMessage(q);
+            };
+
+            const handleSyncPlans = (messageId, content, explicitPlans = null) => {
+                const plans = Array.isArray(explicitPlans) && explicitPlans.length
+                    ? explicitPlans
+                    : parseRecommendationPlansFromText(content);
+                if (!plans.length) {
+                    setMessages(prev => prev.map(msg => (
+                        msg.id === messageId
+                            ? { ...msg, syncStatus: '这条回答里没有识别到可同步的院校推荐。' }
+                            : msg
+                    )));
+                    return;
+                }
+                const saved = saveSyncedPlansForProfile(userProfile, plans);
+                setMessages(prev => prev.map(msg => (
+                    msg.id === messageId
+                        ? {
+                            ...msg,
+                            syncPlans: saved.plans,
+                            syncStatus: `已同步 ${saved.plans.length} 所到我的当前方案。当前画像最多保留 ${MAX_SYNCED_PLANS} 所，新同步会替换旧方案。`
+                        }
+                        : msg
+                )));
+            };
+
+            const renderMessageContent = (content = '') => {
+                const lines = String(content).split('\n');
+                return lines.map((line, lineIdx) => {
+                    const normalizedLine = line.replace(/^\s*\*\s+/, '鈥?');
+                    const parts = normalizedLine.split(/(\*\*[^*]+\*\*|\*[^*\n]+\*)/g);
+                    return (
+                        <React.Fragment key={lineIdx}>
+                            {parts.map((part, partIdx) => {
+                                if (part.startsWith('**') && part.endsWith('**')) {
+                                    return <strong key={partIdx} className="font-bold text-white">{part.slice(2, -2)}</strong>;
+                                }
+                                if (part.startsWith('*') && part.endsWith('*') && part.length > 2) {
+                                    return <strong key={partIdx} className="font-semibold text-white">{part.slice(1, -1)}</strong>;
+                                }
+                                return <React.Fragment key={partIdx}>{part.replace(/\*/g, '')}</React.Fragment>;
+                            })}
+                            {lineIdx < lines.length - 1 && <br />}
+                        </React.Fragment>
+                    );
+                });
+            };
+
+            const getSessionGroup = (session) => {
+                const createdAt = session.created_at ? new Date(session.created_at) : new Date();
+                const today = new Date();
+                const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                const startOfYesterday = new Date(startOfToday);
+                startOfYesterday.setDate(startOfYesterday.getDate() - 1);
+                if (createdAt >= startOfToday) return '今天';
+                if (createdAt >= startOfYesterday) return '昨天';
+                return '更早';
+            };
+
+            const safeSessions = Array.isArray(sessions) ? sessions : [];
+
+            const groupedSessions = safeSessions.reduce((groups, session) => {
+                const group = getSessionGroup(session);
+                groups[group].push(session);
+                return groups;
+            }, { '今天': [], '昨天': [], '更早': [] });
+
+            const profileStrategy = userProfile.family === '富裕'
+                ? '策略：可以追求热爱，试错空间更大'
+                : userProfile.family === '中产'
+                    ? '策略：平衡理想与现实'
+                    : '策略：先谋生再谈热爱，优先追求确定性';
+
+            return (
+                <section id="chat" className="py-6 bg-gradient-to-b from-warm-50 to-white">
+                    <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="grid grid-cols-1 xl:grid-cols-[280px_minmax(0,1fr)_330px] gap-6 items-start">
+                            {/* History Sidebar - Desktop */}
+                            <aside className="hidden xl:block">
+                                <div className="bg-white rounded-2xl border border-ink-100 shadow-sm p-4 sticky top-24">
+                                    <button
+                                        onClick={createNewSession}
+                                        disabled={isLoadingSessions}
+                                        className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-zxf-red text-white text-sm font-bold hover:bg-red-700 transition-colors disabled:opacity-50"
+                                    >
+                                        <Icon name="plus" size={17} />
+                                        新建对话
+                                    </button>
+
+                                    <div className="mt-6">
+                                        <div className="flex items-center justify-between mb-3">
+                                            <h3 className="font-bold text-ink-900 text-sm">历史对话</h3>
+                                            {isLoadingSessions && <Icon name="loader-2" size={14} className="animate-spin text-ink-400" />}
+                                        </div>
+
+                                        <div className="space-y-4 max-h-[560px] overflow-y-auto pr-1">
+                                            {safeSessions.length === 0 && !isLoadingSessions && (
+                                                <div className="text-xs text-ink-400 text-center py-8">暂无会话，点击上方新建</div>
+                                            )}
+                                            {['今天', '昨天', '更早'].map(groupName => (
+                                                groupedSessions[groupName].length > 0 && (
+                                                    <div key={groupName}>
+                                                        <div className="flex items-center gap-1.5 text-xs font-semibold text-ink-600 mb-2">
+                                                            {groupName}
+                                                            <Icon name="chevron-down" size={13} className="text-ink-400" />
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            {groupedSessions[groupName].map(session => (
+                                                                <div
+                                                                    key={session.id}
+                                                                    onClick={() => switchSession(session.id)}
+                                                                    className={`group flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg cursor-pointer border transition-colors ${
+                                                                        currentSessionId === session.id
+                                                                            ? 'bg-red-50 border-red-100 text-zxf-red'
+                                                                            : 'bg-white border-ink-100 text-ink-700 hover:bg-ink-50'
+                                                                    }`}
+                                                                >
+                                                                    <div className="text-xs font-medium truncate">{session.title}</div>
+                                                                    <button
+                                                                        onClick={(e) => deleteSession(e, session.id)}
+                                                                        className="p-1.5 text-ink-400 hover:text-red-500 hover:bg-red-100 rounded-md opacity-80 group-hover:opacity-100 transition-colors"
+                                                                        title="删除会话"
+                                                                    >
+                                                                        <Icon name="trash-2" size={12} />
+                                                                    </button>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        onClick={clearAllSessions}
+                                        disabled={!safeSessions.length || isLoadingSessions}
+                                        className="mt-5 w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-ink-200 text-xs text-ink-500 hover:border-zxf-red hover:text-zxf-red transition-colors disabled:opacity-40 disabled:hover:border-ink-200 disabled:hover:text-ink-500"
+                                    >
+                                        <Icon name="trash-2" size={14} />
+                                        清空历史记录
+                                    </button>
+                                </div>
+                            </aside>
+
+                            {/* Main Chat Area */}
+                            <div className="flex-1 min-w-0">
+                                <div className="bg-white rounded-2xl border border-ink-100 shadow-sm overflow-hidden">
+                                    {/* Chat header */}
+                                    <div className="flex items-center justify-between px-5 py-3.5 border-b border-ink-100 bg-gradient-to-r from-red-50/50 to-white">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-9 h-9 rounded-full bg-zxf-red flex items-center justify-center">
+                                                <Icon name="brain" size={18} className="text-white" />
+                                            </div>
+                                            <div>
+                                                <div className="text-sm font-bold text-ink-900">张雪峰 · AI 顾问</div>
+                                                <div className="text-xs text-zxf-red flex items-center gap-1 font-mono">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-zxf-red animate-pulse"></span>
+                                                    基于就业数据 · 中位数原则
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button className="xl:hidden p-2 text-ink-500 hover:bg-ink-50 rounded-lg" onClick={() => setSidebarOpen(!sidebarOpen)}>
+                                            <Icon name="panel-right-open" size={18} />
+                                        </button>
+                                    </div>
+
+                                    {/* Messages */}
+                                    <div className="p-5 space-y-5 max-h-[600px] overflow-y-auto">
+                                        {messages.map((msg, idx) => (
+                                            <div key={idx} className={`flex gap-3 ${msg.type === 'user' ? 'justify-end' : ''}`}>
+                                                {msg.type === 'ai' && (
+                                                    <div className="w-8 h-8 rounded-full bg-zxf-red flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                        <Icon name="brain" size={15} className="text-white" />
+                                                    </div>
+                                                )}
+                                                <div className={`space-y-3 max-w-[85%] ${msg.type === 'user' ? 'flex flex-col items-end' : ''}`}>
+                                                    <div className={`rounded-2xl px-4 py-3 ${
+                                                        msg.type === 'ai'
+                                                            ? msg.style === 'zxf' ? 'bg-zxf-dark text-gray-200 rounded-tl-sm border border-zxf-border' : 'bg-primary-50/70 border border-primary-100 rounded-tl-sm'
+                                                            : 'bg-zxf-red text-white rounded-tr-sm'
+                                                    }`}>
+                                                        {msg.style === 'zxf' ? (
+                                                            <div className="zxf-message text-sm leading-relaxed whitespace-pre-line">
+                                                                {renderMessageContent(msg.content)}
+                                                            </div>
+                                                        ) : (
+                                                            <p className="text-sm leading-relaxed">{msg.content}</p>
+                                                        )}
+                                                    </div>
+
+                                                    {msg.type === 'ai' && !msg.loading && ((Array.isArray(msg.syncPlans) && msg.syncPlans.length > 0) || parseRecommendationPlansFromText(msg.content).length > 0) && (
+                                                        <div className="flex flex-wrap items-center gap-2">
+                                                            <button
+                                                                onClick={() => handleSyncPlans(msg.id || `msg-${idx}`, msg.content, msg.syncPlans)}
+                                                                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-zxf-red/20 text-xs font-bold text-zxf-red hover:bg-red-50 hover:border-zxf-red/50 transition-colors shadow-sm"
+                                                            >
+                                                                <Icon name="send-to-back" size={14} />
+                                                                鍚屾鍒版垜鐨勫綋鍓嶆柟妗?                                                            </button>
+                                                            <span className="text-[11px] text-ink-400">
+                                                                璇嗗埆鍒?{(Array.isArray(msg.syncPlans) && msg.syncPlans.length) || parseRecommendationPlansFromText(msg.content).length} 鎵€锛屽綋鍓嶇敾鍍忔渶澶氫繚瀛?{MAX_SYNCED_PLANS} 鎵€
+                                                            </span>
+                                                        </div>
+                                                    )}
+
+                                                    {msg.syncStatus && (
+                                                        <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-50 border border-emerald-100 text-[11px] font-medium text-emerald-700">
+                                                            <Icon name="check-circle-2" size={13} />
+                                                            {msg.syncStatus}
+                                                        </div>
+                                                    )}
+
+                                                    {/* University Cards */}
+                                                    {Array.isArray(msg.cards) && msg.cards.length > 0 && (
+                                                        <div className="grid sm:grid-cols-2 gap-3 w-full">
+                                                            {msg.cards.map((card, cidx) => {
+                                                                const tc = typeColors[card.typeColor] || typeColors.wen;
+                                                                const trend = Array.isArray(card.trend) && card.trend.length ? card.trend : [0];
+                                                                const majors = Array.isArray(card.majors) ? card.majors : [];
+                                                                return (
+                                                                    <div key={cidx} className={`bg-white border ${tc.border} rounded-xl p-4 hover-lift cursor-pointer shadow-sm card-accent-bar`}>
+                                                                        <div className="flex items-start justify-between mb-3">
+                                                                            <div>
+                                                                                <div className="flex items-center gap-2 mb-1">
+                                                                                    <span className="font-bold text-sm text-ink-900">{card.name}</span>
+                                                                                    <span className={`px-2 py-0.5 ${tc.bg} ${tc.text} text-[10px] font-bold rounded-full`}>
+                                                                                        {card.type}
+                                                                                    </span>
+                                                                                    {card.fortune500 && (
+                                                                                        <span className="px-1.5 py-0.5 bg-zxf-red/10 text-zxf-red text-[9px] font-bold rounded border border-zxf-red/20" title="500寮烘祴璇曢€氳繃">
+                                                                                            500寮?
+                                                                                        </span>
+                                                                                    )}
+                                                                                </div>
+                                                                                <div className="flex items-center gap-2 text-xs text-ink-500">
+                                                                                    <Icon name="map-pin" size={11} />
+                                                                                    {card.city}
+                                                                                    <span className="text-ink-300">路</span>
+                                                                                    {card.level}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        {/* Key metrics */}
+                                                                        <div className="grid grid-cols-3 gap-2 mb-3">
+                                                                            <div className={`${tc.badge} rounded-lg p-2 text-center`}>
+                                                                                <div className={`text-xs font-bold ${tc.text}`}>{card.probability}%</div>
+                                                                                <div className="text-[9px] text-ink-400">录取概率</div>
+                                                                            </div>
+                                                                            <div className="bg-ink-50 rounded-lg p-2 text-center">
+                                                                                <div className="text-xs font-bold text-ink-700">{card.medianSalary}</div>
+                                                                                <div className="text-[9px] text-ink-400">
+                                                                                    <span className="median-badge text-[8px]">中位数</span>薪资
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="bg-ink-50 rounded-lg p-2 text-center">
+                                                                                <div className="text-xs font-bold text-ink-700">{card.irreplaceability}</div>
+                                                                                <div className="text-[9px] text-ink-400">不可替代性</div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        {/* Trend */}
+                                                                        <div className="flex items-end gap-1 h-8 mb-3">
+                                                                            {trend.map((t, tidx) => {
+                                                                                const max = Math.max(...trend);
+                                                                                const min = Math.min(...trend);
+                                                                                const range = max - min || 1;
+                                                                                const height = 30 + ((max - t) / range) * 30;
+                                                                                return (
+                                                                                    <div key={tidx} className="flex-1 flex flex-col items-center gap-1">
+                                                                                        <div className={`w-full ${tc.light} rounded-sm`} style={{height: `${height}%`}}></div>
+                                                                                        <span className="text-[9px] text-ink-400">{2022+tidx}</span>
+                                                                                    </div>
+                                                                                );
+                                                                            })}
+                                                                        </div>
+
+                                                                        {/* Majors */}
+                                                                        <div className="flex flex-wrap gap-1.5 mb-3">
+                                                                            {majors.map((major, midx) => (
+                                                                                <span key={midx} className="px-2 py-0.5 bg-ink-50 text-ink-600 text-[10px] rounded-md">
+                                                                                    {major}
+                                                                                </span>
+                                                                            ))}
+                                                                        </div>
+
+                                                                        {/* Risk with ZXF style */}
+                                                                        <div className={`flex items-start gap-1.5 p-2 ${tc.bg} rounded-lg mb-3`}>
+                                                                            <Icon name="alert-triangle" size={12} className={`${tc.text} mt-0.5 flex-shrink-0`} />
+                                                                            <span className="text-[11px] text-ink-600 leading-relaxed">{card.risk}</span>
+                                                                        </div>
+
+                                                                        {/* Employment reason */}
+                                                                        <div className="p-2 bg-zxf-dark rounded-lg mb-3">
+                                                                            <div className="text-[10px] text-gray-400 font-mono mb-0.5">就业倒推 · 判断依据</div>
+                                                                            <div className="text-[11px] text-gray-300 leading-relaxed">{card.reason}</div>
+                                                                        </div>
+
+                                                                        <div className="flex gap-2">
+                                                                            <button className="flex-1 py-1.5 text-xs bg-zxf-red text-white rounded-lg hover:bg-red-700 transition-colors">
+                                                                                鍔犲叆鏂规
+                                                                            </button>
+                                                                            <button className="px-3 py-1.5 text-xs border border-ink-200 text-ink-600 rounded-lg hover:bg-ink-50 transition-colors">
+                                                                                璇︽儏
+                                                                            </button>
+                                                                            <button className="px-3 py-1.5 text-xs border border-ink-200 text-ink-600 rounded-lg hover:bg-ink-50 transition-colors">
+                                                                                瀵规瘮
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                {msg.type === 'user' && (
+                                                    <div className="w-8 h-8 rounded-full bg-ink-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                        <Icon name="user" size={15} className="text-ink-600" />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Quick questions - ZXF style */}
+                                    <div className="px-5 py-3 border-t border-ink-100 bg-warm-50/50">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <span className="text-[10px] font-mono text-zxf-red">ZXF.TOOLS</span>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {quickQuestions.map((q, idx) => (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => handleQuickQuestion(q)}
+                                                    disabled={isSending}
+                                                    className={`px-3.5 py-1.5 text-xs bg-white border border-ink-200 rounded-full transition-all ${
+                                                        isSending
+                                                            ? 'text-ink-300 cursor-not-allowed'
+                                                            : 'text-ink-600 hover:border-zxf-red hover:text-zxf-red hover:shadow-sm'
+                                                    }`}
+                                                >
+                                                    {q}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Input */}
+                                    <div className="px-5 py-4 border-t border-ink-100">
+                                        <div className="flex items-center gap-3 bg-ink-50 rounded-xl px-4 py-3">
+                                            <Icon name="mic" size={18} className="text-ink-400 flex-shrink-0 cursor-pointer hover:text-ink-600" />
+                                            <input
+                                                type="text"
+                                                value={inputValue}
+                                                onChange={(e) => setInputValue(e.target.value)}
+                                                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                                                disabled={isSending}
+                                                placeholder="杈撳叆浣犵殑闂锛屼緥濡傦細鎴戞兂鍘讳笂娴疯澶у锛屾湁浠€涔堟帹鑽愶紵"
+                                                className="flex-1 bg-transparent text-sm text-ink-700 placeholder-ink-400 outline-none"
+                                            />
+                                            <button
+                                                onClick={handleSend}
+                                                disabled={isSending || !inputValue.trim()}
+                                                className={`w-9 h-9 rounded-lg flex items-center justify-center text-white flex-shrink-0 transition-colors ${
+                                                    isSending || !inputValue.trim()
+                                                        ? 'bg-ink-300 cursor-not-allowed'
+                                                        : 'bg-zxf-red hover:bg-red-700'
+                                                }`}
+                                            >
+                                                <Icon name={isSending ? 'loader-2' : 'send'} size={16} className={isSending ? 'animate-spin' : ''} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Profile Sidebar - Desktop */}
+                            <aside className="hidden xl:block w-full">
+                                <div className="bg-white rounded-2xl border border-ink-100 shadow-sm p-5 sticky top-24 space-y-4">
+                                    {/* 鏂板缓鍜ㄨ */}
+                                    <button
+                                        onClick={createNewSession}
+                                        disabled={isLoadingSessions}
+                                        className="hidden w-full items-center justify-center gap-2 py-2.5 rounded-xl bg-zxf-red text-white text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
+                                    >
+                                        <Icon name="plus" size={16} />
+                                        新建咨询
+                                    </button>
+
+                                    {/* 浼氳瘽鍒楄〃 */}
+                                    <div className="hidden">
+                                        <div className="flex items-center justify-between mb-3">
+                                             <h3 className="font-bold text-ink-900 text-sm">咨询会话</h3>
+                                            {isLoadingSessions && <Icon name="loader-2" size={14} className="animate-spin text-ink-400" />}
+                                        </div>
+                                        <div className="space-y-2 max-h-64 overflow-y-auto">
+                                            {safeSessions.length === 0 && !isLoadingSessions && (
+                                                <div className="text-xs text-ink-400 text-center py-4">暂无会话，点击上方新建</div>
+                                            )}
+                                            {safeSessions.map(session => (
+                                                <div
+                                                    key={session.id}
+                                                    onClick={() => switchSession(session.id)}
+                                                    className={`group flex items-center justify-between p-3 rounded-lg cursor-pointer transition-colors ${
+                                                        currentSessionId === session.id
+                                                            ? 'bg-red-50 border border-red-100'
+                                                            : 'hover:bg-ink-50 border border-transparent'
+                                                    }`}
+                                                >
+                                                    <div className="flex-1 min-w-0">
+                                                        <div className={`text-xs font-medium truncate ${
+                                                            currentSessionId === session.id ? 'text-zxf-red' : 'text-ink-700'
+                                                        }`}>
+                                                            {session.title}
+                                                        </div>
+                                                        <div className="text-[10px] text-ink-400 mt-0.5">
+                                                            {session.created_at ? new Date(session.created_at).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''}
+                                                        </div>
+                                                    </div>
+                                                    <button
+                                                        onClick={(e) => deleteSession(e, session.id)}
+                                                        className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-red-100 rounded-md transition-opacity"
+                                                        title="删除会话"
+                                                    >
+                                                        <Icon name="trash-2" size={12} className="text-ink-400 hover:text-red-500" />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* 褰撳墠浼氳瘽鑰冪敓鐢诲儚 */}
+                                    {(
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <Icon name="user-circle" size={16} className="text-zxf-red" />
+                                                 <h3 className="font-bold text-ink-900 text-base">考生画像</h3>
+                                            </div>
+                                            <div className="bg-gradient-to-br from-red-50 to-rose-50 border border-red-100 rounded-xl p-4">
+                                                <div className="flex items-center gap-3 mb-4">
+                                                    <span className="px-2.5 py-1 rounded bg-zxf-red text-white text-[10px] font-mono tracking-wider">灵魂追问</span>
+                                                    <span className="text-xs text-ink-500">已完成</span>
+                                                </div>
+                                                <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-xs">
+                                                    <div><span className="text-ink-500">省份</span> <span className="ml-1 text-ink-800 font-medium">{userProfile.province || '未填写'}</span></div>
+                                                    <div><span className="text-ink-500">分数</span> <span className="ml-1 text-ink-800 font-medium">{userProfile.score || '未填写'}</span></div>
+                                                    <div><span className="text-ink-500">位次</span> <span className="ml-1 text-ink-800 font-medium">{userProfile.rank || '未填写'}</span></div>
+                                                    <div><span className="text-ink-500">选科</span> <span className="ml-1 text-ink-800 font-medium">{userProfile.subjects || '未填写'}</span></div>
+                                                    <div><span className="text-ink-500">城市</span> <span className="ml-1 text-ink-800 font-medium">{formatPreference(userProfile.cityPref)}</span></div>
+                                                    <div><span className="text-ink-500">方向</span> <span className="ml-1 text-ink-800 font-medium">{userProfile.majorPref || '未填写'}</span></div>
+                                                </div>
+                                                <div className="mt-4 pt-3 border-t border-red-100">
+                                                    <div className="text-xs text-ink-400">家庭条件</div>
+                                                    <div className="text-sm font-bold text-ink-700">{userProfile.family || '普通家庭'}</div>
+                                                    <div className="text-xs text-ink-400 mt-0.5">风险偏好：{userProfile.risk || '均衡'}</div>
+                                                    <div className="text-[10px] text-ink-400 mt-0.5">
+                                                        {profileStrategy}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Sieve status */}
+                                    <div className="space-y-3 pt-2 border-t border-ink-100">
+                                        <h4 className="text-xs font-bold text-ink-700 uppercase tracking-wider">筛选状态</h4>
+                                        {[
+                                            { label: '学历筛选', status: '通过', color: 'text-emerald-600', bg: 'bg-emerald-50' },
+                                            { label: '城市筛选', status: '进行中', color: 'text-amber-600', bg: 'bg-amber-50' },
+                                            { label: '专业筛选', status: '待分析', color: 'text-ink-400', bg: 'bg-ink-50' },
+                                        ].map((item) => (
+                                            <div key={item.label} className={`flex items-center justify-between p-2.5 rounded-lg ${item.bg}`}>
+                                                <span className="text-xs text-ink-600">{item.label}</span>
+                                                <span className={`text-xs font-bold ${item.color}`}>{item.status}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </aside>
+
+                            {/* Mobile / Tablet Sidebar */}
+                            {sidebarOpen && (
+                                <React.Fragment>
+                                    <div className="fixed inset-0 bg-black/30 z-40 xl:hidden" onClick={() => setSidebarOpen(false)}></div>
+                                    <div className="fixed right-0 top-0 bottom-0 w-80 max-w-[85vw] bg-white z-50 p-5 overflow-y-auto xl:hidden space-y-4">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <h3 className="font-bold text-ink-900">浼氳瘽绠＄悊</h3>
+                                            <button onClick={() => setSidebarOpen(false)} className="p-2 hover:bg-ink-50 rounded-lg">
+                                                <Icon name="x" size={18} />
+                                            </button>
+                                        </div>
+
+                                        {/* 鏂板缓鍜ㄨ */}
+                                        <button
+                                            onClick={createNewSession}
+                                            disabled={isLoadingSessions}
+                                            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-zxf-red text-white text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
+                                        >
+                                            <Icon name="plus" size={16} />
+                                            新建咨询
+                                        </button>
+
+                                        {/* 浼氳瘽鍒楄〃 */}
+                                        <div>
+                                            <div className="flex items-center justify-between mb-3">
+                                                <h3 className="font-bold text-ink-900 text-sm">咨询会话</h3>
+                                                {isLoadingSessions && <Icon name="loader-2" size={14} className="animate-spin text-ink-400" />}
+                                            </div>
+                                            <div className="space-y-2 max-h-64 overflow-y-auto">
+                                                {safeSessions.length === 0 && !isLoadingSessions && (
+                                                    <div className="text-xs text-ink-400 text-center py-4">暂无会话，点击上方新建</div>
+                                                )}
+                                                {safeSessions.map(session => (
+                                                    <div
+                                                        key={session.id}
+                                                        onClick={() => switchSession(session.id)}
+                                                        className={`group flex items-center justify-between p-3 rounded-lg cursor-pointer transition-colors ${
+                                                            currentSessionId === session.id
+                                                                ? 'bg-red-50 border border-red-100'
+                                                                : 'hover:bg-ink-50 border border-transparent'
+                                                        }`}
+                                                    >
+                                                        <div className="flex-1 min-w-0">
+                                                            <div className={`text-xs font-medium truncate ${
+                                                                currentSessionId === session.id ? 'text-zxf-red' : 'text-ink-700'
+                                                            }`}>
+                                                                {session.title}
+                                                            </div>
+                                                            <div className="text-[10px] text-ink-400 mt-0.5">
+                                                                {session.created_at ? new Date(session.created_at).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''}
+                                                            </div>
+                                                        </div>
+                                                        <button
+                                                            onClick={(e) => deleteSession(e, session.id)}
+                                                            className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-red-100 rounded-md transition-opacity"
+                                                            title="删除会话"
+                                                        >
+                                                            <Icon name="trash-2" size={12} className="text-ink-400 hover:text-red-500" />
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* 褰撳墠浼氳瘽鑰冪敓鐢诲儚 */}
+                                        {currentSessionId && (
+                                            <div className="pt-4 border-t border-ink-100">
+                                                <div className="flex items-center gap-2 mb-3">
+                                                    <Icon name="user-circle" size={16} className="text-zxf-red" />
+                                                    <h3 className="font-bold text-ink-900 text-sm">当前考生画像</h3>
+                                                </div>
+                                                <div className="bg-red-50 border border-red-100 rounded-xl p-3">
+                                                    <div className="grid grid-cols-2 gap-2 text-xs">
+                                                        <div><span className="text-ink-400">省份</span> <span className="text-ink-700 font-medium">{userProfile.province || '未填写'}</span></div>
+                                                        <div><span className="text-ink-400">分数</span> <span className="text-ink-700 font-medium">{userProfile.score || '未填写'}</span></div>
+                                                        <div><span className="text-ink-400">位次</span> <span className="text-ink-700 font-medium">{userProfile.rank || '未填写'}</span></div>
+                                                        <div><span className="text-ink-400">选科</span> <span className="text-ink-700 font-medium">{userProfile.subjects || '未填写'}</span></div>
+                                                        <div><span className="text-ink-400">城市</span> <span className="text-ink-700 font-medium">{formatPreference(userProfile.cityPref)}</span></div>
+                                                        <div><span className="text-ink-400">方向</span> <span className="text-ink-700 font-medium">{userProfile.majorPref || '未填写'}</span></div>
+                                                    </div>
+                                                    <div className="mt-2 pt-2 border-t border-red-100">
+                                                        <div className="text-xs text-ink-400">家庭条件</div>
+                                                        <div className="text-sm font-bold text-ink-700">{userProfile.family || '普通家庭'}</div>
+                                                        <div className="text-xs text-ink-400 mt-0.5">风险偏好：{userProfile.risk || '均衡'}</div>
+                                                        <div className="text-[10px] text-ink-400 mt-0.5">
+                                                            {userProfile.family === '富裕' ? '策略：可以追求热爱，试错空间更大' :
+                                                             userProfile.family === '中产' ? '策略：平衡理想与现实' :
+                                                             '策略：先谋生再谈热爱，优先追求确定性'}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/* Sieve status */}
+                                        <div className="space-y-3 pt-2 border-t border-ink-100">
+                                            <h4 className="text-xs font-bold text-ink-700 uppercase tracking-wider">筛选状态</h4>
+                                            {[
+                                                { label: '学历筛选', status: '通过', color: 'text-emerald-600', bg: 'bg-emerald-50' },
+                                                { label: '城市筛选', status: '进行中', color: 'text-amber-600', bg: 'bg-amber-50' },
+                                                { label: '专业筛选', status: '待分析', color: 'text-ink-400', bg: 'bg-ink-50' },
+                                            ].map((item) => (
+                                                <div key={item.label} className={`flex items-center justify-between p-2.5 rounded-lg ${item.bg}`}>
+                                                    <span className="text-xs text-ink-600">{item.label}</span>
+                                                    <span className={`text-xs font-bold ${item.color}`}>{item.status}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            )}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // ============================================
+        // 5. Universities Section - 涓浗楂樻牎鍚嶅綍
+        // ============================================
+        const UniversitiesSection = () => {
+            const [currentFilter, setCurrentFilter] = useState('all');
+            const [searchQuery, setSearchQuery] = useState('');
+
+            const universitiesData = {
+                "北京": ["北京大学", "清华大学", "中国人民大学", "北京师范大学", "北京航空航天大学", "北京理工大学", "中国农业大学", "中央财经大学", "北京邮电大学", "中国政法大学"],
+                "上海": ["复旦大学", "上海交通大学", "同济大学", "华东师范大学", "华东理工大学", "上海财经大学", "上海大学", "东华大学", "上海外国语大学"],
+                "江苏": ["南京大学", "东南大学", "南京航空航天大学", "南京理工大学", "苏州大学", "南京师范大学", "河海大学", "江南大学", "南京邮电大学"],
+                "浙江": ["浙江大学", "宁波大学", "浙江工业大学", "杭州电子科技大学", "浙江理工大学", "浙江师范大学", "温州医科大学"],
+                "山东": ["山东大学", "中国海洋大学", "中国石油大学（华东）", "山东师范大学", "青岛大学", "济南大学", "山东财经大学"],
+                "广东": ["中山大学", "华南理工大学", "暨南大学", "华南师范大学", "南方科技大学", "深圳大学", "广东工业大学", "广州大学"],
+                "湖北": ["武汉大学", "华中科技大学", "武汉理工大学", "华中师范大学", "华中农业大学", "中南财经政法大学", "中国地质大学（武汉）"],
+                "湖南": ["中南大学", "湖南大学", "湖南师范大学", "国防科技大学", "湘潭大学", "长沙理工大学"],
+                "四川": ["四川大学", "电子科技大学", "西南交通大学", "西南财经大学", "四川农业大学", "成都理工大学"],
+                "陕西": ["西安交通大学", "西北工业大学", "西安电子科技大学", "西北大学", "长安大学", "陕西师范大学", "西北农林科技大学"],
+                "天津": ["南开大学", "天津大学", "天津医科大学", "天津工业大学", "天津师范大学"],
+                "重庆": ["重庆大学", "西南大学", "西南政法大学", "重庆邮电大学", "重庆医科大学"],
+                "河南": ["郑州大学", "河南大学", "河南师范大学", "河南科技大学", "河南理工大学"],
+                "河北": ["河北工业大学", "燕山大学", "河北大学", "河北师范大学", "河北医科大学"],
+                "辽宁": ["大连理工大学", "东北大学", "辽宁大学", "大连海事大学", "东北财经大学"],
+                "吉林": ["吉林大学", "东北师范大学", "延边大学", "长春理工大学"],
+                "黑龙江": ["哈尔滨工业大学", "哈尔滨工程大学", "东北林业大学", "东北农业大学", "黑龙江大学"],
+                "安徽": ["中国科学技术大学", "合肥工业大学", "安徽大学", "安徽师范大学"],
+                "福建": ["厦门大学", "福州大学", "福建师范大学", "华侨大学"],
+                "江西": ["南昌大学", "江西财经大学", "江西师范大学", "江西理工大学"],
+                "广西": ["广西大学", "广西师范大学", "桂林电子科技大学"],
+                "云南": ["云南大学", "昆明理工大学", "云南师范大学"],
+                "贵州": ["贵州大学", "贵州师范大学", "贵州医科大学"],
+                "甘肃": ["兰州大学", "西北师范大学", "兰州交通大学"],
+                "新疆": ["新疆大学", "石河子大学", "新疆医科大学"]
+            };
+
+            const nineEightFiveSchools = new Set(["北京大学", "清华大学", "中国人民大学", "北京航空航天大学", "北京理工大学", "北京师范大学", "复旦大学", "上海交通大学", "同济大学", "华东师范大学", "南京大学", "东南大学", "浙江大学", "山东大学", "中国海洋大学", "武汉大学", "华中科技大学", "湖南大学", "中南大学", "中山大学", "华南理工大学", "四川大学", "电子科技大学", "西安交通大学", "西北工业大学", "西北农林科技大学", "天津大学", "南开大学", "重庆大学", "吉林大学", "哈尔滨工业大学", "中国科学技术大学", "厦门大学", "兰州大学"]);
+            const twoOneOneSchools = new Set(["北京大学", "清华大学", "中国人民大学", "北京师范大学", "北京邮电大学", "中央财经大学", "中国政法大学", "复旦大学", "上海交通大学", "同济大学", "华东师范大学", "上海财经大学", "上海大学", "东华大学", "南京大学", "东南大学", "苏州大学", "南京师范大学", "河海大学", "江南大学", "浙江大学", "山东大学", "中国海洋大学", "中国石油大学（华东）", "中山大学", "华南理工大学", "暨南大学", "华南师范大学", "武汉大学", "华中科技大学", "武汉理工大学", "华中师范大学", "华中农业大学", "中南财经政法大学", "四川大学", "电子科技大学", "西南交通大学", "西南财经大学", "西安交通大学", "西北工业大学", "西安电子科技大学", "西北大学", "长安大学", "陕西师范大学", "郑州大学", "河北工业大学", "辽宁大学", "大连海事大学", "吉林大学", "东北师范大学", "哈尔滨工业大学", "哈尔滨工程大学", "东北林业大学", "东北农业大学", "中国科学技术大学", "合肥工业大学", "安徽大学", "厦门大学", "福州大学", "南昌大学", "广西大学", "云南大学", "贵州大学", "兰州大学", "新疆大学", "石河子大学"]);
+            const doubleFirstClassSchools = new Set([...nineEightFiveSchools, ...twoOneOneSchools, "南方科技大学", "宁波大学", "湘潭大学", "上海中医药大学", "广州中医药大学"]);
+            const schoolOfficialUrls = {
+                "北京大学": "https://www.pku.edu.cn/",
+                "清华大学": "https://www.tsinghua.edu.cn/",
+                "中国人民大学": "https://www.ruc.edu.cn/",
+                "复旦大学": "https://www.fudan.edu.cn/",
+                "上海交通大学": "https://www.sjtu.edu.cn/",
+                "同济大学": "https://www.tongji.edu.cn/",
+                "南京大学": "https://www.nju.edu.cn/",
+                "东南大学": "https://www.seu.edu.cn/",
+                "浙江大学": "https://www.zju.edu.cn/",
+                "山东大学": "https://www.sdu.edu.cn/",
+                "中国海洋大学": "https://www.ouc.edu.cn/",
+                "中山大学": "https://www.sysu.edu.cn/",
+                "华南理工大学": "https://www.scut.edu.cn/",
+                "武汉大学": "https://www.whu.edu.cn/",
+                "华中科技大学": "https://www.hust.edu.cn/",
+                "四川大学": "https://www.scu.edu.cn/",
+                "电子科技大学": "https://www.uestc.edu.cn/",
+                "西安交通大学": "https://www.xjtu.edu.cn/",
+                "西北工业大学": "https://www.nwpu.edu.cn/",
+                "天津大学": "https://www.tju.edu.cn/",
+                "南开大学": "https://www.nankai.edu.cn/",
+                "重庆大学": "https://www.cqu.edu.cn/",
+                "吉林大学": "https://www.jlu.edu.cn/",
+                "哈尔滨工业大学": "https://www.hit.edu.cn/",
+                "中国科学技术大学": "https://www.ustc.edu.cn/",
+                "厦门大学": "https://www.xmu.edu.cn/",
+                "兰州大学": "https://www.lzu.edu.cn/"
+            };
+
+            const badgeStyles = {
+                '985': 'bg-zxf-red/10 text-zxf-red border-zxf-red/20',
+                '211': 'bg-blue-50 text-blue-700 border-blue-200',
+                '双一流': 'bg-emerald-50 text-emerald-700 border-emerald-200'
+            };
+
+            const getSchoolBadge = (school) => {
+                if (nineEightFiveSchools.has(school)) return '985';
+                if (twoOneOneSchools.has(school)) return '211';
+                if (doubleFirstClassSchools.has(school)) return '双一流';
+                return null;
+            };
+
+            const regionInitialMap = {
+                '北京': '京', '上海': '沪', '江苏': '苏', '浙江': '浙', '山东': '鲁', '广东': '粤', '湖北': '鄂', '湖南': '湘', '四川': '川', '陕西': '陕',
+                '天津': '津', '重庆': '渝', '河南': '豫', '河北': '冀', '辽宁': '辽', '吉林': '吉', '黑龙江': '黑', '安徽': '皖', '福建': '闽', '江西': '赣',
+                '广西': '桂', '云南': '云', '贵州': '贵', '甘肃': '甘', '新疆': '新'
+            };
+
+            const getRegionInitial = (region) => regionInitialMap[region] || region[0];
+
+            const totalProvinces = Object.keys(universitiesData).length;
+            const totalUniversities = Object.values(universitiesData).flat().length;
+
+            const regions = (searchQuery || currentFilter === 'all') ? Object.keys(universitiesData) : [currentFilter];
+
+            let hasResult = false;
+
+            return (
+                <section id="universities" className="py-20 bg-gradient-to-b from-white to-warm-50">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-12 reveal">
+                            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-zxf-red tracking-wider uppercase font-mono">
+                                <Icon name="graduation-cap" size={12} />
+                                Universities Directory
+                            </span>
+                            <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink-900 mt-2">
+                                中国<span className="text-zxf-red">高校</span>全景
+                            </h2>
+                            <p className="text-ink-500 mt-3 max-w-xl mx-auto">
+                                汇集全国重点高校，支持按地区筛选和名称搜索，并按 985、211、双一流分层标注。
+                            </p>
+                        </div>
+
+                        {/* Stats */}
+                        <div className="grid grid-cols-2 gap-4 max-w-md mx-auto mb-10">
+                            <div className="bg-white border border-ink-100 rounded-xl p-5 text-center hover-lift">
+                                <div className="text-3xl font-bold text-zxf-red font-mono">{totalProvinces}</div>
+                                <div className="text-sm text-ink-500 mt-1">省 / 市 / 区</div>
+                            </div>
+                            <div className="bg-white border border-ink-100 rounded-xl p-5 text-center hover-lift">
+                                <div className="text-3xl font-bold text-zxf-red font-mono">{totalUniversities}</div>
+                                <div className="text-sm text-ink-500 mt-1">高等院校</div>
+                            </div>
+                        </div>
+
+                        {/* Search */}
+                        <div className="max-w-xl mx-auto mb-8">
+                            <div className="relative">
+                                <Icon name="search" size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-400" />
+                                <input
+                                    type="text"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value.trim())}
+                                    placeholder="搜索高校名称..."
+                                    className="w-full pl-11 pr-4 py-3 bg-white border border-ink-200 rounded-xl text-sm text-ink-700 placeholder-ink-400 outline-none focus:border-zxf-red focus:ring-2 focus:ring-red-100 transition-all"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Filter Tags */}
+                        <div className="mb-10">
+                            <div className="flex items-center gap-3 mb-4">
+                                <span className="font-display text-lg font-bold text-ink-900">地区筛选</span>
+                                <span className="flex-1 h-px bg-gradient-to-r from-ink-200 to-transparent"></span>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                                <button
+                                    onClick={() => { setCurrentFilter('all'); setSearchQuery(''); }}
+                                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
+                                        currentFilter === 'all'
+                                            ? 'bg-zxf-red text-white border-zxf-red shadow-md shadow-red-500/20'
+                                            : 'bg-white text-ink-600 border-ink-200 hover:border-zxf-red/50 hover:text-zxf-red'
+                                    }`}
+                                >
+                                    全部
+                                </button>
+                                {Object.keys(universitiesData).map(region => (
+                                    <button
+                                        key={region}
+                                        onClick={() => { setCurrentFilter(region); setSearchQuery(''); }}
+                                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
+                                            currentFilter === region
+                                                ? 'bg-zxf-red text-white border-zxf-red shadow-md shadow-red-500/20'
+                                                : 'bg-white text-ink-600 border-ink-200 hover:border-zxf-red/50 hover:text-zxf-red'
+                                        }`}
+                                    >
+                                        {region}
+                                        <span className="text-xs opacity-70 ml-1">{universitiesData[region].length}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Content */}
+                        <div className="space-y-10">
+                            {regions.map(region => {
+                                let universities = universitiesData[region];
+                                if (searchQuery) {
+                                    universities = universities.filter(u => u.toLowerCase().includes(searchQuery.toLowerCase()));
+                                }
+                                if (universities.length === 0) return null;
+                                hasResult = true;
+
+                                return (
+                                    <div key={region} className="reveal visible">
+                                        <div className="flex items-center gap-4 mb-5 pb-3 border-b border-ink-100">
+                                            <div className="w-10 h-10 rounded-lg bg-zxf-red flex items-center justify-center text-white font-bold text-lg">
+                                                {getRegionInitial(region)}
+                                            </div>
+                                            <div className="font-display text-xl font-bold text-ink-900">{region}</div>
+                                            <div className="ml-auto px-3 py-1 bg-ink-50 text-ink-500 text-xs rounded-full">
+                                                {universities.length} 所
+                                            </div>
+                                        </div>
+                                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                                            {universities.map(uni => {
+                                                const badge = getSchoolBadge(uni);
+                                                const officialUrl = schoolOfficialUrls[uni];
+                                                const CardTag = officialUrl ? 'a' : 'div';
+                                                return (
+                                                    <CardTag
+                                                        key={uni}
+                                                        href={officialUrl || undefined}
+                                                        target={officialUrl ? "_blank" : undefined}
+                                                        rel={officialUrl ? "noopener noreferrer" : undefined}
+                                                        title={officialUrl ? `打开${uni}官网` : `${uni}暂无官网地址`}
+                                                        className={`bg-white border border-ink-100 rounded-xl p-4 hover-lift card-accent-bar relative group block transition-colors ${officialUrl ? 'cursor-pointer hover:border-zxf-red/30' : 'cursor-default opacity-80'}`}
+                                                    >
+                                                        <div className="flex items-start justify-between gap-2">
+                                                            <div className="text-sm font-medium text-ink-900">{uni}</div>
+                                                            {officialUrl && <Icon name="external-link" size={14} className="text-ink-300 group-hover:text-zxf-red flex-shrink-0" />}
+                                                        </div>
+                                                        {badge && (
+                                                            <span className={`inline-block mt-2 px-2 py-0.5 ${badgeStyles[badge]} text-[10px] font-bold rounded border`}>
+                                                                {badge}
+                                                            </span>
+                                                        )}
+                                                    </CardTag>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+
+                            {!hasResult && (
+                                <div className="text-center py-20">
+                                    <div className="text-5xl mb-4 opacity-30">📚</div>
+                                    <div className="text-ink-500">未找到匹配的高校</div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // ============================================
+        // 6. Heuristics Toolkit - 8鏉″喅绛栧惎鍙戝紡宸ュ叿
+        // ============================================
+        const HeuristicsToolkit = () => {
+            const [activeTool, setActiveTool] = useState(null);
+
+            const tools = [
+                { num: '01', title: '灵魂追问法', desc: '面对任何选择，先问清楚分数、位次、省份、选科、家庭条件、城市偏好和风险承受力。', scene: '志愿填报 / 职业选择', case: '先把关键约束问清楚，再谈方案。', icon: 'message-circle-question', color: 'red' },
+                { num: '02', title: '中位数原则', desc: '不要只看顶尖个例，也不要只看最差情况，要看大多数人的中位结果。', scene: '评估专业 / 行业 / 公司', case: '用中位薪资和就业去向判断真实价值。', icon: 'bar-chart-2', color: 'blue' },
+                { num: '03', title: '不可替代性检验', desc: '工资和不可替代性正相关。判断一个方向，要看它是否有技术壁垒、资格壁垒或资源壁垒。', scene: '职业方向 / 跳槽判断', case: '技术壁垒越高，议价空间越大。', icon: 'shield-check', color: 'green' },
+                { num: '04', title: '500强测试', desc: '不要只听企业宣传，要看企业实际去哪些学校招聘、招哪些专业、给多少钱。', scene: '判断学历市场价值', case: '用招聘需求校验学校和专业。', icon: 'building-2', color: 'orange' },
+                { num: '05', title: '家庭背景分流', desc: '同一个专业，对不同家庭条件的孩子，策略完全不同。试错成本决定选择空间。', scene: '给建议前的第一道分流', case: '没矿的家庭优先追求确定性。', icon: 'users', color: 'purple' },
+                { num: '06', title: '城市优先原则', desc: '城市带来信息、资源、实习和机会，能去更好的城市时，不要轻易放弃。', scene: '择校 / 择业', case: '同档次学校优先看城市平台。', icon: 'map-pin', color: 'cyan' },
+                { num: '07', title: '10年后压力测试', desc: '把选择放到十年后看：收入、成长、稳定性和转换成本是否还能接受。', scene: '最终决策', case: '用长期后果逼自己面对现实。', icon: 'clock', color: 'amber' },
+                { num: '08', title: '认态度不认事实', desc: '表达方式可以调整，但核心判断必须尊重数据和事实。', scene: '面对争议和质疑', case: '可以道歉，但不能把事实说反。', icon: 'scale', color: 'rose' },
+            ];
+
+            const colorMap = {
+                red: 'bg-red-50 text-red-700 border-red-200 hover:border-red-300',
+                blue: 'bg-blue-50 text-blue-700 border-blue-200 hover:border-blue-300',
+                green: 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:border-emerald-300',
+                orange: 'bg-amber-50 text-amber-700 border-amber-200 hover:border-amber-300',
+                purple: 'bg-purple-50 text-purple-700 border-purple-200 hover:border-purple-300',
+                cyan: 'bg-cyan-50 text-cyan-700 border-cyan-200 hover:border-cyan-300',
+                amber: 'bg-orange-50 text-orange-700 border-orange-200 hover:border-orange-300',
+                rose: 'bg-rose-50 text-rose-700 border-rose-200 hover:border-rose-300',
+            };
+
+            return (
+                <section id="tools" className="py-20 bg-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-12 reveal">
+                            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-zxf-red tracking-wider uppercase font-mono">
+                                <Icon name="wrench" size={12} />
+                                Decision Heuristics
+                            </span>
+                            <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink-900 mt-2">决策工具箱</h2>
+                            <p className="text-ink-500 mt-3 max-w-xl mx-auto">
+                                八条可操作的决策规则。每条都有明确的应用场景和案例，点击卡片查看详情。
+                            </p>
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            {tools.map((tool) => (
+                                <div
+                                    key={tool.num}
+                                    onClick={() => setActiveTool(activeTool === tool.num ? null : tool.num)}
+                                    className={`border rounded-xl p-5 cursor-pointer transition-all hover:shadow-md ${colorMap[tool.color]} ${
+                                        activeTool === tool.num ? 'ring-2 ring-offset-2 ring-zxf-red' : ''
+                                    }`}
+                                >
+                                    <div className="flex items-center justify-between mb-3">
+                                        <span className="font-mono text-xs opacity-60">{tool.num}</span>
+                                        <Icon name={tool.icon} size={20} className="opacity-60" />
+                                    </div>
+                                    <h3 className="font-bold text-sm mb-2">{tool.title}</h3>
+                                    <p className="text-xs opacity-80 leading-relaxed">{tool.desc}</p>
+                                    {activeTool === tool.num && (
+                                        <div className="mt-3 pt-3 border-t border-current border-opacity-20">
+                                            <div className="text-[10px] opacity-60 uppercase tracking-wider mb-1">搴旂敤鍦烘櫙</div>
+                                            <div className="text-xs font-medium">{tool.scene}</div>
+                                            <div className="text-[10px] opacity-60 uppercase tracking-wider mt-2 mb-1">妗堜緥</div>
+                                            <div className="text-xs">{tool.case}</div>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // ============================================
+        // 7. Comparison Section - 鏂规瀵规瘮锛堝寮虹増锛?
+        // ============================================
+        const ComparisonSection = ({ userProfile }) => {
+            const [syncedPayload, setSyncedPayload] = useState(() => readSyncedPlansForProfile(userProfile));
+
+            useEffect(() => {
+                setSyncedPayload(readSyncedPlansForProfile(userProfile));
+            }, [userProfile.province, userProfile.score, userProfile.rank, userProfile.subjects, userProfile.family, userProfile.cityPref, userProfile.majorPref, userProfile.risk]);
+
+            useEffect(() => {
+                const handleSyncedPlansUpdated = (event) => {
+                    if (event.detail && event.detail.profileKey === getProfileStorageKey(userProfile)) {
+                        setSyncedPayload(event.detail);
+                    }
+                };
+                const handleStorage = () => setSyncedPayload(readSyncedPlansForProfile(userProfile));
+                window.addEventListener(SYNCED_PLANS_EVENT, handleSyncedPlansUpdated);
+                window.addEventListener('storage', handleStorage);
+                return () => {
+                    window.removeEventListener(SYNCED_PLANS_EVENT, handleSyncedPlansUpdated);
+                    window.removeEventListener('storage', handleStorage);
+                };
+            }, [userProfile]);
+
+            const defaultPlans = [
+                { order: 1, school: '山东大学', major: '计算机科学与技术', group: '专业组A', reason: '985 平台，学科基础扎实，适合作为冲刺方案。', risk: '冲', riskLevel: '中高风险', prob: '65%', medianSalary: '18.5K', irreplaceability: 92, fortune500: true },
+                { order: 2, school: '吉林大学', major: '软件工程', group: '工科试验班', reason: '985 兜底思路，位次匹配度较高。', risk: '稳', riskLevel: '中低风险', prob: '82%', medianSalary: '15.2K', irreplaceability: 88, fortune500: true },
+                { order: 3, school: '南京邮电大学', major: '信息安全', group: '计算机类', reason: '行业认可度高，通信和互联网就业面较好。', risk: '稳', riskLevel: '低风险', prob: '88%', medianSalary: '16.8K', irreplaceability: 85, fortune500: true },
+                { order: 4, school: '青岛大学', major: '计算机科学与技术', group: '普通类', reason: '本地保底，就业半径友好。', risk: '保', riskLevel: '低风险', prob: '95%', medianSalary: '11.5K', irreplaceability: 72, fortune500: false },
+            ];
+
+            const plans = syncedPayload && Array.isArray(syncedPayload.plans) && syncedPayload.plans.length ? syncedPayload.plans : defaultPlans;
+            const isSynced = Boolean(syncedPayload && syncedPayload.plans && syncedPayload.plans.length);
+            const countByRisk = (risk) => plans.filter(plan => plan.risk === risk).length;
+            const salaryNumbers = plans.map(plan => parseFloat(String(plan.medianSalary || '').replace(/[^\d.]/g, ''))).filter(value => !Number.isNaN(value));
+            const salaryRange = salaryNumbers.length ? `${Math.min(...salaryNumbers).toFixed(1).replace('.0', '')}-${Math.max(...salaryNumbers).toFixed(1).replace('.0', '')}K` : '待核验';
+            const riskStyles = {
+                '冲': 'bg-amber-50 text-amber-700 border-amber-200',
+                '稳': 'bg-blue-50 text-blue-700 border-blue-200',
+                '保': 'bg-emerald-50 text-emerald-700 border-emerald-200',
+            };
+
+            const clearSyncedPlans = () => {
+                clearSyncedPlansForProfile(userProfile);
+                setSyncedPayload(readSyncedPlansForProfile(userProfile));
+            };
+
+            return (
+                <section id="comparison" className="py-20 bg-warm-50">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 reveal">
+                            <div>
+                                <span className="text-xs font-bold text-zxf-red tracking-wider uppercase font-mono">Plan Comparison</span>
+                                <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink-900 mt-2">方案对比</h2>
+                                <p className="text-ink-500 mt-3 max-w-2xl">对话里同步的院校方案会显示在这里；还没有同步时展示示例方案。</p>
+                            </div>
+                            {isSynced && (
+                                <button onClick={clearSyncedPlans} className="px-4 py-2 rounded-lg border border-ink-200 text-sm text-ink-600 hover:border-zxf-red hover:text-zxf-red transition-colors">
+                                    清空同步方案
+                                </button>
+                            )}
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            <div className="bg-white rounded-xl border border-ink-100 p-4"><div className="text-2xl font-bold text-ink-900">{plans.length}</div><div className="text-xs text-ink-500 mt-1">候选方案</div></div>
+                            <div className="bg-white rounded-xl border border-ink-100 p-4"><div className="text-2xl font-bold text-amber-700">{countByRisk('冲')} 所</div><div className="text-xs text-ink-500 mt-1">冲刺</div></div>
+                            <div className="bg-white rounded-xl border border-ink-100 p-4"><div className="text-2xl font-bold text-blue-700">{countByRisk('稳')} 所</div><div className="text-xs text-ink-500 mt-1">稳妥</div></div>
+                            <div className="bg-white rounded-xl border border-ink-100 p-4"><div className="text-2xl font-bold text-emerald-700">{salaryRange}</div><div className="text-xs text-ink-500 mt-1">薪资区间</div></div>
+                        </div>
+
+                        <div className="grid lg:grid-cols-2 gap-4">
+                            {plans.map((plan, idx) => (
+                                <div key={`${plan.school}-${plan.major}-${idx}`} className="bg-white rounded-xl border border-ink-100 p-5 hover-lift">
+                                    <div className="flex items-start justify-between gap-3">
+                                        <div>
+                                            <div className="text-xs text-ink-400">#{plan.order || idx + 1} {plan.group || '普通类'}</div>
+                                            <h3 className="text-lg font-bold text-ink-900 mt-1">{plan.school}</h3>
+                                            <div className="text-sm text-zxf-red font-semibold mt-1">{plan.major}</div>
+                                        </div>
+                                        <span className={`px-2.5 py-1 rounded-full border text-xs font-bold ${riskStyles[plan.risk] || 'bg-ink-50 text-ink-600 border-ink-200'}`}>{plan.risk || '待定'}</span>
+                                    </div>
+                                    <p className="text-sm text-ink-600 mt-4 leading-relaxed">{plan.reason}</p>
+                                    <div className="grid grid-cols-3 gap-3 mt-4 text-center">
+                                        <div className="bg-ink-50 rounded-lg p-3"><div className="font-bold text-ink-900">{plan.prob || '-'}</div><div className="text-[10px] text-ink-400 mt-1">录取概率</div></div>
+                                        <div className="bg-ink-50 rounded-lg p-3"><div className="font-bold text-ink-900">{plan.medianSalary || '-'}</div><div className="text-[10px] text-ink-400 mt-1">中位薪资</div></div>
+                                        <div className="bg-ink-50 rounded-lg p-3"><div className="font-bold text-ink-900">{plan.irreplaceability || '-'}</div><div className="text-[10px] text-ink-400 mt-1">壁垒指数</div></div>
+                                    </div>
+                                    {Array.isArray(plan.citations) && plan.citations.length > 0 && (
+                                        <div className="text-xs text-ink-400 mt-4 truncate">联网核验源：{plan.citations.slice(0, 2).join('，')}</div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+        const DataAnalysisSection = () => {
+            const salaryData = [
+                { name: '计算机科学与技术', median: 18500, avg: 22000 },
+                { name: '电子信息工程', median: 16000, avg: 19000 },
+                { name: '软件工程', median: 17500, avg: 20500 },
+                { name: '临床医学', median: 14000, avg: 18000 },
+                { name: '新闻学', median: 6500, avg: 9500 },
+            ];
+            const employmentData = [
+                { name: '计算机科学与技术', rate: 94, medianRate: 89 },
+                { name: '电子信息工程', rate: 92, medianRate: 88 },
+                { name: '软件工程', rate: 93, medianRate: 90 },
+                { name: '临床医学', rate: 91, medianRate: 86 },
+                { name: '新闻学', rate: 78, medianRate: 74 },
+            ];
+            const riskRadar = [
+                { name: '计算机/AI', score: 92, reason: '技术迭代快，门槛持续提升' },
+                { name: '电子信息', score: 86, reason: '产业链长，就业面较广' },
+                { name: '医学', score: 82, reason: '培养周期长，但专业壁垒强' },
+                { name: '法学', score: 75, reason: '资格考试门槛明显' },
+                { name: '工商管理', score: 45, reason: '本科阶段壁垒较弱' },
+            ];
+
+            const maxSalary = Math.max(...salaryData.map(item => item.avg));
+
+            return (
+                <section id="data" className="py-20 bg-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-12 reveal">
+                            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-zxf-red tracking-wider uppercase font-mono">
+                                <Icon name="bar-chart-3" size={12} /> Data Dashboard
+                            </span>
+                            <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink-900 mt-2">
+                                理解推荐背后的<span className="text-zxf-red">底层数据</span>
+                            </h2>
+                            <p className="text-ink-500 mt-3 max-w-xl mx-auto">
+                                页面中的概率和薪资区间用于方案比较，不等于官方录取概率或真实薪资统计。关键原则：能查来源就看来源，查不到就明确标注估算。
+                            </p>
+                        </div>
+
+                        <div className="grid lg:grid-cols-2 gap-6">
+                            <div className="bg-warm-50 rounded-2xl border border-ink-100 p-6">
+                                <h3 className="font-bold text-ink-900 mb-5 flex items-center gap-2"><Icon name="wallet" size={18} className="text-zxf-red" />专业薪资中位数</h3>
+                                <div className="space-y-4">
+                                    {salaryData.map(item => (
+                                        <div key={item.name}>
+                                            <div className="flex justify-between text-sm mb-1"><span className="font-medium text-ink-700">{item.name}</span><span className="font-mono text-ink-500">{(item.median / 1000).toFixed(1)}K</span></div>
+                                            <div className="h-3 bg-white rounded-full overflow-hidden"><div className="h-full bg-zxf-red rounded-full" style={{ width: `${Math.max(8, item.median / maxSalary * 100)}%` }}></div></div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="bg-warm-50 rounded-2xl border border-ink-100 p-6">
+                                <h3 className="font-bold text-ink-900 mb-5 flex items-center gap-2"><Icon name="briefcase" size={18} className="text-zxf-red" />就业稳定性</h3>
+                                <div className="space-y-4">
+                                    {employmentData.map(item => (
+                                        <div key={item.name} className="flex items-center gap-3">
+                                            <div className="w-32 text-sm text-ink-700 truncate">{item.name}</div>
+                                            <div className="flex-1 h-2 bg-white rounded-full overflow-hidden"><div className="h-full bg-emerald-500 rounded-full" style={{ width: `${item.rate}%` }}></div></div>
+                                            <div className="w-10 text-right text-sm font-mono text-ink-500">{item.rate}%</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="lg:col-span-2 bg-ink-900 rounded-2xl p-6 text-white">
+                                <h3 className="font-bold mb-5 flex items-center gap-2"><Icon name="radar" size={18} className="text-red-300" />不可替代性雷达</h3>
+                                <div className="grid md:grid-cols-5 gap-4">
+                                    {riskRadar.map(item => (
+                                        <div key={item.name} className="bg-white/8 border border-white/10 rounded-xl p-4">
+                                            <div className="text-sm font-bold">{item.name}</div>
+                                            <div className="text-3xl font-mono font-bold text-red-200 mt-3">{item.score}</div>
+                                            <p className="text-xs text-white/60 mt-2 leading-relaxed">{item.reason}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+        const DisclaimerSection = () => (
+            <section className="py-12 bg-white border-t border-ink-100">
+                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-start gap-4 p-6 bg-zxf-dark rounded-2xl border border-zxf-border reveal">
+                        <div className="w-10 h-10 rounded-full bg-zxf-red/20 flex items-center justify-center flex-shrink-0">
+                            <Icon name="shield-alert" size={20} className="text-zxf-red" />
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-white mb-2">重要提示 · 诚实边界</h3>
+                            <p className="text-sm text-gray-400 leading-relaxed">
+                                AI 建议基于历史就业数据、招生信息和规则推演，<strong className="text-gray-300">仅供参考</strong>。最终志愿填报请结合官方招生计划、招生章程和个人实际情况综合判断。
+                            </p>
+                            <p className="text-sm text-gray-500 leading-relaxed mt-2">
+                                薪资数据优先使用中位数思路，不同城市、企业和年份差异很大。能联网核验的数据应以官方或可信来源为准。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const Footer = () => (
+            <footer className="py-10 bg-zxf-dark text-gray-500 border-t border-zxf-border">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                        <div className="flex items-center gap-2">
+                            <div className="w-7 h-7 rounded-lg bg-zxf-red flex items-center justify-center">
+                                <Icon name="filter" size={14} className="text-white" />
+                            </div>
+                            <div>
+                                <span className="font-display text-white font-bold">志愿智选 Agent</span>
+                                <span className="text-xs text-zxf-red ml-2 font-mono">ZXF.OS</span>
+                            </div>
+                        </div>
+                        <div className="flex gap-6 text-sm">
+                            <a href="#" className="hover:text-white transition-colors">关于我们</a>
+                            <a href="#" className="hover:text-white transition-colors">数据来源</a>
+                            <a href="#" className="hover:text-white transition-colors">隐私政策</a>
+                            <a href="#" className="hover:text-white transition-colors">联系方式</a>
+                        </div>
+                        <div className="text-xs text-gray-600 font-mono">数据更新：2026 年 5 月 · 支持全国多地区</div>
+                    </div>
+                    <div className="mt-6 pt-6 border-t border-zxf-border text-center">
+                        <p className="text-xs text-gray-600">选择比努力更重要，但有得选的前提是你足够努力。</p>
+                    </div>
+                </div>
+            </footer>
+        );
+
+        // ============================================
+        // Main App
+        // ============================================
+        const App = () => {
+            const [showSoulQuery, setShowSoulQuery] = useState(false);
+            const [userProfile, setUserProfile] = useState({
+                province: '山东省',
+                score: '623',
+                rank: '12,456',
+                subjects: '物化生',
+                cityPref: '济南、青岛、南京',
+                majorPref: '计算机、电子信息',
+                family: '普通',
+                risk: '均衡'
+            });
+
+            useEffect(() => {
+                scheduleLucideRefresh();
+
+                if (!('IntersectionObserver' in window)) {
+                    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+                    return;
+                }
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+                return () => observer.disconnect();
+            }, []);
+
+            const handleSoulQueryComplete = (data) => {
+                setUserProfile(prev => ({...prev, ...data}));
+            };
+
+            return (
+                <div className="min-h-screen bg-warm-50">
+                    <Navbar />
+                    <HeroSection />
+                    <ChatSection userProfile={userProfile} />
+                    <HeuristicsToolkit />
+                    <ComparisonSection userProfile={userProfile} />
+                    <DataAnalysisSection />
+                    <UniversitiesSection />
+                    <DisclaimerSection />
+                    <Footer />
+
+                    <SoulQueryModal
+                        isOpen={showSoulQuery}
+                        onClose={() => setShowSoulQuery(false)}
+                        onComplete={handleSoulQueryComplete}
+                    />
+
+                    {/* Floating action button */}
+                    <button
+                        onClick={() => setShowSoulQuery(true)}
+                        className="fixed bottom-6 right-6 w-14 h-14 bg-zxf-red text-white rounded-full shadow-lg shadow-red-500/30 flex items-center justify-center hover:bg-red-700 transition-all z-50 hover:scale-110"
+                        title="鍚姩鐏甸瓊杩介棶"
+                    >
+                        <Icon name="brain" size={24} />
+                    </button>
+                </div>
+            );
+        };
+
+        window.addEventListener('error', (event) => {
+            console.error('鍓嶇鍏ㄥ眬閿欒:', event.error || event.message);
+        });
+        window.addEventListener('unhandledrejection', (event) => {
+            console.error('鍓嶇鏈鐞嗗紓姝ラ敊璇?', event.reason);
+        });
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(
+            <ErrorBoundary>
+                <App />
+            </ErrorBoundary>
+        );
+    </script>
+</body>
+</html>

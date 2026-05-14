@@ -1,0 +1,2492 @@
+[
+  {
+    "name": "中国人民公安大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国人民大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国传媒大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国农业大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国地质大学（北京）",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国戏曲学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国政法大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国石油大学（北京）",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国矿业大学（北京）",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国社会科学院大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国科学院大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国音乐学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中央戏剧学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中央民族大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中央美术学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中央财经大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中央音乐学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京中医药大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京交通大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京体育大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京信息科技大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京化工大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京协和医学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京外国语大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京工业大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京工商大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京师范大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京建筑大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京林业大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京物资学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京理工大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京电影学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京科技大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京第二外国语学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京航空航天大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京语言大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北京邮电大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "北方工业大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "华北电力大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "国际关系学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "外交学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "对外经济贸易大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "清华大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "首都体育学院",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "首都医科大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "首都师范大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "首都经济贸易大学",
+    "province": "北京",
+    "city": "北京"
+  },
+  {
+    "name": "中国民航大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "南开大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津中医药大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津体育学院",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津医科大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津商业大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津城建大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津外国语大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津工业大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津师范大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津理工大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津科技大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津职业技术师范大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "天津财经大学",
+    "province": "天津",
+    "city": "天津"
+  },
+  {
+    "name": "中国人民警察大学",
+    "province": "河北",
+    "city": "廊坊"
+  },
+  {
+    "name": "中央司法警官学院",
+    "province": "河北",
+    "city": "保定"
+  },
+  {
+    "name": "华北理工大学",
+    "province": "河北",
+    "city": "唐山"
+  },
+  {
+    "name": "承德医学院",
+    "province": "河北",
+    "city": "承德"
+  },
+  {
+    "name": "河北中医药大学",
+    "province": "河北",
+    "city": "石家庄"
+  },
+  {
+    "name": "河北农业大学",
+    "province": "河北",
+    "city": "保定"
+  },
+  {
+    "name": "河北北方学院",
+    "province": "河北",
+    "city": "张家口"
+  },
+  {
+    "name": "河北医科大学",
+    "province": "河北",
+    "city": "石家庄"
+  },
+  {
+    "name": "河北地质大学",
+    "province": "河北",
+    "city": "石家庄"
+  },
+  {
+    "name": "河北大学",
+    "province": "河北",
+    "city": "保定"
+  },
+  {
+    "name": "河北工业大学",
+    "province": "河北",
+    "city": "天津"
+  },
+  {
+    "name": "河北工程大学",
+    "province": "河北",
+    "city": "邯郸"
+  },
+  {
+    "name": "河北师范大学",
+    "province": "河北",
+    "city": "石家庄"
+  },
+  {
+    "name": "河北科技大学",
+    "province": "河北",
+    "city": "石家庄"
+  },
+  {
+    "name": "河北经贸大学",
+    "province": "河北",
+    "city": "石家庄"
+  },
+  {
+    "name": "燕山大学",
+    "province": "河北",
+    "city": "秦皇岛"
+  },
+  {
+    "name": "石家庄铁道大学",
+    "province": "河北",
+    "city": "石家庄"
+  },
+  {
+    "name": "中北大学",
+    "province": "山西",
+    "city": "太原"
+  },
+  {
+    "name": "太原理工大学",
+    "province": "山西",
+    "city": "太原"
+  },
+  {
+    "name": "太原科技大学",
+    "province": "山西",
+    "city": "太原"
+  },
+  {
+    "name": "山西中医药大学",
+    "province": "山西",
+    "city": "晋中"
+  },
+  {
+    "name": "山西农业大学",
+    "province": "山西",
+    "city": "晋中"
+  },
+  {
+    "name": "山西医科大学",
+    "province": "山西",
+    "city": "太原"
+  },
+  {
+    "name": "山西大同大学",
+    "province": "山西",
+    "city": "大同"
+  },
+  {
+    "name": "山西大学",
+    "province": "山西",
+    "city": "太原"
+  },
+  {
+    "name": "山西师范大学",
+    "province": "山西",
+    "city": "临汾"
+  },
+  {
+    "name": "山西财经大学",
+    "province": "山西",
+    "city": "太原"
+  },
+  {
+    "name": "内蒙古农业大学",
+    "province": "内蒙古",
+    "city": "呼和浩特"
+  },
+  {
+    "name": "内蒙古医科大学",
+    "province": "内蒙古",
+    "city": "呼和浩特"
+  },
+  {
+    "name": "内蒙古大学",
+    "province": "内蒙古",
+    "city": "呼和浩特"
+  },
+  {
+    "name": "内蒙古工业大学",
+    "province": "内蒙古",
+    "city": "呼和浩特"
+  },
+  {
+    "name": "内蒙古师范大学",
+    "province": "内蒙古",
+    "city": "呼和浩特"
+  },
+  {
+    "name": "内蒙古科技大学",
+    "province": "内蒙古",
+    "city": "包头"
+  },
+  {
+    "name": "内蒙古财经大学",
+    "province": "内蒙古",
+    "city": "呼和浩特"
+  },
+  {
+    "name": "东北大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "东北财经大学",
+    "province": "辽宁",
+    "city": "大连"
+  },
+  {
+    "name": "中国医科大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "大连交通大学",
+    "province": "辽宁",
+    "city": "大连"
+  },
+  {
+    "name": "大连医科大学",
+    "province": "辽宁",
+    "city": "大连"
+  },
+  {
+    "name": "大连外国语大学",
+    "province": "辽宁",
+    "city": "大连"
+  },
+  {
+    "name": "大连大学",
+    "province": "辽宁",
+    "city": "大连"
+  },
+  {
+    "name": "大连工业大学",
+    "province": "辽宁",
+    "city": "大连"
+  },
+  {
+    "name": "大连民族大学",
+    "province": "辽宁",
+    "city": "大连"
+  },
+  {
+    "name": "大连海事大学",
+    "province": "辽宁",
+    "city": "大连"
+  },
+  {
+    "name": "大连海洋大学",
+    "province": "辽宁",
+    "city": "大连"
+  },
+  {
+    "name": "大连理工大学",
+    "province": "辽宁",
+    "city": "大连"
+  },
+  {
+    "name": "沈阳农业大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "沈阳化工大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "沈阳医学院",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "沈阳工业大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "沈阳师范大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "沈阳建筑大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "沈阳理工大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "沈阳航空航天大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "沈阳药科大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "渤海大学",
+    "province": "辽宁",
+    "city": "锦州"
+  },
+  {
+    "name": "辽宁中医药大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "辽宁大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "辽宁工程技术大学",
+    "province": "辽宁",
+    "city": "阜新"
+  },
+  {
+    "name": "辽宁师范大学",
+    "province": "辽宁",
+    "city": "沈阳"
+  },
+  {
+    "name": "辽宁石油化工大学",
+    "province": "辽宁",
+    "city": "抚顺"
+  },
+  {
+    "name": "锦州医科大学",
+    "province": "辽宁",
+    "city": "锦州"
+  },
+  {
+    "name": "东北师范大学",
+    "province": "吉林",
+    "city": "长春"
+  },
+  {
+    "name": "东北电力大学",
+    "province": "吉林",
+    "city": "吉林"
+  },
+  {
+    "name": "北华大学",
+    "province": "吉林",
+    "city": "吉林"
+  },
+  {
+    "name": "吉林农业大学",
+    "province": "吉林",
+    "city": "长春"
+  },
+  {
+    "name": "吉林化工学院",
+    "province": "吉林",
+    "city": "吉林"
+  },
+  {
+    "name": "吉林大学",
+    "province": "吉林",
+    "city": "长春"
+  },
+  {
+    "name": "吉林师范大学",
+    "province": "吉林",
+    "city": "四平"
+  },
+  {
+    "name": "吉林建筑大学",
+    "province": "吉林",
+    "city": "长春"
+  },
+  {
+    "name": "吉林财经大学",
+    "province": "吉林",
+    "city": "长春"
+  },
+  {
+    "name": "延边大学",
+    "province": "吉林",
+    "city": "延吉"
+  },
+  {
+    "name": "长春中医药大学",
+    "province": "吉林",
+    "city": "长春"
+  },
+  {
+    "name": "长春大学",
+    "province": "吉林",
+    "city": "长春"
+  },
+  {
+    "name": "长春工业大学",
+    "province": "吉林",
+    "city": "长春"
+  },
+  {
+    "name": "长春师范大学",
+    "province": "吉林",
+    "city": "长春"
+  },
+  {
+    "name": "长春理工大学",
+    "province": "吉林",
+    "city": "长春"
+  },
+  {
+    "name": "东北农业大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "东北林业大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "东北石油大学",
+    "province": "黑龙江",
+    "city": "大庆"
+  },
+  {
+    "name": "佳木斯大学",
+    "province": "黑龙江",
+    "city": "佳木斯"
+  },
+  {
+    "name": "哈尔滨医科大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "哈尔滨商业大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "哈尔滨工业大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "哈尔滨工程大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "哈尔滨师范大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "哈尔滨理工大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "牡丹江医科大学",
+    "province": "黑龙江",
+    "city": "牡丹江"
+  },
+  {
+    "name": "黑龙江中医药大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "黑龙江八一农垦大学",
+    "province": "黑龙江",
+    "city": "大庆"
+  },
+  {
+    "name": "黑龙江大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "黑龙江科技大学",
+    "province": "黑龙江",
+    "city": "哈尔滨"
+  },
+  {
+    "name": "齐齐哈尔大学",
+    "province": "黑龙江",
+    "city": "齐齐哈尔"
+  },
+  {
+    "name": "上海中医药大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海交通大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海体育大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海健康医学院",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海外国语大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海对外经贸大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海工程技术大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海师范大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海应用技术大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海戏剧学院",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海政法学院",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海海事大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海海洋大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海理工大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海电力大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海科技大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海立信会计金融学院",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海财经大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "上海音乐学院",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "东华大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "华东师范大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "华东政法大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "华东理工大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "同济大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "复旦大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "海军军医大学",
+    "province": "上海",
+    "city": "上海"
+  },
+  {
+    "name": "东南大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "中国矿业大学",
+    "province": "江苏",
+    "city": "徐州"
+  },
+  {
+    "name": "中国药科大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京中医药大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京信息工程大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京农业大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京医科大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京审计大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京工业大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京工程学院",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京师范大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京林业大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京理工大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京航空航天大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京艺术学院",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京财经大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南京邮电大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "南通大学",
+    "province": "江苏",
+    "city": "南通"
+  },
+  {
+    "name": "常州大学",
+    "province": "江苏",
+    "city": "常州"
+  },
+  {
+    "name": "徐州医科大学",
+    "province": "江苏",
+    "city": "徐州"
+  },
+  {
+    "name": "扬州大学",
+    "province": "江苏",
+    "city": "扬州"
+  },
+  {
+    "name": "江南大学",
+    "province": "江苏",
+    "city": "无锡"
+  },
+  {
+    "name": "江苏大学",
+    "province": "江苏",
+    "city": "镇江"
+  },
+  {
+    "name": "江苏师范大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "江苏海洋大学",
+    "province": "江苏",
+    "city": "连云港"
+  },
+  {
+    "name": "江苏科技大学",
+    "province": "江苏",
+    "city": "镇江"
+  },
+  {
+    "name": "河海大学",
+    "province": "江苏",
+    "city": "南京"
+  },
+  {
+    "name": "苏州大学",
+    "province": "江苏",
+    "city": "苏州"
+  },
+  {
+    "name": "苏州科技大学",
+    "province": "江苏",
+    "city": "苏州"
+  },
+  {
+    "name": "西交利物浦大学",
+    "province": "江苏",
+    "city": "苏州"
+  },
+  {
+    "name": "中国美术学院",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "中国计量大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "嘉兴大学",
+    "province": "浙江",
+    "city": "嘉兴"
+  },
+  {
+    "name": "宁波大学",
+    "province": "浙江",
+    "city": "宁波"
+  },
+  {
+    "name": "宁波诺丁汉大学",
+    "province": "浙江",
+    "city": "宁波"
+  },
+  {
+    "name": "杭州师范大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "杭州电子科技大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "浙江中医药大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "浙江传媒学院",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "浙江农林大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "浙江大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "浙江工业大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "浙江工商大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "浙江师范大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "浙江理工大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "浙江科技大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "浙江财经大学",
+    "province": "浙江",
+    "city": "杭州"
+  },
+  {
+    "name": "温州医科大学",
+    "province": "浙江",
+    "city": "温州"
+  },
+  {
+    "name": "温州大学",
+    "province": "浙江",
+    "city": "温州"
+  },
+  {
+    "name": "湖州师范学院",
+    "province": "浙江",
+    "city": "湖州"
+  },
+  {
+    "name": "绍兴文理学院",
+    "province": "浙江",
+    "city": "绍兴"
+  },
+  {
+    "name": "中国科学技术大学",
+    "province": "安徽",
+    "city": "合肥"
+  },
+  {
+    "name": "合肥工业大学",
+    "province": "安徽",
+    "city": "合肥"
+  },
+  {
+    "name": "安庆师范大学",
+    "province": "安徽",
+    "city": "安庆"
+  },
+  {
+    "name": "安徽中医药大学",
+    "province": "安徽",
+    "city": "合肥"
+  },
+  {
+    "name": "安徽农业大学",
+    "province": "安徽",
+    "city": "合肥"
+  },
+  {
+    "name": "安徽医科大学",
+    "province": "安徽",
+    "city": "合肥"
+  },
+  {
+    "name": "安徽大学",
+    "province": "安徽",
+    "city": "合肥"
+  },
+  {
+    "name": "安徽工业大学",
+    "province": "安徽",
+    "city": "马鞍山"
+  },
+  {
+    "name": "安徽工程大学",
+    "province": "安徽",
+    "city": "芜湖"
+  },
+  {
+    "name": "安徽师范大学",
+    "province": "安徽",
+    "city": "芜湖"
+  },
+  {
+    "name": "安徽建筑大学",
+    "province": "安徽",
+    "city": "合肥"
+  },
+  {
+    "name": "安徽理工大学",
+    "province": "安徽",
+    "city": "淮南"
+  },
+  {
+    "name": "安徽财经大学",
+    "province": "安徽",
+    "city": "蚌埠"
+  },
+  {
+    "name": "淮北师范大学",
+    "province": "安徽",
+    "city": "淮北"
+  },
+  {
+    "name": "皖南医学院",
+    "province": "安徽",
+    "city": "芜湖"
+  },
+  {
+    "name": "蚌埠医科大学",
+    "province": "安徽",
+    "city": "蚌埠"
+  },
+  {
+    "name": "华侨大学",
+    "province": "福建",
+    "city": "泉州"
+  },
+  {
+    "name": "厦门医学院",
+    "province": "福建",
+    "city": "厦门"
+  },
+  {
+    "name": "厦门大学",
+    "province": "福建",
+    "city": "厦门"
+  },
+  {
+    "name": "厦门理工学院",
+    "province": "福建",
+    "city": "厦门"
+  },
+  {
+    "name": "泉州师范学院",
+    "province": "福建",
+    "city": "泉州"
+  },
+  {
+    "name": "福州大学",
+    "province": "福建",
+    "city": "福州"
+  },
+  {
+    "name": "福建中医药大学",
+    "province": "福建",
+    "city": "福州"
+  },
+  {
+    "name": "福建农林大学",
+    "province": "福建",
+    "city": "福州"
+  },
+  {
+    "name": "福建医科大学",
+    "province": "福建",
+    "city": "福州"
+  },
+  {
+    "name": "福建师范大学",
+    "province": "福建",
+    "city": "福州"
+  },
+  {
+    "name": "闽南师范大学",
+    "province": "福建",
+    "city": "漳州"
+  },
+  {
+    "name": "集美大学",
+    "province": "福建",
+    "city": "厦门"
+  },
+  {
+    "name": "东华理工大学",
+    "province": "江西",
+    "city": "南昌"
+  },
+  {
+    "name": "井冈山大学",
+    "province": "江西",
+    "city": "吉安"
+  },
+  {
+    "name": "华东交通大学",
+    "province": "江西",
+    "city": "南昌"
+  },
+  {
+    "name": "南昌大学",
+    "province": "江西",
+    "city": "南昌"
+  },
+  {
+    "name": "南昌工程学院",
+    "province": "江西",
+    "city": "南昌"
+  },
+  {
+    "name": "南昌航空大学",
+    "province": "江西",
+    "city": "南昌"
+  },
+  {
+    "name": "景德镇陶瓷大学",
+    "province": "江西",
+    "city": "景德镇"
+  },
+  {
+    "name": "江西中医药大学",
+    "province": "江西",
+    "city": "南昌"
+  },
+  {
+    "name": "江西农业大学",
+    "province": "江西",
+    "city": "南昌"
+  },
+  {
+    "name": "江西师范大学",
+    "province": "江西",
+    "city": "南昌"
+  },
+  {
+    "name": "江西理工大学",
+    "province": "江西",
+    "city": "赣州"
+  },
+  {
+    "name": "江西财经大学",
+    "province": "江西",
+    "city": "南昌"
+  },
+  {
+    "name": "赣南医科大学",
+    "province": "江西",
+    "city": "赣州"
+  },
+  {
+    "name": "赣南师范大学",
+    "province": "江西",
+    "city": "赣州"
+  },
+  {
+    "name": "中国海洋大学",
+    "province": "山东",
+    "city": "青岛"
+  },
+  {
+    "name": "中国石油大学（华东）",
+    "province": "山东",
+    "city": "青岛"
+  },
+  {
+    "name": "临沂大学",
+    "province": "山东",
+    "city": "临沂"
+  },
+  {
+    "name": "山东中医药大学",
+    "province": "山东",
+    "city": "济南"
+  },
+  {
+    "name": "山东农业大学",
+    "province": "山东",
+    "city": "泰安"
+  },
+  {
+    "name": "山东大学",
+    "province": "山东",
+    "city": "济南"
+  },
+  {
+    "name": "山东师范大学",
+    "province": "山东",
+    "city": "济南"
+  },
+  {
+    "name": "山东建筑大学",
+    "province": "山东",
+    "city": "济南"
+  },
+  {
+    "name": "山东政法学院",
+    "province": "山东",
+    "city": "济南"
+  },
+  {
+    "name": "山东理工大学",
+    "province": "山东",
+    "city": "淄博"
+  },
+  {
+    "name": "山东科技大学",
+    "province": "山东",
+    "city": "济南"
+  },
+  {
+    "name": "山东第一医科大学",
+    "province": "山东",
+    "city": "济南"
+  },
+  {
+    "name": "山东第二医科大学",
+    "province": "山东",
+    "city": "潍坊"
+  },
+  {
+    "name": "山东财经大学",
+    "province": "山东",
+    "city": "济南"
+  },
+  {
+    "name": "曲阜师范大学",
+    "province": "山东",
+    "city": "曲阜"
+  },
+  {
+    "name": "济南大学",
+    "province": "山东",
+    "city": "济南"
+  },
+  {
+    "name": "烟台大学",
+    "province": "山东",
+    "city": "烟台"
+  },
+  {
+    "name": "聊城大学",
+    "province": "山东",
+    "city": "聊城"
+  },
+  {
+    "name": "青岛农业大学",
+    "province": "山东",
+    "city": "青岛"
+  },
+  {
+    "name": "青岛大学",
+    "province": "山东",
+    "city": "青岛"
+  },
+  {
+    "name": "青岛理工大学",
+    "province": "山东",
+    "city": "青岛"
+  },
+  {
+    "name": "青岛科技大学",
+    "province": "山东",
+    "city": "青岛"
+  },
+  {
+    "name": "鲁东大学",
+    "province": "山东",
+    "city": "烟台"
+  },
+  {
+    "name": "齐鲁工业大学",
+    "province": "山东",
+    "city": "济南"
+  },
+  {
+    "name": "中原工学院",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "信阳师范大学",
+    "province": "河南",
+    "city": "信阳"
+  },
+  {
+    "name": "华北水利水电大学",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "战略支援部队信息工程大学",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "新乡医学院",
+    "province": "河南",
+    "city": "新乡"
+  },
+  {
+    "name": "河南中医药大学",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "河南农业大学",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "河南大学",
+    "province": "河南",
+    "city": "开封"
+  },
+  {
+    "name": "河南工业大学",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "河南师范大学",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "河南理工大学",
+    "province": "河南",
+    "city": "焦作"
+  },
+  {
+    "name": "河南科技大学",
+    "province": "河南",
+    "city": "洛阳"
+  },
+  {
+    "name": "河南财经政法大学",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "郑州大学",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "郑州航空工业管理学院",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "郑州轻工业大学",
+    "province": "河南",
+    "city": "郑州"
+  },
+  {
+    "name": "三峡大学",
+    "province": "湖北",
+    "city": "宜昌"
+  },
+  {
+    "name": "中南民族大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "中南财经政法大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "中国地质大学（武汉）",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "华中农业大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "华中师范大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "华中科技大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "武汉体育学院",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "武汉大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "武汉工程大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "武汉理工大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "武汉科技大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "武汉纺织大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "武汉轻工大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "江汉大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "海军工程大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "湖北中医药大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "湖北医药学院",
+    "province": "湖北",
+    "city": "十堰"
+  },
+  {
+    "name": "湖北大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "湖北工业大学",
+    "province": "湖北",
+    "city": "武汉"
+  },
+  {
+    "name": "湖北师范大学",
+    "province": "湖北",
+    "city": "黄石"
+  },
+  {
+    "name": "长江大学",
+    "province": "湖北",
+    "city": "荆州"
+  },
+  {
+    "name": "中南大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "中南林业科技大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "南华大学",
+    "province": "湖南",
+    "city": "衡阳"
+  },
+  {
+    "name": "吉首大学",
+    "province": "湖南",
+    "city": "吉首"
+  },
+  {
+    "name": "国防科技大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "湖南中医药大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "湖南农业大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "湖南大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "湖南工业大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "湖南工商大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "湖南师范大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "湖南理工学院",
+    "province": "湖南",
+    "city": "岳阳"
+  },
+  {
+    "name": "湖南科技大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "湘潭大学",
+    "province": "湖南",
+    "city": "湘潭"
+  },
+  {
+    "name": "衡阳师范学院",
+    "province": "湖南",
+    "city": "衡阳"
+  },
+  {
+    "name": "长沙理工大学",
+    "province": "湖南",
+    "city": "长沙"
+  },
+  {
+    "name": "东莞理工学院",
+    "province": "广东",
+    "city": "东莞"
+  },
+  {
+    "name": "中山大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "佛山大学",
+    "province": "广东",
+    "city": "佛山"
+  },
+  {
+    "name": "北京师范大学-香港浸会大学联合国际学院",
+    "province": "广东",
+    "city": "珠海"
+  },
+  {
+    "name": "华南农业大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "华南师范大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "华南理工大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "南方医科大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "南方科技大学",
+    "province": "广东",
+    "city": "深圳"
+  },
+  {
+    "name": "广东医科大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "广东外语外贸大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "广东工业大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "广东技术师范大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "广东海洋大学",
+    "province": "广东",
+    "city": "湛江"
+  },
+  {
+    "name": "广东药科大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "广东财经大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "广州中医药大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "广州医科大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "广州大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "广州美术学院",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "星海音乐学院",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "暨南大学",
+    "province": "广东",
+    "city": "广州"
+  },
+  {
+    "name": "汕头大学",
+    "province": "广东",
+    "city": "汕头"
+  },
+  {
+    "name": "深圳北理莫斯科大学",
+    "province": "广东",
+    "city": "深圳"
+  },
+  {
+    "name": "深圳大学",
+    "province": "广东",
+    "city": "深圳"
+  },
+  {
+    "name": "深圳技术大学",
+    "province": "广东",
+    "city": "深圳"
+  },
+  {
+    "name": "香港中文大学（深圳）",
+    "province": "广东",
+    "city": "深圳"
+  },
+  {
+    "name": "南宁师范大学",
+    "province": "广西",
+    "city": "南宁"
+  },
+  {
+    "name": "右江民族医学院",
+    "province": "广西",
+    "city": "百色"
+  },
+  {
+    "name": "广西中医药大学",
+    "province": "广西",
+    "city": "南宁"
+  },
+  {
+    "name": "广西医科大学",
+    "province": "广西",
+    "city": "南宁"
+  },
+  {
+    "name": "广西大学",
+    "province": "广西",
+    "city": "南宁"
+  },
+  {
+    "name": "广西师范大学",
+    "province": "广西",
+    "city": "桂林"
+  },
+  {
+    "name": "广西民族大学",
+    "province": "广西",
+    "city": "南宁"
+  },
+  {
+    "name": "广西科技大学",
+    "province": "广西",
+    "city": "柳州"
+  },
+  {
+    "name": "桂林理工大学",
+    "province": "广西",
+    "city": "桂林"
+  },
+  {
+    "name": "桂林电子科技大学",
+    "province": "广西",
+    "city": "桂林"
+  },
+  {
+    "name": "海南医科大学",
+    "province": "海南",
+    "city": "海口"
+  },
+  {
+    "name": "海南大学",
+    "province": "海南",
+    "city": "海口"
+  },
+  {
+    "name": "海南师范大学",
+    "province": "海南",
+    "city": "海口"
+  },
+  {
+    "name": "四川外国语大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "四川美术学院",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "西南大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "西南政法大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "重庆交通大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "重庆医科大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "重庆大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "重庆工商大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "重庆师范大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "重庆理工大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "重庆科技大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "重庆邮电大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "陆军军医大学",
+    "province": "重庆",
+    "city": "重庆"
+  },
+  {
+    "name": "四川农业大学",
+    "province": "四川",
+    "city": "雅安"
+  },
+  {
+    "name": "四川大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "四川师范大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "川北医学院",
+    "province": "四川",
+    "city": "南充"
+  },
+  {
+    "name": "成都中医药大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "成都体育学院",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "成都信息工程大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "成都医学院",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "成都大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "成都理工大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "电子科技大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "西华大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "西华师范大学",
+    "province": "四川",
+    "city": "南充"
+  },
+  {
+    "name": "西南交通大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "西南医科大学",
+    "province": "四川",
+    "city": "泸州"
+  },
+  {
+    "name": "西南民族大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "西南石油大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "西南科技大学",
+    "province": "四川",
+    "city": "绵阳"
+  },
+  {
+    "name": "西南财经大学",
+    "province": "四川",
+    "city": "成都"
+  },
+  {
+    "name": "贵州中医药大学",
+    "province": "贵州",
+    "city": "贵阳"
+  },
+  {
+    "name": "贵州医科大学",
+    "province": "贵州",
+    "city": "贵阳"
+  },
+  {
+    "name": "贵州大学",
+    "province": "贵州",
+    "city": "贵阳"
+  },
+  {
+    "name": "贵州师范大学",
+    "province": "贵州",
+    "city": "贵阳"
+  },
+  {
+    "name": "贵州民族大学",
+    "province": "贵州",
+    "city": "贵阳"
+  },
+  {
+    "name": "贵州财经大学",
+    "province": "贵州",
+    "city": "贵阳"
+  },
+  {
+    "name": "遵义医科大学",
+    "province": "贵州",
+    "city": "遵义"
+  },
+  {
+    "name": "云南中医药大学",
+    "province": "云南",
+    "city": "昆明"
+  },
+  {
+    "name": "云南农业大学",
+    "province": "云南",
+    "city": "昆明"
+  },
+  {
+    "name": "云南大学",
+    "province": "云南",
+    "city": "昆明"
+  },
+  {
+    "name": "云南师范大学",
+    "province": "云南",
+    "city": "昆明"
+  },
+  {
+    "name": "云南民族大学",
+    "province": "云南",
+    "city": "昆明"
+  },
+  {
+    "name": "云南艺术学院",
+    "province": "云南",
+    "city": "昆明"
+  },
+  {
+    "name": "云南财经大学",
+    "province": "云南",
+    "city": "昆明"
+  },
+  {
+    "name": "大理大学",
+    "province": "云南",
+    "city": "大理"
+  },
+  {
+    "name": "昆明医科大学",
+    "province": "云南",
+    "city": "昆明"
+  },
+  {
+    "name": "昆明理工大学",
+    "province": "云南",
+    "city": "昆明"
+  },
+  {
+    "name": "西南林业大学",
+    "province": "云南",
+    "city": "昆明"
+  },
+  {
+    "name": "西藏大学",
+    "province": "西藏",
+    "city": "拉萨"
+  },
+  {
+    "name": "西藏民族大学",
+    "province": "西藏",
+    "city": "咸阳"
+  },
+  {
+    "name": "西藏藏医药大学",
+    "province": "西藏",
+    "city": "拉萨"
+  },
+  {
+    "name": "延安大学",
+    "province": "陕西",
+    "city": "延安"
+  },
+  {
+    "name": "武警工程大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "火箭军工程大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "空军军医大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "空军工程大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西北农林科技大学",
+    "province": "陕西",
+    "city": "咸阳"
+  },
+  {
+    "name": "西北大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西北工业大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西北政法大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安交通大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安医学院",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安外国语大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安工业大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安工程大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安建筑科技大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安理工大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安电子科技大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安石油大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安科技大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安美术学院",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安财经大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安邮电大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "西安音乐学院",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "长安大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "陕西中医药大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "陕西师范大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "陕西科技大学",
+    "province": "陕西",
+    "city": "西安"
+  },
+  {
+    "name": "兰州交通大学",
+    "province": "甘肃",
+    "city": "兰州"
+  },
+  {
+    "name": "兰州大学",
+    "province": "甘肃",
+    "city": "兰州"
+  },
+  {
+    "name": "兰州理工大学",
+    "province": "甘肃",
+    "city": "兰州"
+  },
+  {
+    "name": "兰州财经大学",
+    "province": "甘肃",
+    "city": "兰州"
+  },
+  {
+    "name": "天水师范学院",
+    "province": "甘肃",
+    "city": "天水"
+  },
+  {
+    "name": "甘肃中医药大学",
+    "province": "甘肃",
+    "city": "兰州"
+  },
+  {
+    "name": "甘肃农业大学",
+    "province": "甘肃",
+    "city": "兰州"
+  },
+  {
+    "name": "西北师范大学",
+    "province": "甘肃",
+    "city": "兰州"
+  },
+  {
+    "name": "西北民族大学",
+    "province": "甘肃",
+    "city": "兰州"
+  },
+  {
+    "name": "青海大学",
+    "province": "青海",
+    "city": "西宁"
+  },
+  {
+    "name": "青海师范大学",
+    "province": "青海",
+    "city": "西宁"
+  },
+  {
+    "name": "青海民族大学",
+    "province": "青海",
+    "city": "西宁"
+  },
+  {
+    "name": "北方民族大学",
+    "province": "宁夏",
+    "city": "银川"
+  },
+  {
+    "name": "宁夏医科大学",
+    "province": "宁夏",
+    "city": "银川"
+  },
+  {
+    "name": "宁夏大学",
+    "province": "宁夏",
+    "city": "银川"
+  },
+  {
+    "name": "伊犁师范大学",
+    "province": "新疆",
+    "city": "伊宁"
+  },
+  {
+    "name": "塔里木大学",
+    "province": "新疆",
+    "city": "阿拉尔"
+  },
+  {
+    "name": "新疆农业大学",
+    "province": "新疆",
+    "city": "乌鲁木齐"
+  },
+  {
+    "name": "新疆医科大学",
+    "province": "新疆",
+    "city": "乌鲁木齐"
+  },
+  {
+    "name": "新疆大学",
+    "province": "新疆",
+    "city": "乌鲁木齐"
+  },
+  {
+    "name": "新疆师范大学",
+    "province": "新疆",
+    "city": "乌鲁木齐"
+  },
+  {
+    "name": "新疆财经大学",
+    "province": "新疆",
+    "city": "乌鲁木齐"
+  },
+  {
+    "name": "石河子大学",
+    "province": "新疆",
+    "city": "石河子"
+  }
+]
