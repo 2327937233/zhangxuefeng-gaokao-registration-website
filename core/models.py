@@ -65,6 +65,7 @@ class ConsultRecommendationPlan(BaseModel):
     risk_level: str
     school: str
     major: str
+    school_level: str = "待核验"
     overview: str
     recommendation_reason: str
     probability: int
@@ -74,6 +75,19 @@ class ConsultRecommendationPlan(BaseModel):
     probability_basis: str = "模拟估计值：基于当前画像、冲稳保规则和待核验投档位次粗排"
     salary_basis: str = "模拟估计值：基于本地专业库和就业质量报告检索口径估算"
     data_basis: str = "规则模拟/本地估算，仅供排序参考"
+    admissions_url: Optional[str] = None
+    admissions_query: Optional[str] = None
+    risk_tags: List[str] = Field(default_factory=list)
+    family_strategy: str = ""
+    family_risk_summary: str = ""
+    fallback_strategy: str = ""
+    fallback_reason: str = ""
+    sync_reason: str = ""
+    evidence_status: str = "待核验"
+    official_verification: List[dict] = Field(default_factory=list)
+    required_tables: List[str] = Field(default_factory=list)
+    missing_key_data: List[str] = Field(default_factory=list)
+    audit_notes: List[str] = Field(default_factory=list)
     citations: List[str] = []
 
 
@@ -186,6 +200,7 @@ class PlanOption(BaseModel):
     order: int = Field(..., description="志愿顺序")
     school: str
     major: str
+    school_level: str = "待核验"
     major_group: Optional[str] = Field(None, description="专业组")
     risk_level: str = Field(..., description="冲/稳/保")
     probability: int = Field(..., ge=0, le=100, description="录取概率")
@@ -193,6 +208,11 @@ class PlanOption(BaseModel):
     irreplaceability: Optional[int] = None
     reason: str = Field(default="", description="推荐理由（就业倒推）")
     risk_warning: Optional[str] = None
+    risk_tags: List[str] = Field(default_factory=list)
+    family_strategy: str = ""
+    family_risk_summary: str = ""
+    fallback_strategy: str = ""
+    fallback_reason: str = ""
     tags: List[str] = []
     fortune500_pass: bool = False
 

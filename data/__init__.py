@@ -12,5 +12,5 @@ def load_json(filename: str) -> list | dict:
 
 majors = load_json('majors.json')
 schools = load_json('schools.json')
+school_admissions_urls = load_json('school_admissions_urls.json')
 quotes = load_json('quotes.json')
-expression_dna = load_json('expression_dna.json')

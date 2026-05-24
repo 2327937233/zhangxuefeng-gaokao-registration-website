@@ -8,6 +8,7 @@ from core.models import (
     PressureTestRequest, PressureTestResponse, AnalyzeRequest, AnalyzeResponse,
     ThinkingStep, UserProfile,
 )
+from core.family_risk import build_family_risk_profile
 from core.zxf_engine import data_source, ZXFEvaluator
 from core.llm_client import llm_client
 
@@ -135,6 +136,32 @@ class AgentEngine:
         ],
     }
 
+    REGION_GROUP_ALIASES = {
+        "南方": ["上海", "江苏", "浙江", "福建", "广东", "湖北", "湖南", "重庆", "四川"],
+        "南方城市": ["上海", "南京", "苏州", "杭州", "宁波", "广州", "深圳", "武汉", "成都", "重庆"],
+        "江浙沪": ["上海", "江苏", "浙江"],
+        "长三角": ["上海", "江苏", "浙江", "安徽"],
+        "华东": ["上海", "江苏", "浙江", "安徽", "福建", "江西"],
+        "华南": ["广东", "广西", "海南"],
+        "珠三角": ["广州", "深圳", "佛山", "东莞"],
+        "西南": ["重庆", "四川", "贵州", "云南"],
+    }
+
+    RELATED_MAJOR_GROUPS = {
+        "汉语言文学": ["小学教育", "教育学", "历史学", "英语", "法学", "网络与新媒体"],
+        "历史学": ["汉语言文学", "小学教育", "教育学", "地理科学", "法学"],
+        "地理科学": ["历史学", "汉语言文学", "小学教育", "教育学"],
+        "英语": ["汉语言文学", "小学教育", "教育学", "网络与新媒体"],
+        "新闻学": ["网络与新媒体", "汉语言文学", "广告学", "英语"],
+        "网络与新媒体": ["新闻学", "汉语言文学", "广告学"],
+        "法学": ["知识产权", "社会学", "汉语言文学", "思想政治教育"],
+        "金融学": ["经济学", "会计学", "财务管理", "工商管理"],
+        "计算机科学与技术": ["软件工程", "数据科学与大数据技术", "信息安全", "人工智能"],
+        "软件工程": ["计算机科学与技术", "数据科学与大数据技术", "信息安全"],
+        "电子信息工程": ["通信工程", "自动化", "电气工程及其自动化", "计算机科学与技术"],
+        "临床医学": ["护理学", "药学", "动物医学"],
+    }
+
     def __init__(self):
         self.data = data_source
 
@@ -176,11 +203,15 @@ class AgentEngine:
             plans.append(self._build_plan_option(c, user, "保", order))
             order += 1
 
-        plans = self._repair_plan_risk_order(plans)
+        plans = self._repair_plan_risk_order(plans, user)
+        used_zero_candidate_fallback = False
+        if not plans:
+            plans = self._build_zero_candidate_fallback_plans(user, limit)
+            used_zero_candidate_fallback = bool(plans)
         plans = plans[:limit]  # 确保不超过用户请求的数量
 
         # 4. 生成分析摘要
-        summary = self._generate_recommend_summary(plans, user)
+        summary = self._generate_recommend_summary(plans, user, used_zero_candidate_fallback)
 
         # 5. 红旗信号
         red_flags = self._collect_recommend_flags(plans, user)
@@ -191,6 +222,10 @@ class AgentEngine:
         if user.city_preference and not plans:
             red_flags.append(
                 f"按「{'、'.join(user.city_preference or [])}」地区偏好没有筛出足够候选，已保留地区硬约束；请补充目标地区招生计划或放宽城市后再重算。"
+            )
+        if used_zero_candidate_fallback:
+            red_flags.append(
+                "原始硬约束没有形成可用冲稳保方案，已按三条替代路径生成可同步方案：放宽城市但保专业、保城市但换相近专业、保稳妥但降低学校层次。"
             )
 
         # 6. LLM 增强分析（如果可用）
@@ -217,6 +252,12 @@ class AgentEngine:
             reverse=True,
         )
         normalized: List[str] = []
+
+        def add_location(location: str) -> None:
+            value = location.removesuffix("省").removesuffix("市").removesuffix("自治区")
+            if value and value not in normalized:
+                normalized.append(value)
+
         for preference in preferences:
             raw = str(preference or "").strip()
             if not raw:
@@ -224,6 +265,16 @@ class AgentEngine:
             pieces = [p for p in re.split(r"[、,，\s/]+", raw) if p]
             for piece in pieces:
                 value = piece.removesuffix("省").removesuffix("市").removesuffix("自治区")
+                alias_hits = [
+                    (value.find(alias), alias)
+                    for alias in self.REGION_GROUP_ALIASES
+                    if alias in value
+                ]
+                if alias_hits:
+                    for _, alias in sorted(alias_hits, key=lambda item: item[0]):
+                        for location in self.REGION_GROUP_ALIASES[alias]:
+                            add_location(location)
+                    continue
                 hits = [
                     (value.find(location), location)
                     for location in known_locations
@@ -231,32 +282,54 @@ class AgentEngine:
                 ]
                 if hits:
                     for _, location in sorted(hits, key=lambda item: item[0]):
-                        if location not in normalized:
-                            normalized.append(location)
+                        add_location(location)
                     continue
-                if value and value not in normalized:
-                    normalized.append(value)
+                add_location(value)
         return normalized
 
-    def _repair_plan_risk_order(self, plans: List[PlanOption]) -> List[PlanOption]:
-        """最终兜底：强校不能排在弱校的更低风险层。"""
+    def _repair_plan_risk_order(self, plans: List[PlanOption], user: UserPreferences) -> List[PlanOption]:
+        """最终兜底：同批方案里更难的院校专业组合优先进入更高风险档。"""
         if len(plans) < 2:
             return plans
 
         school_by_name = {s["name"]: s for s in self.data.schools.values()}
         major_by_name = {m["name"]: m for m in self.data.majors.values()}
-        risk_order = {"冲": 0, "稳": 1, "保": 2}
-        ordered = sorted(
+        strategy = self._get_risk_strategy(user.risk_appetite)
+        total = len(plans)
+        chong_count = max(1, round(total * strategy["ratio"]["冲"]))
+        bao_count = max(1, round(total * strategy["ratio"]["保"]))
+        if chong_count + bao_count >= total:
+            chong_count = max(1, min(chong_count, total - 2))
+            bao_count = max(1, total - chong_count - 1)
+        wen_count = max(1, total - chong_count - bao_count)
+        target_risks = ["冲"] * chong_count + ["稳"] * wen_count + ["保"] * bao_count
+
+        ranked = sorted(
             plans,
-            key=lambda plan: (
-                risk_order.get(plan.risk_level, 1),
-                -self._admission_difficulty_score(
-                    school_by_name.get(plan.school, {"name": plan.school}),
-                    major_by_name.get(plan.major, {"name": plan.major}),
-                ),
+            key=lambda plan: -self._admission_difficulty_score(
+                school_by_name.get(plan.school, {"name": plan.school}),
+                major_by_name.get(plan.major, {"name": plan.major}),
             ),
         )
-        return [plan.model_copy(update={"order": index}) for index, plan in enumerate(ordered, start=1)]
+
+        repaired: List[PlanOption] = []
+        for index, plan in enumerate(ranked, start=1):
+            new_risk = target_risks[index - 1] if index - 1 < len(target_risks) else plan.risk_level
+            school = school_by_name.get(plan.school, {"name": plan.school})
+            major = major_by_name.get(plan.major, {"name": plan.major})
+            combo = {"school": school, "major": major, "match_score": 0}
+            updates = {"order": index, "risk_level": new_risk}
+            if new_risk != plan.risk_level:
+                family_risk = build_family_risk_profile(school, major, user.family_background, new_risk)
+                updates["probability"] = self._estimate_probability(combo, user, new_risk)
+                updates["reason"] = self._generate_reason(school, major, user, new_risk, family_risk)
+                updates["risk_tags"] = family_risk["risk_tags"]
+                updates["family_strategy"] = family_risk["family_strategy"]
+                updates["family_risk_summary"] = family_risk["family_risk_summary"]
+                if family_risk["risk_tags"]:
+                    updates["risk_warning"] = f"{plan.school}-{plan.major}需重点核验：{'、'.join(family_risk['risk_tags'][:3])}"
+            repaired.append(plan.model_copy(update=updates))
+        return repaired
 
     def _filter_candidates(self, user: UserPreferences) -> List[dict]:
         """规则引擎：根据分数和城市偏好筛选候选院校+专业组合"""
@@ -710,6 +783,137 @@ class AgentEngine:
                 break
         return selected
 
+    def _build_zero_candidate_fallback_plans(self, user: UserPreferences, limit: int) -> List[PlanOption]:
+        """When hard constraints produce no usable plan, build syncable alternatives.
+
+        The three alternatives map directly to the product strategy:
+        1) relax city, keep major;
+        2) keep city, switch to adjacent majors;
+        3) keep conservative posture, lower school level / accept safer local choices.
+        """
+        fallback_specs: list[dict] = [
+            {
+                "strategy": "放宽城市但保专业",
+                "reason": "原城市约束过窄，先保住用户最在意的专业方向，把搜索半径放到其他可接受省市。",
+                "user": user.model_copy(update={"city_preference": None}),
+                "risk": "稳",
+                "limit": 3,
+                "sort": "match",
+            },
+            {
+                "strategy": "保城市但换相近专业",
+                "reason": "城市不动，但把专业从单一名称扩展到同类出口，优先保住生活半径和家庭支持成本。",
+                "user": user.model_copy(update={"major_preference": self._related_major_preferences(user.major_preference)}),
+                "risk": "稳",
+                "limit": 3,
+                "sort": "match",
+            },
+            {
+                "strategy": "保稳妥但降低学校层次",
+                "reason": "城市和专业先不动，把目标从冲学校名气改成保录取与专业入口，适合普通家庭兜底。",
+                "user": user,
+                "risk": "保",
+                "limit": 4,
+                "sort": "safe",
+            },
+        ]
+
+        plans: list[PlanOption] = []
+        seen_pairs: set[tuple[str, str]] = set()
+        order = 1
+        for spec in fallback_specs:
+            spec_user: UserPreferences = spec["user"]
+            if spec["strategy"] == "保城市但换相近专业" and not spec_user.major_preference:
+                continue
+            candidates = self._filter_candidates(spec_user)
+            candidates = self._sort_fallback_candidates(candidates, spec_user, spec["sort"])
+            added = 0
+            for combo in candidates:
+                pair = (combo["school"].get("name", ""), combo["major"].get("name", ""))
+                if not all(pair) or pair in seen_pairs:
+                    continue
+                risk = spec["risk"]
+                plan = self._build_plan_option(combo, spec_user, risk, order)
+                plan = self._with_fallback_strategy(plan, spec["strategy"], spec["reason"])
+                plans.append(plan)
+                seen_pairs.add(pair)
+                order += 1
+                added += 1
+                if added >= spec["limit"] or len(plans) >= limit:
+                    break
+            if len(plans) >= limit:
+                break
+        return plans[:limit]
+
+    def _sort_fallback_candidates(self, candidates: list[dict], user: UserPreferences, mode: str) -> list[dict]:
+        if mode == "safe":
+            return sorted(
+                candidates,
+                key=lambda item: (
+                    self._admission_difficulty_score(item["school"], item["major"]),
+                    -item.get("match_score", 0),
+                ),
+            )
+        return sorted(
+            candidates,
+            key=lambda item: (
+                item.get("match_score", 0),
+                self._admission_difficulty_score(item["school"], item["major"]),
+            ),
+            reverse=True,
+        )
+
+    def _with_fallback_strategy(self, plan: PlanOption, strategy: str, reason: str) -> PlanOption:
+        strategy_note = f"兜底路径【{strategy}】：{reason}"
+        original_reason = (plan.reason or "").strip()
+        updates = {
+            "fallback_strategy": strategy,
+            "fallback_reason": reason,
+            "reason": f"{strategy_note}；{original_reason}" if original_reason else strategy_note,
+            "tags": [strategy, *(plan.tags or [])][:4],
+        }
+        if plan.family_risk_summary:
+            updates["family_risk_summary"] = f"{strategy_note} {plan.family_risk_summary}"
+        if plan.risk_warning:
+            updates["risk_warning"] = f"{strategy}：{plan.risk_warning}"
+        else:
+            updates["risk_warning"] = strategy_note
+        return plan.model_copy(update=updates)
+
+    def _related_major_preferences(self, preferences: Optional[list[str]]) -> list[str]:
+        if not preferences:
+            return []
+        known_major_names = {major.get("name") for major in self.data.majors.values()}
+        related: list[str] = []
+
+        def add_major(name: str) -> None:
+            if name in known_major_names and name not in related:
+                related.append(name)
+
+        for pref in preferences:
+            pref = str(pref or "").strip()
+            if not pref:
+                continue
+            if pref in self.RELATED_MAJOR_GROUPS:
+                for item in self.RELATED_MAJOR_GROUPS[pref]:
+                    add_major(item)
+                continue
+            matched = next((name for name in known_major_names if pref == name or (len(pref) >= 2 and pref in name)), "")
+            if matched:
+                for item in self.RELATED_MAJOR_GROUPS.get(matched, []):
+                    add_major(item)
+                continue
+            if any(key in pref for key in ["中文", "汉语言", "文学"]):
+                for item in ["汉语言文学", "小学教育", "教育学", "历史学", "英语"]:
+                    add_major(item)
+            elif any(key in pref for key in ["师范", "教育", "教师"]):
+                for item in ["小学教育", "教育学", "汉语言文学", "历史学", "地理科学"]:
+                    add_major(item)
+            elif any(key in pref for key in ["计算机", "软件", "人工智能", "数据"]):
+                for item in ["软件工程", "计算机科学与技术", "数据科学与大数据技术", "信息安全"]:
+                    add_major(item)
+        return [item for item in related if item not in set(preferences or [])]
+
     def _profile_risk_bucket(self, school: dict, major: dict, user: UserPreferences) -> str:
         """按用户画像把院校专业组合粗分为冲/稳/保/废。
 
@@ -814,9 +1018,10 @@ class AgentEngine:
         school = combo["school"]
         major = combo["major"]
         prob = self._estimate_probability(combo, user, risk)
+        family_risk = build_family_risk_profile(school, major, user.family_background, risk)
 
         # 生成推荐理由
-        reason = self._generate_reason(school, major, user, risk)
+        reason = self._generate_reason(school, major, user, risk, family_risk)
 
         # 风险警告
         risk_warning = None
@@ -825,11 +1030,14 @@ class AgentEngine:
             risk_warning = f"{major['name']}被标记为高风险专业，需谨慎评估"
         if major.get("requires_grad_school", False):
             risk_warning = f"{major['name']}本科竞争力弱，必须深造"
+        if not risk_warning and family_risk["risk_tags"]:
+            risk_warning = f"{school['name']}-{major['name']}需重点核验：{'、'.join(family_risk['risk_tags'][:3])}"
 
         return PlanOption(
             order=order,
             school=school["name"],
             major=major["name"],
+            school_level=school.get("level", "待核验"),
             major_group=f"{major['category']}类",
             risk_level=risk,
             probability=prob,
@@ -837,6 +1045,9 @@ class AgentEngine:
             irreplaceability=major.get("irreplaceability"),
             reason=reason,
             risk_warning=risk_warning,
+            risk_tags=family_risk["risk_tags"],
+            family_strategy=family_risk["family_strategy"],
+            family_risk_summary=family_risk["family_risk_summary"],
             tags=tags,
             fortune500_pass=school["level"] in ["985", "211", "双一流"],
         )
@@ -891,13 +1102,22 @@ class AgentEngine:
 
         return max(lo - 5, min(hi + 1, base))
 
-    def _generate_reason(self, school: dict, major: dict, user: UserPreferences, risk: str) -> str:
+    def _generate_reason(
+        self,
+        school: dict,
+        major: dict,
+        user: UserPreferences,
+        risk: str,
+        family_risk: dict | None = None,
+    ) -> str:
         """生成更有区分度的就业倒推推荐理由。"""
+        family_risk = family_risk or build_family_risk_profile(school, major, user.family_background, risk)
         parts = [
             self._risk_position_text(risk, school, user.risk_appetite or "均衡"),
             self._school_position_text(school, major),
             self._major_fit_text(major, user),
             self._trend_text(major, school),
+            family_risk.get("family_risk_summary", ""),
         ]
 
         salary = major.get("salary_median_5yr")
@@ -998,7 +1218,12 @@ class AgentEngine:
             return "未来趋势上，教师岗位更看编制、地区人口和学科需求，稳定但竞争会更细"
         return f"未来趋势上，{name}要看行业周期和个人能力积累，不能只用当下冷热判断"
 
-    def _generate_recommend_summary(self, plans: List[PlanOption], user: UserPreferences) -> str:
+    def _generate_recommend_summary(
+        self,
+        plans: List[PlanOption],
+        user: UserPreferences,
+        used_zero_candidate_fallback: bool = False,
+    ) -> str:
         family = user.family_background or "普通家庭"
         risk = user.risk_appetite or "均衡"
         strategy = self._get_risk_strategy(risk)
@@ -1007,11 +1232,23 @@ class AgentEngine:
         wen_cnt = sum(1 for p in plans if p.risk_level == "稳")
         bao_cnt = sum(1 for p in plans if p.risk_level == "保")
 
+        fallback_text = ""
+        if used_zero_candidate_fallback:
+            fallback_names = []
+            for plan in plans:
+                if plan.fallback_strategy and plan.fallback_strategy not in fallback_names:
+                    fallback_names.append(plan.fallback_strategy)
+            fallback_text = (
+                f"原始硬约束没有形成可用方案，已启动0候选兜底：{'、'.join(fallback_names)}。"
+                "这些是替代路径方案，不等同于完全满足原始条件。"
+            )
+
         return (
             f"基于你的条件（{user.province}，{user.score}分，位次{user.rank or '未填'}，{family}），"
             f"报考策略为【{strategy['label']}】（{risk}）：{strategy['description']}。"
             f"内容导向为【{content_bias['label']}】：{content_bias['description']}。"
             f"共筛选{len(plans)}个志愿（冲{chong_cnt}/稳{wen_cnt}/保{bao_cnt}）。"
+            f"{fallback_text}"
             f"主回答先讲冲稳保定位、专业出口、城市资源和调剂风险；具体模拟概率和收入估算只进入结构化方案。"
             f"{'结构合理，兼顾层次与确定性。' if len(plans) >= 6 else '建议继续完善志愿表。'}"
         )
@@ -1054,6 +1291,8 @@ class AgentEngine:
                 flags.append(f"{p.school}为冲刺志愿，稳妥策略下务必确认后面有充足稳保底")
             if p.risk_warning:
                 flags.append(p.risk_warning)
+            if p.family_risk_summary:
+                flags.append(f"{p.school}风险标签：{p.family_risk_summary}")
 
         return list(set(flags))[:6]
 
@@ -1085,7 +1324,9 @@ class AgentEngine:
 
     def _build_recommend_llm_prompt(self, plans: List[PlanOption], user: UserPreferences) -> str:
         plan_str = "\n".join([
-            f"{p.order}. [{p.risk_level}] {p.school} - {p.major}（概率{p.probability}%，薪资{p.median_salary_5yr or 'N/A'}）"
+            f"{p.order}. [{p.risk_level}] {p.school} - {p.major}（"
+            f"{f'替代路径：{p.fallback_strategy}，' if p.fallback_strategy else ''}"
+            f"概率{p.probability}%，薪资{p.median_salary_5yr or 'N/A'}，家庭风险标签：{'、'.join(p.risk_tags) if p.risk_tags else '暂无'}）"
             for p in plans
         ])
         risk_strategy = self._get_risk_strategy(user.risk_appetite)

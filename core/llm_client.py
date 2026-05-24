@@ -14,6 +14,7 @@ except ImportError:
     HAS_ANTHROPIC = False
 
 from core.config import settings
+from core.answer_guard import answer_guard
 from core.models import ConsultRequest, ConsultResponse, ThinkingStep
 
 logger = logging.getLogger("app.llm")
@@ -79,6 +80,14 @@ class ZXFLLMClient:
             ctx = request.context.model_dump(exclude_none=True)
             if ctx:
                 context_str = f"\n\n用户背景信息：{json.dumps(ctx, ensure_ascii=False)}"
+        fact_data_mode = "本轮识别为数据/事实咨询" in (extra_context or "")
+        fact_data_instruction = (
+            "【最高优先级】本轮是数据/事实咨询，不是院校推荐。"
+            "必须直接回答用户问的中位数、薪资、收入、就业或500强招聘问题；"
+            "禁止输出[院校推荐]、[灵魂追问]、冲稳保、保底、投档位次、专业组推荐；"
+            "如果本地估算里有薪资数字，可以展示，但必须标注“本地估算/非官方统计/仅供方向判断”。"
+            "如果没有数据，就说暂无，不要改写成学校推荐。"
+        ) if fact_data_mode else ""
 
         # 构建当前用户消息
         current_message = {
@@ -102,6 +111,8 @@ class ZXFLLMClient:
                 "回答推荐学校时必须按“总判断→画像策略→冲稳保分层→逐校理由→红旗风险→下一步核验清单”组织，不要写成散文，不要只罗列指标。"
                 "总判断里用张雪峰式表达：先说这孩子该用什么策略，再说为什么；不要先报数字、概率和收入。"
                 "冲稳保分层里，每一所学校都要单独展开，至少写2句话：第一句讲这所学校和推荐专业为什么放在这个档位，第二句讲毕业路径、未来趋势或普通家庭要防的坑。"
+                "如果Agent推荐结果提供了家庭风险标签，逐校推荐必须引用其中1-3个最关键标签，并按普通/中产/富裕家庭给不同策略；不要把所有家庭都写成普通家庭。"
+                "如果Agent推荐结果提供了“替代路径”，必须说明这是0候选兜底方案，并分别解释放宽城市但保专业、保城市但换相近专业、保稳妥但降低学校层次的取舍。"
                 "不同学校的理由必须不同，不能用同一套话复制粘贴；同一行如果出现多所学校，也要逐所分开说明。"
                 "如果几所学校层次、城市、专业都相似，也必须从校名背后的行业底色、院校类型、学校差异点、招生网核验路径里找差别；禁止连续两所学校出现高度相似的推荐语。"
                 "回答学校分数线时优先引用教育考试院、阳光高考、学校本科招生网、学校官网；不能把第三方商业榜单说成官方数据。"
@@ -111,6 +122,9 @@ class ZXFLLMClient:
                 "如果上下文出现“联网状态：这轮没有拿到有效联网搜索结果”，主回答末尾必须原样保留这个意思：本轮只能按本地库粗筛，投档位次、专业组和调剂风险必须回教育考试院与学校招生网核验。"
                 "如果只有考试院/学校官网入口但没有真实搜索摘要，不能说“已经核验”，只能说“给出核验入口”。"
                 "如果缺少关键信息，先基于已知画像给初步判断，再在[灵魂追问]列最多3个必须补充的问题；不要机械重复要求用户补全已经提供的画像。"
+                "推荐院校时必须按固定顺序输出：[分析过程]→[核心判断]→[灵魂追问]→[院校推荐]→[红旗风险]→[核验清单]→[金句]。"
+                "[灵魂追问]必须完整写完后，才能开始[院校推荐]；不要在追问段落里夹带学校名单，也不要先列学校再补追问。"
+                f"{fact_data_instruction}"
             )
         }
 
@@ -124,6 +138,15 @@ class ZXFLLMClient:
             answer = self._complete_with_retry(messages)
             response = self._parse_response(answer)
             response = self._enforce_data_notice(response, extra_context, citations or [])
+            if fact_data_mode:
+                response.citations = citations or []
+                return response
+            response = answer_guard.guard_response(
+                response,
+                extra_context=extra_context,
+                citations=citations or [],
+                require_recommendation_guard="Agent推荐结果" in extra_context,
+            )
             response.citations = citations or []
             return response
         except Exception as e:
@@ -265,7 +288,19 @@ class ZXFLLMClient:
             "分析过程": "",
             "核心判断": "",
             "灵魂追问": "",
+            "院校推荐": "",
+            "红旗风险": "",
+            "核验清单": "",
             "金句": "",
+        }
+        section_aliases = {
+            "分析过程": ["分析过程", "分析拆解", "分析"],
+            "核心判断": ["核心判断", "总判断", "判断结论", "核心结论", "结论"],
+            "灵魂追问": ["灵魂追问", "继续追问", "关键追问", "必须追问"],
+            "院校推荐": ["院校推荐", "推荐院校", "学校推荐", "推荐学校", "冲稳保推荐", "具体推荐", "方案推荐"],
+            "红旗风险": ["红旗风险", "风险提醒", "风险提示", "注意事项"],
+            "核验清单": ["核验清单", "下一步核验清单", "数据核验", "核验入口", "下一步"],
+            "金句": ["金句", "一句话总结", "总结"],
         }
 
         current_section = None
@@ -274,10 +309,29 @@ class ZXFLLMClient:
 
         for line in lines:
             stripped = line.strip()
-            for sec_name in sections.keys():
-                if stripped.startswith(f"[{sec_name}]") or stripped == sec_name:
-                    current_section = sec_name
+            matched_section = None
+            section_remainder = ""
+            normalized_heading = re.sub(r"^(?:#{1,6}\s*|[-•]\s*)+", "", stripped).strip()
+            for sec_name, aliases in section_aliases.items():
+                alias_pattern = "|".join(re.escape(alias) for alias in aliases)
+                bracket_match = re.match(
+                    rf"^(?:\[\s*(?:{alias_pattern})\s*\]|【\s*(?:{alias_pattern})\s*】)\s*(.*)$",
+                    normalized_heading,
+                )
+                plain_match = re.match(
+                    rf"^(?:{alias_pattern})\s*(?:(?:[：:]\s*(.*))|$)",
+                    normalized_heading,
+                )
+                heading_match = bracket_match or plain_match
+                if heading_match:
+                    matched_section = sec_name
+                    section_remainder = next((group.strip() for group in heading_match.groups() if group), "")
                     break
+            if matched_section:
+                current_section = matched_section
+                if section_remainder:
+                    sections[current_section] += section_remainder + "\n"
+                continue
             else:
                 if current_section:
                     sections[current_section] += line + "\n"
@@ -302,12 +356,12 @@ class ZXFLLMClient:
                 follow_up.append(line.lstrip("-• ").lstrip("0123456789.) "))
 
         answer_parts = []
-        if sections["核心判断"].strip():
-            answer_parts.append(sections["核心判断"].strip())
+        for section_name in ["分析过程", "核心判断", "灵魂追问", "院校推荐", "红旗风险", "核验清单", "金句"]:
+            section_body = sections.get(section_name, "").strip()
+            if section_body:
+                answer_parts.append(f"[{section_name}]\n{section_body}")
         if not answer_parts and parsed_lines:
             answer_parts.append("\n".join(parsed_lines).strip())
-        if sections["金句"].strip():
-            answer_parts.append(f"\n💡 {sections['金句'].strip()}")
 
         answer = "\n\n".join(answer_parts) if answer_parts else text.strip()
 
@@ -320,9 +374,6 @@ class ZXFLLMClient:
 
         if not thinking:
             thinking.append(ThinkingStep(step="综合分析", analysis="基于张雪峰思维框架进行分析"))
-
-        if not follow_up:
-            follow_up.append("还想了解其他专业的对比吗？")
 
         answer = self._humanize_decision_terms(answer)
         answer = self._clean_display_text(answer)
@@ -421,7 +472,7 @@ class ZXFLLMClient:
             )
             confidence = "low"
 
-        return ConsultResponse(
+        response = ConsultResponse(
             answer=self._clean_display_text(self._humanize_decision_terms(self._soften_simulated_certainty(answer))),
             thinking_process=[
                 ThinkingStep(step="Agent兜底", analysis="LLM响应超时，已优先返回后端Agent/本地数据结果"),
@@ -433,6 +484,14 @@ class ZXFLLMClient:
             ],
             confidence=confidence,
             citations=citations,
+        )
+        if "本轮识别为数据/事实咨询" in (extra_context or ""):
+            return response
+        return answer_guard.guard_response(
+            response,
+            extra_context=extra_context,
+            citations=citations,
+            require_recommendation_guard="Agent推荐结果" in extra_context,
         )
 
     def _build_recommendation_fallback(
@@ -632,6 +691,13 @@ class ZXFLLMClient:
         """把用户可见回答里的系统技术词替换成咨询场景语言。"""
         replacements = {
             "后端Agent": "老师",
+            "后端模型": "系统判断",
+            "API 模型": "系统判断",
+            "API模型": "系统判断",
+            "模型回答": "回答",
+            "模型生成": "系统整理",
+            "提示词": "表达要求",
+            "上下文": "已知信息",
             "Agent推荐结果": "老师给出的粗筛结果",
             "Agent洞察结果": "老师给出的分析结果",
             "Agent推荐": "老师推荐",
@@ -654,6 +720,7 @@ class ZXFLLMClient:
         citations: list[str],
     ) -> ConsultResponse:
         """保证主回答里明确标注本地估算/规则模拟，不能只藏在 thinking_process。"""
+        fact_data_mode = "本轮识别为数据/事实咨询" in (extra_context or "")
         context_needs_notice = any(
             marker in extra_context
             for marker in [
@@ -672,11 +739,18 @@ class ZXFLLMClient:
         answer = response.answer or ""
         has_clear_notice = "数据口径" in answer
         if not has_clear_notice:
-            answer = (
-                answer.rstrip()
-                + "\n\n数据口径：本地库里的录取概率是规则模拟，薪资、就业率和不可替代性是经验估算，"
-                "不是官方精确统计，只能用于方向判断和冲稳保排序参考。最终投档位次、招生计划、选科要求，必须以教育考试院和学校招生网为准。"
-            )
+            if fact_data_mode:
+                answer = (
+                    answer.rstrip()
+                    + "\n\n数据口径：薪资、就业率和技术壁垒属于本地估算或公开材料辅助判断，"
+                    "不是官方精确统计，只能用于方向参考；具体学校和专业去向要回到就业质量报告核验。"
+                )
+            else:
+                answer = (
+                    answer.rstrip()
+                    + "\n\n数据口径：本地库里的录取概率是规则模拟，薪资、就业率和不可替代性是经验估算，"
+                    "不是官方精确统计，只能用于方向判断和冲稳保排序参考。最终投档位次、招生计划、选科要求，必须以教育考试院和学校招生网为准。"
+                )
 
         if citations and "本次联网来源" not in answer:
             source_lines = "\n".join(f"- {url}" for url in citations[:5])
@@ -684,7 +758,8 @@ class ZXFLLMClient:
 
         answer = self._soften_simulated_certainty(answer)
         answer = self._humanize_decision_terms(answer)
-        answer = self._remove_main_answer_numeric_estimates(answer)
+        if not fact_data_mode:
+            answer = self._remove_main_answer_numeric_estimates(answer)
         response.answer = self._clean_display_text(answer)
         return response
 

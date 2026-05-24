@@ -5,10 +5,12 @@ from pathlib import Path
 from typing import Optional
 
 from core.agent_engine import agent_engine
+from core.answer_guard import answer_guard
+from core.family_risk import build_family_risk_profile
 from core.llm_client import llm_client
 from core.models import ConsultRecommendationPlan, ConsultRequest, ConsultResponse, InsightRequest, RecommendRequest, RecommendResponse, ThinkingStep, UserPreferences, UserProfile
 from core.research_client import ResearchResult, web_research_client
-from data import majors, schools
+from data import majors, school_admissions_urls, schools
 
 
 PROVINCES = [
@@ -23,6 +25,17 @@ COMMON_CITY_NAMES = [
     "郑州", "长沙", "合肥", "福州", "厦门", "南昌", "济南", "青岛", "烟台", "威海",
     "潍坊", "临沂", "淄博", "济宁", "泰安", "哈尔滨", "长春", "沈阳", "大连",
 ]
+
+REGION_GROUP_ALIASES = {
+    "南方": ["上海", "江苏", "浙江", "福建", "广东", "湖北", "湖南", "重庆", "四川"],
+    "南方城市": ["上海", "南京", "苏州", "杭州", "宁波", "广州", "深圳", "武汉", "成都", "重庆"],
+    "江浙沪": ["上海", "江苏", "浙江"],
+    "长三角": ["上海", "江苏", "浙江", "安徽"],
+    "华东": ["上海", "江苏", "浙江", "安徽", "福建", "江西"],
+    "华南": ["广东", "广西", "海南"],
+    "珠三角": ["广州", "深圳", "佛山", "东莞"],
+    "西南": ["重庆", "四川", "贵州", "云南"],
+}
 
 
 def _load_location_city_names() -> list[str]:
@@ -49,6 +62,7 @@ for _city_name in _load_location_city_names():
 FACT_KEYWORDS = [
     "行业", "政策", "就业", "薪资", "工资", "中位数",
     "录取", "分数线", "位次", "排名", "保研", "招生", "500强", "前景", "数据",
+    "壁垒", "不可替代", "压力测试", "10年后", "十年后",
 ]
 
 RECOMMEND_KEYWORDS = [
@@ -60,6 +74,7 @@ RECOMMEND_KEYWORDS = [
 INSIGHT_KEYWORDS = [
     "怎么样", "靠谱吗", "值不值", "前景", "就业", "薪资", "分析",
     "可以吗", "可不可以", "能不能", "适合", "想学", "要不要学", "能学", "好吗",
+    "壁垒", "不可替代", "压力测试", "10年后", "十年后",
 ]
 
 MAJOR_ALIASES = {
@@ -97,7 +112,6 @@ MAJOR_ALIASES = {
     "地理历史": "地理科学",
     "中文": "汉语言文学",
     "汉语言": "汉语言文学",
-    "师范": "汉语言文学",
     "英语": "英语",
 }
 
@@ -126,6 +140,7 @@ class ConsultOrchestrator:
         self.major_names = [item["name"] for item in majors]
         self.school_by_name = {item["name"]: item for item in schools}
         self.major_by_name = {item["name"]: item for item in majors}
+        self.school_admissions_by_name = school_admissions_urls.get("schools", {}) if isinstance(school_admissions_urls, dict) else {}
 
     def consult(self, request: ConsultRequest, history: list[dict] | None = None) -> ConsultResponse:
         enriched = self._enrich_request_context(request)
@@ -136,6 +151,9 @@ class ConsultOrchestrator:
         citations = [item.url for item in research_results]
         research_status = self._research_status_text(research_results)
 
+        if intent.intent == "pressure_test":
+            return self._build_pressure_test_response(enriched, intent, citations)
+
         if research_results:
             extra_parts.append(web_research_client.build_summary(research_results))
             extra_parts.append(research_status)
@@ -143,6 +161,14 @@ class ConsultOrchestrator:
         profile_context = self._build_profile_context(enriched)
         if profile_context:
             extra_parts.append(profile_context)
+        major_scope_context = self._build_major_scope_context(enriched, intent)
+        if major_scope_context:
+            extra_parts.append(major_scope_context)
+        if self._is_fact_data_question(enriched.question):
+            extra_parts.append(
+                "本轮识别为数据/事实咨询：只回答用户正在问的中位数、薪资、就业或500强招聘问题；"
+                "不要自动改写成冲稳保院校推荐，也不要输出[院校推荐]段落。"
+            )
 
         if intent.intent == "recommend":
             user = self._build_user_preferences(enriched)
@@ -190,23 +216,33 @@ class ConsultOrchestrator:
                 "优先结合已有考生画像，不要机械要求用户重复补全画像。"
             )
 
+        extra_parts.append(self._build_admission_score_research_policy())
         extra_parts.append(self._build_data_honesty_context())
 
         citations = [item.url for item in research_results]
+        llm_history = self._history_for_current_question(history, enriched.question, intent)
         response = llm_client.consult(
             enriched,
             extra_context="\n\n".join(extra_parts),
             citations=citations,
-            history=history,
+            history=llm_history,
         )
+        if self._is_fact_data_question(enriched.question):
+            response = self._guard_fact_data_response(response, enriched, intent, citations)
+        elif intent.intent != "recommend":
+            response = self._guard_non_recommend_response(response, enriched, intent, citations)
         if intent.intent == "recommend":
             user = self._build_user_preferences(enriched)
-            answer_plans = self._extract_recommendations_from_answer(
-                answer=response.answer,
-                user=user,
-                citations=citations,
-            )
-            if len(answer_plans) > len(recommendation_plans):
+            if not user:
+                response = self._guard_insufficient_recommendation_response(response, enriched)
+                answer_plans = []
+            else:
+                answer_plans = [] if self._answer_declines_recommendations(response.answer) else self._extract_recommendations_from_answer(
+                    answer=response.answer,
+                    user=user,
+                    citations=citations,
+                )
+            if not recommendation_plans and len(answer_plans) > len(recommendation_plans):
                 recommendation_plans = answer_plans
             if recommendation_plans and self._should_use_template_recommend_answer(response.answer, recommendation_plans):
                 response.answer = self._compose_recommendation_answer(
@@ -214,8 +250,68 @@ class ConsultOrchestrator:
                     recommendation_plans,
                     self._research_status_text(research_results),
                 )
+            if recommendation_plans:
+                response = answer_guard.guard_response(
+                    response,
+                    extra_context="\n\n".join(extra_parts),
+                    citations=citations,
+                    allowed_schools=[plan.school for plan in recommendation_plans],
+                    known_school_names=self.school_names,
+                    require_recommendation_guard=True,
+                )
         response.recommendation_plans = recommendation_plans
         return response
+
+    def _guard_insufficient_recommendation_response(
+        self,
+        response: ConsultResponse,
+        request: ConsultRequest,
+    ) -> ConsultResponse:
+        response.recommendation_plans = []
+        mentions_school = any(name in (response.answer or "") for name in self.school_names)
+        if not mentions_school and not self._is_unrequested_recommendation_answer(response.answer, request, IntentResult("chat", [], [], False)):
+            response.follow_up_questions = response.follow_up_questions or [
+                "孩子是哪个省的？",
+                "高考分数和位次是多少？",
+                "选科和目标专业方向是什么？",
+            ]
+            return response
+
+        response.answer = (
+            "[核心判断]\n"
+            "现在不能直接给学校名单。缺省份、分数、位次、选科或专业方向时，硬推荐学校就是瞎排，容易把孩子带沟里。\n\n"
+            "[灵魂追问]\n"
+            "1. 孩子是哪个省的？\n"
+            "2. 高考分数和位次是多少？\n"
+            "3. 选科、目标城市和专业方向分别是什么？\n\n"
+            "[核验清单]\n"
+            "补齐画像后，再按省考试院投档表、学校招生网专业组和招生计划做冲稳保。"
+        )
+        response.follow_up_questions = [
+            "孩子是哪个省的？",
+            "高考分数和位次是多少？",
+            "选科、目标城市和专业方向分别是什么？",
+        ]
+        response.confidence = "low"
+        return response
+
+    def _history_for_current_question(
+        self,
+        history: list[dict] | None,
+        question: str,
+        intent: IntentResult,
+    ) -> list[dict] | None:
+        if not history or intent.intent == "recommend":
+            return history
+        filtered: list[dict] = []
+        recommendation_markers = ["[院校推荐]", "【院校推荐】", "冲稳保", "冲刺", "保底", "同步方案"]
+        for message in history:
+            role = message.get("role") if isinstance(message, dict) else None
+            content = str(message.get("content", "")) if isinstance(message, dict) else ""
+            if role == "assistant" and any(marker in content for marker in recommendation_markers):
+                continue
+            filtered.append(message)
+        return filtered[-6:]
 
     def _should_use_template_recommend_answer(self, answer: str, plans: list[ConsultRecommendationPlan]) -> bool:
         if not plans:
@@ -223,18 +319,389 @@ class ConsultOrchestrator:
         if not (answer or "").strip():
             return True
         visible_school_count = sum(1 for plan in plans[:10] if plan.school in answer)
-        required_visible = min(8, len(plans[:10]))
-        if visible_school_count < required_visible:
+        has_recommendation_heading = bool(re.search(
+            r"(?:^|\n)\s*(?:\[|【)?\s*(?:院校推荐|推荐院校|学校推荐|推荐学校|冲稳保推荐|具体推荐|方案推荐)\s*(?:\]|】)?",
+            answer or "",
+        ))
+        if visible_school_count == 0 and not has_recommendation_heading:
             return True
-        forbidden_patterns = [
-            r"\d+\s*K",
-            r"\d+\s*%",
-            r"\d+\s*/\s*100",
-            r"模拟概率",
-            r"估算薪资",
-            r"中位数薪资",
+        return False
+
+    def _guard_non_recommend_response(
+        self,
+        response: ConsultResponse,
+        request: ConsultRequest,
+        intent: IntentResult,
+        citations: list[str],
+    ) -> ConsultResponse:
+        """Prevent non-recommend consultations from being overwritten by recommendation templates."""
+        response.recommendation_plans = []
+        if not self._is_unrequested_recommendation_answer(response.answer, request, intent):
+            if self._answer_conflicts_with_major_scope(response.answer, request, intent):
+                if intent.intent == "school_chance":
+                    response.answer = self._build_school_chance_fallback_answer(request, intent, citations)
+                elif intent.intent == "insight":
+                    response.answer = self._build_local_insight_answer(request, intent, citations)
+                else:
+                    response.answer = self._build_chat_scope_fallback_answer(request, citations)
+                response.follow_up_questions = []
+                response.confidence = "medium"
+            return response
+
+        if intent.intent == "school_chance":
+            response.answer = self._build_school_chance_fallback_answer(request, intent, citations)
+        elif intent.intent == "insight":
+            response.answer = self._build_local_insight_answer(request, intent, citations)
+        else:
+            response.answer = self._build_chat_scope_fallback_answer(request, citations)
+        response.follow_up_questions = []
+        response.confidence = "medium"
+        return response
+
+    def _build_major_scope_context(self, request: ConsultRequest, intent: IntentResult) -> str:
+        majors = self._active_major_scope(request, intent)
+        if not majors:
+            return ""
+        return (
+            "专业一致性要求：\n"
+            f"1. 本轮允许使用的专业方向是：{'、'.join(majors)}。\n"
+            "2. 如果用户没有明确说要换专业、比较专业或看调剂，不要把回答主语改成其他专业。\n"
+            "3. 学校名里的“师范、医科、财经、建筑、农业、政法”等字样只是院校类型，不等于用户专业方向。"
+        )
+
+    def _active_major_scope(self, request: ConsultRequest, intent: IntentResult) -> list[str]:
+        candidates: list[str] = []
+        if intent.major_names:
+            candidates.extend(intent.major_names)
+        elif request.context and request.context.major_preference:
+            candidates.extend(request.context.major_preference)
+        expanded = self._expand_major_preferences(candidates)
+        if expanded:
+            return expanded
+        normalized: list[str] = []
+        for item in candidates:
+            value = str(item or "").strip()
+            if value and value not in normalized:
+                normalized.append(value)
+        return normalized
+
+    def _answer_conflicts_with_major_scope(
+        self,
+        answer: str,
+        request: ConsultRequest,
+        intent: IntentResult,
+    ) -> bool:
+        allowed = self._active_major_scope(request, intent)
+        if not allowed or self._allows_major_scope_change(request.question):
+            return False
+        mentioned = self._extract_major_preference(answer)
+        conflicting = [major for major in mentioned if major not in allowed]
+        if not conflicting:
+            return False
+
+        compact = re.sub(r"\s+", "", answer or "")
+        allowed_mentioned = any(self._contains_major_alias(compact, major) for major in allowed)
+        if not allowed_mentioned:
+            return True
+
+        focus_markers = [
+            "当前方向", "目标方向", "专业方向", "目标专业", "本轮按", "按", "报", "读",
+            "选择", "考虑", "核验", "这个专业", "该专业",
         ]
-        return any(re.search(pattern, answer) for pattern in forbidden_patterns)
+        for major in conflicting:
+            aliases = self._major_aliases(major)
+            for alias in aliases:
+                if not alias or alias not in compact:
+                    continue
+                if any(re.search(rf"{re.escape(marker)}.{{0,12}}{re.escape(alias)}", compact) for marker in focus_markers):
+                    return True
+                if re.search(rf"{re.escape(alias)}.{{0,8}}(?:方向|专业|这个专业|该专业|就业|师范|非师范)", compact):
+                    return True
+        return False
+
+    def _allows_major_scope_change(self, question: str) -> bool:
+        compact = re.sub(r"\s+", "", question or "")
+        return any(
+            marker in compact
+            for marker in [
+                "换专业", "转专业", "改专业", "换方向", "转方向", "改方向",
+                "对比", "比较", "另一个专业", "其他专业", "其它专业", "相近专业",
+                "调剂专业", "专业组里", "专业组内",
+            ]
+        )
+
+    def _major_aliases(self, major: str) -> list[str]:
+        aliases = [major]
+        for alias, target in MAJOR_ALIASES.items():
+            if target == major and alias not in aliases:
+                aliases.append(alias)
+        return aliases
+
+    def _contains_major_alias(self, compact_text: str, major: str) -> bool:
+        return any(alias and alias in compact_text for alias in self._major_aliases(major))
+
+    def _is_unrequested_recommendation_answer(
+        self,
+        answer: str,
+        request: ConsultRequest,
+        intent: IntentResult,
+    ) -> bool:
+        compact = re.sub(r"\s+", "", answer or "")
+        if not compact:
+            return True
+        recommend_markers = [
+            "[院校推荐]", "【院校推荐】", "[推荐院校]", "【推荐院校】",
+            "冲稳保方案", "院校推荐主回答", "同步方案", "待审核方案",
+            "冲刺方案", "稳妥方案", "保底方案",
+        ]
+        if any(marker in compact for marker in recommend_markers):
+            return True
+        if intent.intent == "school_chance":
+            target_school = intent.school_names[0] if intent.school_names else ""
+            mentioned = [name for name in self.school_names if name in (answer or "")]
+            other_schools = [name for name in mentioned if name != target_school]
+            if len(other_schools) >= 2:
+                return True
+        off_topic_markers = [
+            "哪个学校名字好听", "哪所学校名字好听", "先别问哪个学校",
+            "别先问哪个学校", "先问这条路能不能换饭碗",
+        ]
+        return any(marker in compact for marker in off_topic_markers)
+
+    def _build_school_chance_fallback_answer(
+        self,
+        request: ConsultRequest,
+        intent: IntentResult,
+        citations: list[str],
+    ) -> str:
+        school_name = intent.school_names[0] if intent.school_names else ""
+        user = self._build_user_preferences(request, allow_partial=True)
+        ctx = request.context
+        target_major = self._recommend_major_focus(user.major_preference if user else (ctx.major_preference if ctx else None))
+        school = self.school_by_name.get(school_name, {})
+        major = self.major_by_name.get(target_major) or (self.major_by_name.get((user.major_preference or [""])[0]) if user and user.major_preference else {})
+
+        risk_text = "本地规则没有形成稳定档位，需要回到考试院投档表和学校招生网核验。"
+        if user and user.province and user.score:
+            try:
+                recommend = agent_engine.recommend(RecommendRequest(user=user, limit=20))
+                matched_plan = next((plan for plan in recommend.plans if plan.school == school_name), None)
+                if matched_plan:
+                    risk_text = f"本地规则把{school_name}放在「{matched_plan.risk_level}」档，专业方向按「{matched_plan.major}」核验。"
+                elif school and major:
+                    risk = agent_engine._profile_risk_bucket(school, major, user)
+                    risk_text = f"本地规则粗判属于「{risk}」档，但没有进入当前结构化候选，必须单独查官方位次。"
+            except Exception:
+                pass
+
+        answer = (
+            "[核心判断]\n"
+            f"这轮只判断{school_name or '这所学校'}，不展开多校推荐。{risk_text}\n\n"
+            "[分析过程]\n"
+            f"1. 考生画像：{self._profile_brief(ctx)}。\n"
+            f"2. 目标专业方向：{target_major}。\n"
+            f"3. 学校核验入口：{(school.get('official_url') if school else None) or '未命中本地官网，需要手动查学校本科招生网'}。\n\n"
+            "[核验清单]\n"
+            "1. 查本省教育考试院近三年投档位次，先看这所学校对应专业组，不拿学校最低线代替专业线。\n"
+            "2. 查学校本科招生网，确认招生计划、选科要求、专业组包含专业和调剂规则。\n"
+            "3. 如果本轮没有官方来源支撑，只能当作本地规则粗判，不能当录取承诺。"
+        )
+        if citations:
+            answer += "\n\n数据来源：\n" + "\n".join(f"{idx + 1}. {url}" for idx, url in enumerate(citations[:5]))
+        return answer
+
+    def _build_local_insight_answer(
+        self,
+        request: ConsultRequest,
+        intent: IntentResult,
+        citations: list[str],
+    ) -> str:
+        user = self._build_user_preferences(request, allow_partial=True)
+        target_name = (intent.major_names or intent.school_names or [""])[0]
+        if not target_name:
+            return self._build_chat_scope_fallback_answer(request, citations)
+
+        target_type = "major" if target_name in intent.major_names else "school"
+        insight = agent_engine.insights(
+            request=InsightRequest(target_type=target_type, target_name=target_name, user=user)
+        )
+        if target_type == "major":
+            answer = self._format_major_fit_answer(request, target_name, insight)
+        else:
+            answer = self._format_school_fit_answer(request, target_name, insight)
+        answer += "\n\n数据口径：以上为本地专业/院校库和公开核验入口辅助判断，不是多校名单；后续若要报志愿，需要另起一轮单独做方案核验。"
+        if citations:
+            answer += "\n\n数据来源：\n" + "\n".join(f"{idx + 1}. {url}" for idx, url in enumerate(citations[:5]))
+        return answer
+
+    def _build_chat_scope_fallback_answer(self, request: ConsultRequest, citations: list[str]) -> str:
+        answer = (
+            "[核心判断]\n"
+            f"这轮问题是：{request.question}。它没有明确要求列学校，所以不能把回答改成多校名单。\n\n"
+            "[分析过程]\n"
+            f"已知画像：{self._profile_brief(request.context)}。\n"
+            "先围绕本轮问题给判断；如果后续要做学校方案，再单独进入冲稳保推荐流程。\n\n"
+            "[核验清单]\n"
+            "涉及录取就查教育考试院和学校招生网；涉及就业和收入就查就业质量报告、企业招聘官网和真实岗位样本。"
+        )
+        if citations:
+            answer += "\n\n数据来源：\n" + "\n".join(f"{idx + 1}. {url}" for idx, url in enumerate(citations[:5]))
+        return answer
+
+    def _build_pressure_test_response(
+        self,
+        request: ConsultRequest,
+        intent: IntentResult,
+        citations: list[str],
+    ) -> ConsultResponse:
+        target_major = self._fact_target_major(request, intent)
+        if not target_major:
+            return ConsultResponse(
+                answer=(
+                    "[核心判断]\n"
+                    "可以做10年后压力测试，但当前画像里没有明确专业方向，我不能替你编一个对象。\n\n"
+                    "[灵魂追问]\n"
+                    "1. 要测试哪个专业或哪套学校-专业方案？\n"
+                    "2. 孩子能不能接受读研、考编或转行？\n"
+                    "3. 家庭能承受几年试错成本？"
+                ),
+                thinking_process=[ThinkingStep(step="压力测试", analysis="缺少专业对象，未生成虚构压力测试")],
+                follow_up_questions=[
+                    "要测试哪个专业或哪套学校-专业方案？",
+                    "孩子能不能接受读研、考编或转行？",
+                    "家庭能承受几年试错成本？",
+                ],
+                confidence="low",
+                citations=citations,
+                recommendation_plans=[],
+            )
+
+        user = self._build_user_preferences(request, allow_partial=True)
+        insight = agent_engine.insights(
+            request=InsightRequest(target_type="major", target_name=target_major, user=user)
+        )
+        major = self.major_by_name.get(target_major, {})
+        family = (request.context.family_background if request.context and request.context.family_background else "普通家庭")
+        salary_10y = int(insight.median_salary * 1.6) if insight.median_salary else None
+        irreplaceability = insight.irreplaceability
+        risks = insight.risk_factors or []
+        needs_grad = bool(major.get("requires_grad_school"))
+        subjects = user.subjects or (request.context.subjects if request.context and request.context.subjects else "未填")
+        city_pref = "、".join(user.city_preference or []) or "未限定"
+        risk_pref = user.risk_appetite or "均衡"
+        employment_line = self._format_rate(insight.employment_rate)
+        current_salary_line = self._format_salary(insight.median_salary)
+        barrier_line = self._format_irreplaceability(irreplaceability)
+        tags = "、".join(major.get("tags", [])[:4]) or "暂无标签"
+        category = major.get("category") or "未分类"
+
+        family_line = (
+            "普通家庭的核心不是赌十年后的高薪个例，而是看普通毕业生能不能稳定落地；如果要读研、考证或换城市，这些都要提前算成本。"
+            if "普通" in family
+            else "家庭试错空间相对更大，可以给成长型方向更多时间，但仍要看岗位样本和毕业去向，不能只看专业名字。"
+        )
+        subject_line = (
+            "选科偏理，若专业也偏技术或工程，长期壁垒更容易做出来；如果转向低壁垒文商科，要额外核算机会成本。"
+            if any(key in subjects for key in ["物", "化", "生"])
+            else "选科不是强技术底座时，更要靠学校平台、城市实习、证书、作品或考编路径补强可替代性问题。"
+        )
+        grad_line = (
+            "这个方向要把读研或继续深造当成默认成本的一部分，本科毕业直接兑现不能按最好情况估。"
+            if needs_grad
+            else "这个方向可以先按本科就业核验，但仍要看普通毕业生去向，不要只看优秀样本。"
+        )
+        city_line = (
+            f"目标地区是{city_pref}；十年后能否扛住压力，和城市产业密度、实习机会、校友网络强相关，不能把一线城市样本直接套到所有城市。"
+        )
+        risk_pref_line = (
+            f"当前风险偏好是{risk_pref}；偏稳就要优先保留稳定出口，偏激进才适合把高成长、长培养周期的路径放到前面。"
+        )
+
+        risk_flags: list[str] = []
+        if irreplaceability is not None and irreplaceability < 65:
+            risk_flags.append("技术壁垒偏弱，10年后更怕被平台、AI工具或更便宜的人替代")
+        if needs_grad:
+            risk_flags.append("本科直接就业的确定性不够，读研预期要提前算进成本")
+        if any("市场化岗位少" in item or "就业确定性较弱" in item for item in risks):
+            risk_flags.append("市场化岗位少，不能只靠兴趣硬扛，要提前设计考编、考研或体制内路径")
+        if not risk_flags:
+            risk_flags.append("主要看学校平台、城市资源和个人持续积累，不能只用专业名判断")
+
+        pressure_heavy = ("普通" in family and irreplaceability is not None and irreplaceability < 65) or (needs_grad and "普通" in family)
+        conclusion = (
+            "压力测试不算轻松，普通家庭必须先把保底、深造和稳定出口设计好。"
+            if pressure_heavy
+            else "能做备选，但不能无脑当第一主线。"
+        )
+        salary_line = (
+            f"本地估算的10年后收入参考大约在{salary_10y // 1000}K上下，只能看方向，不能当官方工资。"
+            if salary_10y
+            else "当前缺少可用薪资估算，不展示10年后收入数字，先看路径风险。"
+        )
+
+        answer = "\n".join([
+            "[分析过程]",
+            f"1. 测试对象：按当前画像和本轮问题，锁定为{target_major}，不改成其他专业。",
+            f"2. 家庭约束：{family}；普通家庭重点看中位数出口、深造成本和稳定路径。",
+            f"3. 长期变量：{insight.trend_analysis or '暂无趋势数据'}。",
+            "",
+            "[核心判断]",
+            f"{target_major}的10年后压力测试结论：{conclusion}",
+            salary_line,
+            f"当前本地估算中位数参考：{current_salary_line}；就业稳定性参考：{employment_line}；不可替代性：{barrier_line}。",
+            "",
+            "[画像补充分析]",
+            f"1. 考生画像：{self._profile_brief(request.context)}。",
+            f"2. 专业属性：{target_major}属于{category}，本地标签为{tags}。",
+            f"3. 家庭视角：{family_line}",
+            f"4. 选科/能力视角：当前选科{subjects}；{subject_line}",
+            f"5. 深造视角：{grad_line}",
+            f"6. 城市视角：{city_line}",
+            f"7. 风险偏好：{risk_pref_line}",
+            "",
+            "[红旗风险]",
+            *[f"- {item}" for item in risk_flags],
+            "",
+            "[应对动作]",
+            "1. 保底路径：确认本科毕业能走的稳定岗位、考编/考公/国企入口，别把读研当唯一退路。",
+            "2. 提升路径：把课程、证书、项目、竞赛、实习或作品集做成可展示证据，否则十年后只剩学历标签。",
+            "3. 核验路径：用目标学校就业质量报告和企业招聘样本交叉看，不用单个高薪故事替代中位数判断。",
+            "",
+            "[核验清单]",
+            "1. 查目标学校该专业就业质量报告，别只看学校总就业率。",
+            "2. 查该专业普通毕业生去向：教师编、考研、公务员、企业岗位分别占多少。",
+            "3. 查10年后仍能站住的能力：证书、编制、作品、项目、学历或城市资源到底是哪一个。",
+            "",
+            "数据口径：这轮是本地专业库和当前画像的压力测试，不是官方统计；薪资、就业稳定性和技术壁垒都只能做方向判断。",
+        ])
+        if citations:
+            answer += "\n\n数据来源：\n" + "\n".join(f"{idx + 1}. {url}" for idx, url in enumerate(citations[:5]))
+
+        return ConsultResponse(
+            answer=answer,
+            thinking_process=[
+                ThinkingStep(step="画像读取", analysis=self._build_profile_context(request) or "本轮未提供完整画像"),
+                ThinkingStep(step="压力测试", analysis=f"已按当前画像专业{target_major}生成10年后压力测试"),
+            ],
+            follow_up_questions=[],
+            confidence="medium",
+            citations=citations,
+            recommendation_plans=[],
+        )
+
+    def _answer_declines_recommendations(self, answer: str) -> bool:
+        compact = re.sub(r"\s+", "", answer or "")
+        if not compact:
+            return False
+        decline_patterns = [
+            r"(?:筛|粗筛|结果).*?0个(?:志愿|候选|方案)",
+            r"(?:候选|方案|志愿)(?:为零|是0|为0|为空)",
+            r"冲、稳、保三个档位一个都筛不出来",
+            r"没法给你一个.*?学校名单",
+            r"不建议直接给.*?学校名单",
+            r"没有可同步的院校推荐",
+        ]
+        return any(re.search(pattern, compact) for pattern in decline_patterns)
 
     def _build_direct_recommend_response(self, request: ConsultRequest) -> ConsultResponse | None:
         user = self._build_user_preferences(request)
@@ -335,6 +802,10 @@ class ConsultOrchestrator:
         emp = self._format_rate(insight.employment_rate)
         needs_grad = "是" if major.get("requires_grad_school") else "否"
         risks = "；".join(insight.risk_factors) if insight.risk_factors else "暂无明确风险"
+        show_precise_metrics = self._is_fact_data_question(request.question)
+        salary_text = salary if show_precise_metrics else "待就业质量报告核验"
+        emp_text = emp if show_precise_metrics else "待就业质量报告核验"
+        irreplaceability_text = f"{insight.irreplaceability or '暂无'}/100" if show_precise_metrics else "待培养方案和岗位样本核验"
 
         verdict = "可以考虑，但不要无脑转主线。"
         if major.get("requires_grad_school") and "普通" in family:
@@ -353,6 +824,7 @@ class ConsultOrchestrator:
             conflict_notes.append("这个方向比较吃城市、平台、实习和家庭资源，普通路径分化会很明显。")
         if not conflict_notes:
             conflict_notes.append("与当前画像没有硬冲突，但仍要看学校层次和城市资源。")
+        advice = self._major_fit_advice(target_name, major)
 
         return "\n".join([
             f"我跟你说，{target_name}不是不能学，关键看你拿它当主线还是备选。",
@@ -362,17 +834,31 @@ class ConsultOrchestrator:
             f"结合你的画像：{self._profile_brief(ctx)}",
             "",
             "就业倒推看本地估算数据：",
-            f"- 5年后估算薪资中位数：{salary}",
-            f"- 估算就业率：{emp}",
-            f"- 不可替代性估算：{insight.irreplaceability or '暂无'}/100",
+            f"- 5年后收入参考：{salary_text}",
+            f"- 就业稳定性参考：{emp_text}",
+            f"- 技术壁垒/被替代风险：{irreplaceability_text}",
             f"- 是否明显依赖深造：{needs_grad}",
             f"- 主要风险：{risks}",
             "",
             "和你当前情况的冲突点：",
             *[f"- {note}" for note in conflict_notes],
             "",
-            "我的建议：如果坚持这个方向，优先选城市资源强、财经/综合平台强、实习机会多的学校；别为了一个金融名头，去一个平台弱、城市弱、实习少的学校。普通家庭更要看中位数路径，不要只看投行、券商前台这种头部样本。",
+            f"我的建议：{advice}",
         ])
+
+    def _major_fit_advice(self, target_name: str, major: dict) -> str:
+        category = major.get("category", "")
+        if "历史" in target_name or category == "历史学":
+            return "如果坚持历史学，优先看师范培养、保研考研、文博档案、地方教育资源和考编口径；别只拿学校牌子赌就业，普通家庭要把深造和稳定出口提前算清楚。"
+        if "汉语言" in target_name or "中文" in target_name:
+            return "如果坚持中文方向，优先看师范属性、写作训练、考编岗位、媒体出版和新媒体实习资源；别把中文理解成只靠背书，输出能力和城市机会很关键。"
+        if category == "法学" or "法学" in target_name:
+            return "如果坚持法学，优先看法考通过、实习半径、法院律所资源和考公路径；别只看校名，普通家庭更要问毕业后靠什么拿到第一份稳定机会。"
+        if category == "经济学" or "金融" in target_name or "经济" in target_name:
+            return "如果坚持这个方向，优先选城市资源强、财经/综合平台强、实习机会多的学校；别为了一个金融名头，去一个平台弱、城市弱、实习少的学校。"
+        if category == "工学" or any(key in target_name for key in ["计算机", "软件", "电子", "电气", "通信", "自动化"]):
+            return "如果坚持这个方向，重点看课程硬度、实验项目、实习企业和行业标签；别只看专业名字热不热，要看学校能不能把工程能力喂出来。"
+        return "如果坚持这个方向，优先看学校资源、城市岗位、培养方案和毕业去向；普通家庭更要看中位数路径，不要只看头部样本。"
 
     def _format_school_fit_answer(self, request: ConsultRequest, target_name: str, insight) -> str:
         ctx = request.context
@@ -522,13 +1008,38 @@ class ConsultOrchestrator:
                 major_names.append(name)
         ctx = request.context
         profile_ready = bool(ctx and ctx.province and ctx.score)
+        fact_data_question = self._is_fact_data_question(question)
+        pressure_test_question = self._is_pressure_test_question(question)
+        declines_recommendation = self._declines_school_recommendation(question)
+        should_backfill_major = any(marker in question for marker in [
+            "中位数", "薪资", "工资", "收入", "就业", "出路", "岗位",
+            "这个专业", "该专业", "本专业", "这个方向", "当前方向", "我的方向",
+            "我的专业", "壁垒", "不可替代", "压力测试", "10年后", "十年后",
+        ])
+        profile_major_reference = any(marker in question for marker in [
+            "这个专业", "该专业", "本专业", "这个方向", "当前方向", "我的方向",
+            "我的专业", "壁垒", "不可替代", "压力测试", "10年后", "十年后",
+        ])
+        if (fact_data_question or pressure_test_question or declines_recommendation or profile_major_reference) and should_backfill_major and not major_names and ctx and ctx.major_preference:
+            for name in self._expand_major_preferences(ctx.major_preference):
+                if name not in major_names:
+                    major_names.append(name)
         profile_recommend_signal = profile_ready and any(
             keyword in question
-            for keyword in ["学校", "院校", "大学", "专业", "冲", "稳", "保", "填报", "怎么选", "该选"]
+            for keyword in [
+                "院校推荐", "学校推荐", "推荐院校", "推荐学校", "志愿", "冲稳保", "填报",
+                "能报", "能上", "怎么报", "怎么选", "该选", "报什么", "选什么",
+            ]
         )
 
         if self._is_single_school_chance_question(question, school_names):
             intent = "school_chance"
+        elif pressure_test_question:
+            intent = "pressure_test"
+        elif fact_data_question:
+            intent = "insight"
+        elif declines_recommendation:
+            intent = "insight" if (school_names or major_names or any(keyword in question for keyword in INSIGHT_KEYWORDS + FACT_KEYWORDS)) else "chat"
         elif any(keyword in question for keyword in RECOMMEND_KEYWORDS) or profile_recommend_signal:
             intent = "recommend"
         elif school_names or major_names or any(keyword in question for keyword in INSIGHT_KEYWORDS):
@@ -537,13 +1048,315 @@ class ConsultOrchestrator:
             intent = "chat"
 
         needs_research = bool(
-            intent in ["recommend", "insight", "school_chance"]
+            intent in ["recommend", "insight", "school_chance", "pressure_test"]
             or
             school_names
             or major_names
             or any(keyword in question for keyword in FACT_KEYWORDS)
         )
         return IntentResult(intent=intent, school_names=school_names, major_names=major_names, needs_research=needs_research)
+
+    def _is_pressure_test_question(self, text: str) -> bool:
+        compact = re.sub(r"\s+", "", text or "")
+        if not compact:
+            return False
+        return any(marker in compact for marker in ["10年后压力测试", "十年后压力测试", "压力测试", "10年后", "十年后"])
+
+    def _declines_school_recommendation(self, text: str) -> bool:
+        compact = re.sub(r"\s+", "", text or "")
+        if not compact:
+            return False
+        decline_patterns = [
+            r"不要(?:给我)?(?:推荐|列|排).{0,8}(?:学校|院校|大学|志愿)",
+            r"别(?:给我)?(?:推荐|列|排).{0,8}(?:学校|院校|大学|志愿)",
+            r"不(?:要|用|想)(?:推荐|列|看).{0,8}(?:学校|院校|大学|志愿)",
+            r"只(?:说|聊|看|分析).{0,8}(?:就业|出路|薪资|工资|收入|前景|专业)",
+            r"(?:先|暂时)?不(?:做|要|看).{0,8}(?:冲稳保|院校推荐|学校推荐|志愿方案)",
+        ]
+        return any(re.search(pattern, compact) for pattern in decline_patterns)
+
+    def _fact_target_major(self, request: ConsultRequest, intent: IntentResult | None = None) -> str:
+        candidates = list(intent.major_names if intent else [])
+        if not candidates:
+            candidates.extend(self._extract_major_preference(request.question))
+        if not candidates and request.context and request.context.major_preference:
+            candidates.extend(self._expand_major_preferences(request.context.major_preference))
+        if candidates:
+            return candidates[0]
+        if request.context and request.context.major_preference:
+            return str(request.context.major_preference[0]).strip()
+        return ""
+
+    def _is_fact_data_question(self, text: str) -> bool:
+        compact = re.sub(r"\s+", "", text or "")
+        if not compact:
+            return False
+
+        fact_markers = [
+            "中位数", "薪资", "工资", "收入", "就业率", "就业数据", "就业质量",
+            "500强", "五百强", "世界五百强", "校招", "招聘", "招聘名单", "企业名单",
+        ]
+        if not any(marker in compact for marker in fact_markers):
+            return False
+
+        explicit_recommend_markers = [
+            "推荐", "报考", "志愿", "冲稳保", "院校推荐", "学校推荐", "推荐院校", "推荐学校",
+            "能报", "能上", "该报", "报什么", "报哪些", "怎么报", "选什么学校", "选哪些学校",
+        ]
+        if any(marker in compact for marker in explicit_recommend_markers):
+            return False
+
+        fact_question_markers = [
+            "多少", "是多少", "有多少", "哪些", "哪几", "哪里", "去哪些", "怎么查",
+            "有没有", "能进", "进不进", "容易进", "数据", "名单", "招聘", "校招", "中位数", "薪资", "工资", "收入",
+        ]
+        return any(marker in compact for marker in fact_question_markers)
+
+    def _guard_fact_data_response(
+        self,
+        response: ConsultResponse,
+        request: ConsultRequest,
+        intent: IntentResult,
+        citations: list[str],
+    ) -> ConsultResponse:
+        """Keep salary/500强 questions in the data-answer lane after LLM post-processing."""
+        response.recommendation_plans = []
+        response.answer = self._downgrade_unsupported_source_claims(response.answer, citations)
+        answer = response.answer or ""
+        if self._is_fact_answer_off_topic(answer, request) or self._answer_conflicts_with_major_scope(answer, request, intent):
+            response.answer = self._build_fact_data_fallback_answer(request, intent, citations)
+            response.follow_up_questions = []
+            response.confidence = "medium"
+        else:
+            response.answer = self._append_fact_data_contextual_analysis(response.answer, request, intent)
+            response.follow_up_questions = []
+        return response
+
+    def _downgrade_unsupported_source_claims(self, answer: str, citations: list[str] | None = None) -> str:
+        text = str(answer or "")
+        if citations:
+            return text
+        replacements = {
+            "已经官方核验": "按本地库估算",
+            "已官方核验": "按本地库估算",
+            "官方真实": "本地估算",
+            "真实中位数": "收入参考",
+            "真实就业率": "就业稳定性参考",
+            "真实数据": "本地估算数据",
+            "已经核验": "待官方来源核验",
+            "已核验": "待官方来源核验",
+            "联网核验": "公开来源待核验",
+            "官方核验": "官方来源待核验",
+        }
+        for old, new in replacements.items():
+            text = text.replace(old, new)
+        return text
+
+    def _is_fact_answer_off_topic(self, answer: str, request: ConsultRequest) -> bool:
+        compact = re.sub(r"\s+", "", answer or "")
+        if not compact:
+            return True
+        forbidden_markers = [
+            "[灵魂追问]", "【灵魂追问】", "[院校推荐]", "【院校推荐】",
+            "冲稳保", "冲刺", "保底", "志愿表",
+            "哪个学校名字好听", "哪所学校名字好听", "先别问哪个学校",
+        ]
+        if any(marker in compact for marker in forbidden_markers):
+            return True
+        question = request.question or ""
+        salary_like = any(marker in question for marker in ["中位数", "薪资", "工资", "收入"])
+        if salary_like and not any(marker in compact for marker in ["中位数", "薪资", "工资", "收入", "K", "元", "暂无"]):
+            return True
+        return False
+
+    def _build_fact_data_fallback_answer(
+        self,
+        request: ConsultRequest,
+        intent: IntentResult,
+        citations: list[str],
+    ) -> str:
+        question = request.question or ""
+        target_major = self._fact_target_major(request, intent)
+        salary_like = any(marker in question for marker in ["中位数", "薪资", "工资", "收入"])
+        fortune500_like = any(marker in question for marker in ["500强", "五百强", "世界五百强"])
+
+        if salary_like:
+            if not target_major:
+                return (
+                    "[核心判断]\n"
+                    "你问的是“这个专业”的中位数收入，但当前画像里没有识别到明确专业名，所以我不能硬编一个薪资数。\n\n"
+                    "[核验清单]\n"
+                    "把专业名补上后，我再按本地估算、就业质量报告口径和行业去向给你拆。"
+                )
+            user = self._build_user_preferences(request, allow_partial=True)
+            insight = agent_engine.insights(
+                request=InsightRequest(target_type="major", target_name=target_major, user=user)
+            )
+            if insight.median_salary:
+                salary_text = self._format_salary(insight.median_salary)
+            else:
+                salary_text = "暂无可用估算"
+            risk_text = "；".join(insight.risk_factors) if insight.risk_factors else "暂无明确风险标签"
+            answer = (
+                "[核心判断]\n"
+                f"{target_major}普通毕业生工作几年后的收入参考：{salary_text}。这个数是本地估算，不是官方就业质量报告里的精确统计。\n\n"
+                "[分析过程]\n"
+                f"1. 专业对象：按当前画像和本轮问题，识别为{target_major}。\n"
+                f"2. 趋势判断：{insight.trend_analysis or '暂无趋势数据'}。\n"
+                f"3. 风险提醒：{risk_text}。\n\n"
+                f"{self._build_salary_profile_analysis(request, target_major, insight)}\n\n"
+                "[核验清单]\n"
+                "1. 查目标学校就业质量报告，看该专业毕业去向和行业分布。\n"
+                "2. 查招聘平台同岗位真实薪酬区间，分城市看，不要只看头部样本。\n"
+                "3. 如果后续要选学校，再单独回到投档位次和专业组核验。"
+            )
+        elif fortune500_like:
+            user = self._build_user_preferences(request, allow_partial=True)
+            insight = None
+            if target_major:
+                insight = agent_engine.insights(
+                    request=InsightRequest(target_type="major", target_name=target_major, user=user)
+                )
+            major_prefix = f"如果按{target_major}看，" if target_major else ""
+            answer = (
+                "[核心判断]\n"
+                f"{major_prefix}500强校招不是一张全国统一固定名单，它通常看学校层次、专业对口度、城市产业圈和企业当年岗位需求。你这轮问的是招聘去向，不是让系统重排志愿。\n\n"
+                "[分析过程]\n"
+                f"1. 专业对象：{target_major or '本轮未识别到明确专业'}。\n"
+                "2. 985、强211、行业特色院校和重点城市高校更容易进入500强校招池。\n"
+                "3. 不同企业差异很大：电力、制造、金融、互联网、央国企看的学校和专业并不一样。\n\n"
+                f"{self._build_fortune500_profile_analysis(request, target_major, insight)}\n\n"
+                "[核验清单]\n"
+                "1. 查企业校园招聘官网的目标院校和宣讲行程。\n"
+                "2. 查学校就业质量报告里的重点单位、世界500强/中国500强去向。\n"
+                "3. 查学院层面的就业去向，别只看学校总表。"
+            )
+        else:
+            answer = (
+                "[核心判断]\n"
+                "这轮是数据咨询，不是院校推荐。我会按数据口径回答，不展开冲稳保学校名单。\n\n"
+                "[核验清单]\n"
+                "优先查官方就业质量报告、企业招聘官网和公开统计口径。"
+            )
+
+        if citations:
+            answer += "\n\n数据来源：\n" + "\n".join(f"{idx + 1}. {url}" for idx, url in enumerate(citations[:5]))
+        return answer
+
+    def _append_fact_data_contextual_analysis(
+        self,
+        answer: str,
+        request: ConsultRequest,
+        intent: IntentResult,
+    ) -> str:
+        question = request.question or ""
+        target_major = self._fact_target_major(request, intent)
+        salary_like = any(marker in question for marker in ["中位数", "薪资", "工资", "收入"])
+        fortune500_like = any(marker in question for marker in ["500强", "五百强", "世界五百强"])
+        if not target_major and not fortune500_like:
+            return answer
+
+        user = self._build_user_preferences(request, allow_partial=True)
+        insight = None
+        if target_major:
+            insight = agent_engine.insights(
+                request=InsightRequest(target_type="major", target_name=target_major, user=user)
+            )
+
+        supplement = ""
+        if salary_like and insight:
+            supplement = self._build_salary_profile_analysis(request, target_major, insight)
+        elif fortune500_like:
+            supplement = self._build_fortune500_profile_analysis(request, target_major, insight)
+
+        if not supplement or supplement in (answer or ""):
+            return answer
+        return f"{(answer or '').rstrip()}\n\n{supplement}"
+
+    def _build_salary_profile_analysis(self, request: ConsultRequest, target_major: str, insight) -> str:
+        user = self._build_user_preferences(request, allow_partial=True)
+        major = self.major_by_name.get(target_major, {})
+        family = user.family_background or "普通家庭"
+        subjects = user.subjects or "未填"
+        city_pref = "、".join(user.city_preference or []) or "未限定"
+        risk_pref = user.risk_appetite or "均衡"
+        needs_grad = bool(major.get("requires_grad_school"))
+        barrier = insight.irreplaceability
+        employment = self._format_rate(insight.employment_rate)
+        tags = "、".join(major.get("tags", [])[:4]) or "暂无标签"
+
+        family_line = (
+            "普通家庭要把这个数当作“下限和稳定性检查”，不能只看头部高薪个例。"
+            if "普通" in family
+            else "家庭试错空间相对更大，但也要看投入周期和回报确定性。"
+        )
+        subject_line = (
+            "当前选科偏理，若转向文史经管类，要额外评估技术壁垒损失。"
+            if any(key in subjects for key in ["物", "化", "生"]) and major.get("category") in ["文学", "历史学", "法学", "经济学", "管理学"]
+            else "当前选科与专业方向没有明显硬冲突，重点看学校培养资源和毕业去向。"
+        )
+        grad_line = (
+            "这个方向明显要把读研、考证或考编放进成本表，本科毕业直接变现不能想得太满。"
+            if needs_grad
+            else "这个方向可以先看本科就业出口，但仍要核验普通毕业生去向。"
+        )
+        barrier_line = (
+            "壁垒偏高，关键是把课程、项目和实习做实，否则高壁垒也落不到个人身上。"
+            if barrier and barrier >= 80
+            else "壁垒一般或偏弱，更要靠城市、学校平台、证书/作品/项目补足竞争力。"
+        )
+
+        return "\n".join([
+            "[画像补充分析]",
+            f"1. 家庭视角：{family_line}",
+            f"2. 选科视角：{subject_line}",
+            f"3. 深造视角：{grad_line}",
+            f"4. 壁垒视角：{barrier_line}",
+            f"5. 城市视角：目标地区为{city_pref}；薪资中位数必须分城市看，一线和非一线不能混成一个数。",
+            f"6. 风险偏好：当前偏好是{risk_pref}，如果偏稳，就优先看稳定岗位和可验证去向；如果偏冲，再看高成长岗位。",
+            f"本地参考：就业稳定性{employment}，专业标签{tags}。这些只用于方向判断，不是官方统计。",
+        ])
+
+    def _build_fortune500_profile_analysis(self, request: ConsultRequest, target_major: str, insight) -> str:
+        user = self._build_user_preferences(request, allow_partial=True)
+        major = self.major_by_name.get(target_major, {}) if target_major else {}
+        family = user.family_background or "普通家庭"
+        subjects = user.subjects or "未填"
+        city_pref = "、".join(user.city_preference or []) or "未限定"
+        target = target_major or "当前方向"
+        category = major.get("category", "")
+        barrier = insight.irreplaceability if insight else None
+
+        if any(key in target for key in ["计算机", "软件", "电子", "电气", "通信", "自动化"]):
+            position_line = "更适合看研发、测试、运维、硬件、供应链数字化、央国企技术岗等入口。"
+        elif any(key in target for key in ["历史", "汉语言", "新闻", "英语"]):
+            position_line = "不要只盯总部管培，重点看品牌、内容、行政、人力、公共事务、教育培训和央国企综合岗。"
+        elif any(key in target for key in ["法学", "经济", "金融", "会计"]):
+            position_line = "重点看法务、合规、审计、财务、风控、运营和管培，但学校平台与实习经历权重很高。"
+        else:
+            position_line = "先拆岗位类型，再看企业是否真的招这个专业，不要把“500强”当成一个笼统标签。"
+
+        family_line = (
+            "普通家庭别把“能进500强”理解成必然高薪稳定，先看岗位地点、培养周期、淘汰率和转正概率。"
+            if "普通" in family
+            else "家庭支持更强时，可以适当接受更长培养周期，但仍要核验岗位质量。"
+        )
+        barrier_line = (
+            "专业壁垒较强时，要用项目、竞赛、实习和证书把对口能力证明出来。"
+            if barrier and barrier >= 75
+            else "专业壁垒不够强时，500强筛人会更看学校层次、城市实习和可迁移能力。"
+        )
+
+        return "\n".join([
+            "[画像补充分析]",
+            f"1. 岗位匹配：{position_line}",
+            f"2. 家庭视角：{family_line}",
+            f"3. 选科/能力：当前选科{subjects}，要把课程基础转成企业能看懂的项目、证书或实习。",
+            f"4. 城市视角：目标地区为{city_pref}；500强校招高度受城市产业圈影响，上海、北京、深圳、广州、杭州、南京等机会密度不同。",
+            f"5. 壁垒视角：{barrier_line}",
+            f"6. 验证动作：查企业校招官网、目标学校就业质量报告、学院去向表，再看近两年是否有{target}对口岗位。",
+            f"结论边界：这只能判断进入校招池的可能性和准备方向，不能承诺固定企业名单或录用结果。",
+        ])
 
     def _extract_school_names(self, text: str) -> list[str]:
         compact = re.sub(r"\s+", "", text or "")
@@ -576,7 +1389,7 @@ class ConsultOrchestrator:
         queries = self._build_research_queries(request, intent)
         results = self._local_official_sources(intent)
         results.extend(self._province_official_sources(request))
-        results.extend(web_research_client.research(queries, limit_per_query=4, max_results=12, max_queries=12, max_seconds=25))
+        results.extend(web_research_client.research(queries, limit_per_query=3, max_results=10, max_queries=8, max_seconds=18))
         seen = set()
         unique_results = []
         for item in results:
@@ -590,29 +1403,31 @@ class ConsultOrchestrator:
         ctx = request.context
         province = self._normalize_region_name(ctx.province) if ctx and ctx.province else self._extract_province(request.question)
         results: list[ResearchResult] = []
-        queries = []
+        queries: list[str] = []
+        official_site = self._province_exam_site(province)
         if province:
-            score = ctx.score if ctx and ctx.score else self._extract_score(request.question) or ""
-            rank = ctx.rank if ctx and ctx.rank else self._extract_rank(request.question) or ""
             major_focus = self._recommend_major_focus(ctx.major_preference if ctx else None)
-            official_site = self._province_exam_site(province)
-            queries.extend(
-                [
-                    f"{province} 2025 普通类常规批 投档情况表 位次 教育考试院",
-                    f"{province} 2025 一分一段表 {score} {rank}".strip(),
-                    f"{province} 2024 普通类常规批 投档线 位次 教育招生考试院",
-                    f"{province} {score}分 {rank}位次 能报大学 {major_focus} 投档线".strip(),
-                    f"site:gaokao.chsi.com.cn {province} {score}分 位次 院校专业组",
-                ]
-            )
             if official_site:
-                queries.append(f"site:{official_site} {province} 2025 普通类常规批 投档 位次")
-                queries.append(f"site:{official_site} {province} 2025 本科 投档线 专业组 位次")
-                queries.append(f"site:{official_site} {province} 2024 本科 投档线 专业组 位次")
+                queries.append(f"site:{official_site} {province} 2025 本科 普通类 专业最低分 录取分数线")
+                queries.append(f"site:{official_site} {province} 2025 投档最低分 专业 录取分数线")
+            queries.append(f"site:gaokao.chsi.com.cn {province} 2025 {major_focus} 专业最低分 录取分数线".strip())
         for plan in recommend.plans[:10]:
             school = self.school_by_name.get(plan.school, {})
+            admissions_url = self._school_admissions_entry_url(school, plan.school)
+            admissions_domain = self._extract_domain(admissions_url)
+            if admissions_url:
+                results.append(
+                    ResearchResult(
+                        title=f"{plan.school}本科招生网",
+                        url=admissions_url,
+                        snippet="本地高校本科招生网地址库匹配，优先用于核验招生计划、专业组、选科要求、录取分数线和调剂规则。",
+                    )
+                )
+                if admissions_domain:
+                    queries.append(f"site:{admissions_domain} 2025 {plan.school} {plan.major} 专业最低分 录取分数线")
+                    queries.append(f"site:{admissions_domain} 2025 {plan.school} {province or ''} {plan.major} 招生计划 专业组".strip())
             official_url = school.get("official_url")
-            if official_url:
+            if official_url and official_url.rstrip("/") != (admissions_url or "").rstrip("/"):
                 official_domain = self._extract_domain(official_url)
                 results.append(
                     ResearchResult(
@@ -622,22 +1437,24 @@ class ConsultOrchestrator:
                     )
                 )
                 if official_domain:
-                    queries.append(f"site:{official_domain} {plan.school} 本科招生 {plan.major} 专业组")
-                    queries.append(f"site:{official_domain} {plan.school} 就业质量报告 {plan.major}")
-            if len(queries) < 48:
-                queries.append(f"{province or ''} 2025 {plan.school} {plan.major} 投档线 位次 教育考试院".strip())
-                queries.append(f"{province or ''} 2024 {plan.school} {plan.major} 投档线 位次".strip())
-                queries.append(f"{plan.school} 本科招生网 {plan.major} 专业组 选科要求".strip())
-                queries.append(f"{plan.school} {plan.major} 培养方案 就业质量报告".strip())
-                queries.append(f"{plan.school} {plan.major} 毕业生去向 校招 企业".strip())
-                queries.append(f"site:gaokao.chsi.com.cn {plan.school} {plan.major} 专业 介绍 开设院校".strip())
+                    queries.append(f"site:{official_domain} 2025 {plan.school} {plan.major} 专业最低分 录取分数线")
+                    queries.append(f"site:{official_domain} 2025 {plan.school} 本科招生 {plan.major} 最低录取分")
+            queries.extend(
+                self._admission_score_queries(
+                    province=province,
+                    school_name=plan.school,
+                    major_name=plan.major,
+                    official_site=official_site,
+                    admissions_site=admissions_domain,
+                )
+            )
         results.extend(
             web_research_client.research(
-                queries,
+                self._dedupe_queries(queries),
                 limit_per_query=2,
-                max_results=24,
-                max_queries=36,
-                max_seconds=55,
+                max_results=20,
+                max_queries=28,
+                max_seconds=35,
             )
         )
         seen = set()
@@ -650,11 +1467,74 @@ class ConsultOrchestrator:
             unique.append(item)
         return unique[:24]
 
+    def _dedupe_queries(self, queries: list[str]) -> list[str]:
+        unique: list[str] = []
+        seen = set()
+        for query in queries:
+            normalized = re.sub(r"\s+", " ", str(query or "")).strip()
+            if not normalized or normalized in seen:
+                continue
+            seen.add(normalized)
+            unique.append(normalized)
+        return unique
+
+    def _admission_score_queries(
+        self,
+        province: str | None,
+        school_name: str | None = None,
+        major_name: str | None = None,
+        official_site: str | None = None,
+        admissions_site: str | None = None,
+    ) -> list[str]:
+        """Build focused queries for 2025 admission-score verification."""
+        province = self._normalize_region_name(province or "")
+        school = (school_name or "").strip()
+        major = (major_name or "").strip()
+        subject = " ".join(part for part in [province, school, major] if part)
+        if not subject:
+            return []
+
+        queries: list[str] = []
+        if admissions_site:
+            queries.append(f"site:{admissions_site} 2025 {subject} 专业最低分 录取分数线")
+            queries.append(f"site:{admissions_site} 2025 {subject} 招生计划 专业组 调剂")
+        if official_site:
+            queries.append(f"site:{official_site} 2025 {subject} 专业最低分 录取分数线")
+            queries.append(f"site:{official_site} 2025 {subject} 投档最低分")
+        queries.append(f"site:gaokao.chsi.com.cn 2025 {subject} 专业最低分 录取分数线")
+        if school:
+            queries.append(f"{school} 本科招生网 2025 {province} {major} 专业最低分".strip())
+        queries.append(f"2025 {subject} 最低录取分 专业录取分数线")
+        return self._dedupe_queries(queries)
+
     def _extract_domain(self, url: str | None) -> str:
         if not url:
             return ""
         match = re.search(r"https?://([^/]+)", url)
         return match.group(1).lower() if match else ""
+
+    def _school_admissions_record(self, school_name: str | None) -> dict:
+        if not school_name:
+            return {}
+        return self.school_admissions_by_name.get(school_name) or {}
+
+    def _school_admissions_entry_url(self, school: dict, school_name: str | None = None) -> str | None:
+        """Return the safest local official entry for undergraduate-admission verification."""
+        name = school_name or school.get("name")
+        record = self._school_admissions_record(name)
+        if record.get("admissions_url"):
+            return record.get("admissions_url")
+        return school.get("official_url") or None
+
+    def _school_admissions_query(self, province: str | None, school_name: str, major_name: str) -> str:
+        province = self._normalize_region_name(province or "")
+        pieces = [school_name, "本科招生网", "2025"]
+        if province:
+            pieces.append(province)
+        if major_name:
+            pieces.append(major_name)
+        pieces.extend(["专业最低分", "录取分数线"])
+        return " ".join(piece for piece in pieces if piece).strip()
 
     def _is_live_research_result(self, item: ResearchResult) -> bool:
         snippet = item.snippet or ""
@@ -750,8 +1630,17 @@ class ConsultOrchestrator:
         by_name = {item["name"]: item for item in schools}
         for name in intent.school_names:
             school = by_name.get(name)
+            admissions_url = self._school_admissions_entry_url(school or {}, name)
+            if admissions_url:
+                official_sources.append(
+                    ResearchResult(
+                        title=f"{name}本科招生网",
+                        url=admissions_url,
+                        snippet="本地高校本科招生网地址库匹配，用于核验招生计划、专业组、选科要求、录取分数线和调剂规则。",
+                    )
+                )
             official_url = school.get("official_url") if school else None
-            if official_url:
+            if official_url and official_url.rstrip("/") != (admissions_url or "").rstrip("/"):
                 official_sources.append(
                     ResearchResult(
                         title=f"{name}官网",
@@ -764,39 +1653,72 @@ class ConsultOrchestrator:
     def _build_research_queries(self, request: ConsultRequest, intent: IntentResult) -> list[str]:
         question = request.question
         ctx = request.context
+        province = ctx.province if ctx and ctx.province else self._extract_province(question) or ""
+        official_site = self._province_exam_site(province)
+        if self._is_fact_data_question(question):
+            fact_queries = [question]
+            salary_like = any(marker in question for marker in ["中位数", "薪资", "工资", "收入", "就业率", "就业数据", "就业质量"])
+            if salary_like:
+                major_targets = intent.major_names or self._expand_major_preferences(ctx.major_preference if ctx else None) or []
+                for major_name in major_targets[:3]:
+                    fact_queries.append(f"{major_name} 中位数薪资 就业质量报告")
+                    fact_queries.append(f"{major_name} 毕业生 薪资 中位数")
+            if any(marker in question for marker in ["500强", "五百强", "世界五百强"]):
+                fact_queries.append("500强 校招 高校 招聘 名单")
+                fact_queries.append("世界500强 校园招聘 高校 名单")
+            return self._dedupe_queries(fact_queries)
+
         targets = intent.school_names + intent.major_names
         if not targets:
             targets = self._extract_city_preference(question) or []
 
-        queries = []
-        for target in targets[:3]:
-            queries.append(f"{target} 就业质量报告 毕业生就业质量报告 薪资")
-            queries.append(f"{target} {ctx.province if ctx and ctx.province else ''} 录取分数线 位次 招生网".strip())
+        queries: list[str] = []
+        if intent.school_names:
+            majors = intent.major_names or self._expand_major_preferences(ctx.major_preference if ctx else None) or [""]
+            for school_name in intent.school_names[:3]:
+                admissions_domain = self._extract_domain(self._school_admissions_entry_url(self.school_by_name.get(school_name, {}), school_name))
+                for major_name in majors[:2]:
+                    queries.extend(
+                        self._admission_score_queries(
+                            province=province,
+                            school_name=school_name,
+                            major_name=major_name,
+                            official_site=official_site,
+                            admissions_site=admissions_domain,
+                        )
+                    )
+        else:
+            for target in targets[:3]:
+                queries.extend(
+                    self._admission_score_queries(
+                        province=province,
+                        major_name=target,
+                        official_site=official_site,
+                    )
+                )
 
         if intent.intent == "school_chance" and intent.school_names:
-            province = ctx.province if ctx and ctx.province else self._extract_province(question) or ""
-            score = ctx.score if ctx and ctx.score else self._extract_score(question) or ""
-            rank = ctx.rank if ctx and ctx.rank else self._extract_rank(question) or ""
             major_focus = self._recommend_major_focus(ctx.major_preference if ctx else intent.major_names)
             school = intent.school_names[0]
-            queries.append(f"{province} {score}分 {rank}位次 {school} 投档线 位次 专业组 教育考试院".strip())
-            queries.append(f"{province} 2025 {school} 普通类 投档 位次 专业组".strip())
-            queries.append(f"{province} 2024 {school} 投档线 位次 招生计划".strip())
-            queries.append(f"{school} 本科招生网 {major_focus} 招生计划 选科要求")
-            queries.append(f"site:gaokao.chsi.com.cn {school} {major_focus} 专业 录取 位次")
+            admissions_domain = self._extract_domain(self._school_admissions_entry_url(self.school_by_name.get(school, {}), school))
+            queries.extend(
+                self._admission_score_queries(
+                    province=province,
+                    school_name=school,
+                    major_name=major_focus,
+                    official_site=official_site,
+                    admissions_site=admissions_domain,
+                )
+            )
 
         if intent.intent == "recommend":
-            province = ctx.province if ctx and ctx.province else self._extract_province(question) or ""
-            score = ctx.score if ctx and ctx.score else self._extract_score(question) or ""
-            rank = ctx.rank if ctx and ctx.rank else self._extract_rank(question) or ""
-            cities = " ".join(ctx.city_preference or []) if ctx and ctx.city_preference else " ".join(self._extract_city_preference(question))
-            queries.append(f"{province} {score}分 {rank}位次 {cities} 高校 录取分数线 位次 阳光高考")
-            queries.append(f"{province} 高考 {score}分 {rank}位次 {cities} 高校 投档线 位次 教育考试院")
-            queries.append(f"{province} 2025 普通类常规批 第一次志愿 投档情况表 位次")
-            queries.append(f"{province} 2024 普通类常规批 投档线 位次 教育招生考试院")
+            major_focus = self._recommend_major_focus(ctx.major_preference if ctx else intent.major_names)
+            if official_site:
+                queries.append(f"site:{official_site} {province} 2025 本科 普通类 专业最低分 录取分数线")
+                queries.append(f"site:{official_site} {province} 2025 投档最低分 专业 录取分数线")
+            queries.append(f"site:gaokao.chsi.com.cn {province} 2025 {major_focus} 专业最低分 录取分数线".strip())
 
-        queries.append(question)
-        return [query for query in queries if query.strip()]
+        return self._dedupe_queries(queries)
 
     def _build_recommend_context(self, request: ConsultRequest) -> str:
         user = self._build_user_preferences(request)
@@ -814,6 +1736,7 @@ class ConsultOrchestrator:
             "Agent推荐结果：",
             self._sanitize_recommend_summary_for_chat(recommend.summary),
             "院校推荐主回答模板：先给总判断，再分冲稳保；每档先解释档位作用，再逐校说明“为什么能看、普通家庭防什么坑、下一步查什么”。",
+            "输出顺序硬约束：必须先完整输出[分析过程]、[核心判断]、[灵魂追问]，再输出[院校推荐]；禁止在[灵魂追问]没有写完时提前列学校。",
             "主回答禁止项：不要出现具体模拟概率、具体薪资数字、薪资区间、估算中位数、不可替代性分值；这些数值只进入 recommendation_plans。",
             "推荐理由写法：用“学校行业底色 + 专业真实出口 + 城市资源 + 调剂风险 + 官方核验入口”替代数字堆砌。",
             "冲稳保方案：",
@@ -829,9 +1752,13 @@ class ConsultOrchestrator:
         for plan in recommend.plans:
             school = self.school_by_name.get(plan.school, {})
             major = self.major_by_name.get(plan.major, {})
+            risk_tags = plan.risk_tags or build_family_risk_profile(school, major, user.family_background if user else None, plan.risk_level)["risk_tags"]
             lines.append(
                 f"{plan.order}. [{plan.risk_level}] {plan.school} - {plan.major}，"
                 f"风险档位仅用于冲稳保排序，具体模拟概率和薪资只进入同步方案。"
+                f"{f'替代路径：{plan.fallback_strategy}。' if plan.fallback_strategy else ''}"
+                f"家庭风险标签：{'、'.join(risk_tags) if risk_tags else '暂无明显结构性风险'}。"
+                f"家庭分流建议：{plan.family_strategy or build_family_risk_profile(school, major, user.family_background if user else None, plan.risk_level)['family_strategy']}。"
                 f"学校差异点：{self._school_distinctive_angle(school, plan.school, plan.major)}。"
                 f"专业路径：{self._school_major_path_sentence(school, plan.school, major, plan.major)}"
                 f"普通家庭核验点：{self._family_warning_sentence(school, major, plan.school, plan.major)}"
@@ -840,6 +1767,8 @@ class ConsultOrchestrator:
         if recommend.red_flags:
             lines.append("红旗提醒：" + "；".join(recommend.red_flags))
         lines.append("表达要求：回答时不要直接堆中位数、不可替代性这类指标名，要翻译成普通家庭听得懂的话：能不能进、毕业后走什么路、被替代风险高不高、下一步查哪张官方投档表。")
+        lines.append("风险标签要求：逐校推荐必须点名最关键的家庭风险标签，例如调剂风险高、专业组混杂、城市就业资源弱、专业出口窄、需要读研、家庭试错成本高、文科就业不确定、医学培养周期长、工科行业波动、学校名气强但专业一般；不同家庭要给不同策略，不要一律套“普通家庭”。")
+        lines.append("0候选兜底要求：如果Agent推荐结果里出现“替代路径”，回答必须明说这是原硬约束过窄后的替代方案，并按“放宽城市但保专业 / 保城市但换相近专业 / 保稳妥但降低学校层次”解释，不要再说完全没法同步学校。")
         lines.append("展开要求：每所学校都要单独写推荐理由，不允许把多所学校合并成一句；连续两所学校不得复用同一句“学校差异点/专业路径/普通家庭核验点”。如果学校同城同层次，也必须从办学背景、行业场景、学院/培养方案、校企资源、招生网核验入口里拆开。")
         lines.append("分层硬约束：冲稳保必须先看近年投档位次、院校层次、专业热度和行业辨识度，再看城市/偏好匹配。明显更强、分数位次通常更高的学校不得放在比弱校更低的档位；例如邮电/电子信息强校不应被放到普通地方工科院校之后当保底。")
         if user and user.city_preference:
@@ -941,11 +1870,6 @@ class ConsultOrchestrator:
         province_name = self._normalize_region_name(ctx.province) if ctx and ctx.province else "本省"
         exam_authority = self._exam_authority_name(province_name)
 
-        lines = [
-            f"你这个画像（{profile_text}），别先问“哪个学校名字好听”，先问这条路能不能换饭碗。",
-            f"具体学校我给你分三档：按位次分层，再按{major_focus}的真实出口筛。别拿学校最低投档线当专业线，尤其别拿冷门专业最低位次骗自己能上热门专业。",
-        ]
-
         risk_titles = {
             "冲": "冲刺档：",
             "稳": "稳妥档：",
@@ -956,6 +1880,24 @@ class ConsultOrchestrator:
             "稳": "志愿表的主骨架，优先看学校和专业是不是同时不亏。",
             "保": "防滑档，但不能糟蹋分数，重点看专业组和调剂风险。",
         }
+
+        lines = [
+            "[分析过程]",
+            f"1. 画像拆解：{profile_text}。我先看省份、位次、选科、家庭条件和专业方向，不先看学校名头。",
+            f"2. 策略筛选：这轮按{major_focus}倒推就业路径，再用冲稳保分层，防止拿学校最低投档线冒充热门专业能上。",
+            "3. 风险控制：普通家庭填志愿，先保证稳妥档和保底档能接住，再谈冲刺档抬天花板。",
+            "",
+            "[核心判断]",
+            f"我跟你说，你这个画像（{profile_text}），别先问“哪个学校名字好听”，先问这条路能不能换饭碗。",
+            f"具体学校我会放在后面分三档讲：按位次分层，再按{major_focus}的真实出口筛。别拿学校最低投档线当专业线，尤其别拿冷门专业最低位次骗自己能上热门专业。",
+            "",
+            "[灵魂追问]",
+            "- 第一，目标城市是硬约束，还是为了专业和学校层次可以适当让一步？",
+            "- 第二，能不能接受专业组内调剂？如果不能，必须逐个查专业组和招生计划。",
+            "- 第三，家庭能不能支持考研、实习和证书投入？这决定冲刺档能不能冒险。",
+            "",
+            "[院校推荐]",
+        ]
         grouped = self._group_chat_plans_by_risk(self._merge_school_chat_plans(plans)[:10])
         for risk in ["冲", "稳", "保"]:
             risk_plans = grouped.get(risk) or []
@@ -969,15 +1911,20 @@ class ConsultOrchestrator:
 
         lines.extend([
             "",
+            "[红旗风险]",
             self._major_strategy_sentence(major_focus),
-            "",
             self._family_strategy_sentence(ctx.family_background if ctx else None),
             "",
-            "继续追问：",
-            "- 还想了解这些学校的专业组和调剂风险吗？",
-            "- 要不要按“冲稳保各留几所”重新压缩成最终志愿表？",
+            "[核验清单]",
+            f"1. 第一查{exam_authority}近三年投档表，看院校专业组最低位次和专业冷热差。",
+            "2. 第二查学校招生网专业组、选科要求、招生计划和调剂规则。",
+            "3. 第三查学院培养方案和就业质量报告，确认这个专业在这所学校有没有真实出口。",
+            "4. 第三方平台只能当入口，不能当结论。",
             "",
-            f"核验清单：第一查{exam_authority}投档表，第二查学校招生网专业组，第三查学院培养方案和就业质量报告。第三方平台只能当入口，不能当结论。",
+            "[金句]",
+            "普通家庭填志愿，先让稳保接住孩子，再让冲刺抬高天花板。",
+            "",
+            "数据口径：当前推荐使用本地院校/专业库和规则模拟排序，不是真实录取概率；最终投档位次、招生计划、专业组和调剂风险必须回官方渠道核验。",
         ])
         if research_status:
             lines.extend(["", research_status])
@@ -1115,7 +2062,24 @@ class ConsultOrchestrator:
             plan.risk_level,
             applicant_province,
         )
-        return f"{plan.school}：{reason}"
+        admissions_entry = plan.admissions_url or self._school_admissions_entry_url(school, plan.school)
+        admissions_query = plan.admissions_query or self._school_admissions_query(applicant_province, plan.school, primary_major)
+        admissions_note = (
+            f"学校官网入口：{admissions_entry}；本科招生网检索词：{admissions_query}。"
+            if admissions_entry
+            else f"本科招生网检索词：{admissions_query}。"
+        )
+        risk_tags = plan.risk_tags or build_family_risk_profile(
+            {**school, "name": plan.school},
+            {**major, "name": primary_major},
+            None,
+            plan.risk_level,
+        )["risk_tags"]
+        tag_note = f"家庭风险标签：{'、'.join(risk_tags[:3])}。" if risk_tags else ""
+        family_text = (plan.family_strategy or "").strip()
+        family_note = f"{family_text}{'' if family_text.endswith('。') else '。'}" if family_text else ""
+        fallback_note = f"替代路径：{plan.fallback_strategy}。" if plan.fallback_strategy else ""
+        return f"{plan.school}：{fallback_note}{reason} {tag_note}{family_note}{admissions_note}"
 
     def _chat_risk_sentence(self, risk_level: str) -> str:
         if risk_level == "冲":
@@ -1636,10 +2600,10 @@ class ConsultOrchestrator:
 
     def _probability_basis_text(self, school: dict, school_name: str, major_name: str, probability: int, applicant_province: str | None = None) -> str:
         province = applicant_province or school.get("province", "")
-        query = f"{province} 2025 {school_name} {major_name} 投档线 位次".strip()
+        query = f"{province} 2025 {school_name} {major_name} 专业最低分 录取分数线".strip()
         return (
             f"模拟估计值{probability}%：由当前分数/位次画像、冲稳保规则和学校层次粗排生成；"
-            f"联网核验优先搜“{query}”，再看省考试院投档表和学校招生网。"
+            f"联网核验优先搜“{query}”，按当前专业最低录取分口径判断，再看省考试院投档表和学校招生网。"
         )
 
     def _salary_basis_text(self, school: dict, school_name: str, major_name: str, salary: int | None) -> str:
@@ -2209,11 +3173,11 @@ class ConsultOrchestrator:
 
     def _score_verify_sentence(self, school: dict, school_name: str, major_name: str, applicant_province: str | None = None) -> str:
         province = applicant_province or school.get("province", "")
-        query_hint = f"{province} 2025 {school_name} {major_name} 投档线 位次".strip()
-        official = school.get("official_url")
-        if official:
-            return f"核验分数时优先搜“{query_hint}”，再进学校招生网或省考试院看专业组。"
-        return f"核验分数时优先搜“{query_hint}”，不要只看第三方榜单。"
+        query_hint = f"{province} 2025 {school_name} {major_name} 专业最低分 录取分数线".strip()
+        admissions = self._school_admissions_entry_url(school, school_name)
+        if admissions:
+            return f"核验分数时优先搜“{query_hint}”，按当前专业最低分判断，再进本科招生网（{admissions}）或省考试院看专业组。"
+        return f"核验分数时优先搜“{query_hint}”，按当前专业最低分判断，不要只看第三方榜单。"
 
     def _shorten_for_chat(self, text: str, limit: int) -> str:
         text = re.sub(r"\s+", " ", text or "").strip("；。 ")
@@ -2221,6 +3185,167 @@ class ConsultOrchestrator:
             return text
         cut = text[:limit].rstrip("；，, ")
         return f"{cut}……"
+
+    def _risk_role_label(self, risk_level: str) -> tuple[str, str]:
+        if risk_level == "冲":
+            return "冲刺", "低"
+        if risk_level == "保":
+            return "保底", "高"
+        return "稳妥", "中"
+
+    def _build_sync_reason(
+        self,
+        school: dict,
+        major: dict,
+        user: UserPreferences | None,
+        risk_level: str,
+        fallback_strategy: str = "",
+        fallback_reason: str = "",
+    ) -> str:
+        """Generate a short, readable reason for the sync/audit desk."""
+        school_name = school.get("name", "这所学校")
+        major_name = major.get("name", "该专业")
+        province = self._normalize_region_name(user.province) if user and user.province else "本省"
+        family = user.family_background if user and user.family_background else "当前家庭"
+        city = school.get("city") or school.get("province") or "目标城市"
+        school_level = school.get("level") or "待核验层次"
+        risk_role, chance_label = self._risk_role_label(risk_level)
+
+        if fallback_strategy:
+            lead = (
+                f"这是原始条件过窄后的「{fallback_strategy}」方案，先把它作为{risk_role}候选同步，"
+                f"用于审核是否比“0候选”更可执行。"
+            )
+        else:
+            lead = (
+                f"同步这所学校，是因为它在当前画像下属于{risk_role}候选，"
+                f"录取把握先按「{chance_label}」档审核。"
+            )
+
+        body = (
+            f"{school_name}位于{city}，本地库标记为{school_level}；本轮重点看{major_name}是否有明确招生计划、"
+            f"近三年在{province}的专业最低位次，以及专业组里是否混入不想去的专业。"
+        )
+        family_guard = (
+            f"对{family}来说，这张卡不是最终结论，而是提醒你先查官方表，再决定是否放进正式志愿表。"
+        )
+        if fallback_reason:
+            family_guard = f"{family_guard} 替代原因：{fallback_reason}"
+        return " ".join([lead, body, family_guard])
+
+    def _official_verification_links(
+        self,
+        school: dict,
+        school_name: str,
+        province: str | None,
+    ) -> list[dict]:
+        links: list[dict] = []
+        exam_site = self._province_exam_site(province)
+        if province and exam_site:
+            links.append(
+                {
+                    "label": f"{province}教育考试院",
+                    "type": "省考试院",
+                    "url": f"https://{exam_site}/",
+                    "desc": "查近三年投档表、招生录取政策和官方公告。",
+                }
+            )
+        links.append(
+            {
+                "label": "阳光高考",
+                "type": "教育部平台",
+                "url": "https://gaokao.chsi.com.cn/",
+                "desc": "核对招生章程、选科要求、专业组和院校基本信息。",
+            }
+        )
+        admissions_url = self._school_admissions_entry_url(school, school_name)
+        if admissions_url:
+            links.append(
+                {
+                    "label": f"{school_name}本科招生网",
+                    "type": "学校招生网",
+                    "url": admissions_url,
+                    "desc": "查招生计划、专业最低分、专业组和调剂规则。",
+                }
+            )
+        official_url = school.get("official_url")
+        if official_url and official_url.rstrip("/") != (admissions_url or "").rstrip("/"):
+            links.append(
+                {
+                    "label": f"{school_name}官网",
+                    "type": "学校官网",
+                    "url": official_url,
+                    "desc": "查学院设置、培养方案、就业质量报告入口。",
+                }
+            )
+        return links[:4]
+
+    def _required_verification_tables(
+        self,
+        user: UserPreferences | None,
+        school_name: str,
+        major_name: str,
+    ) -> list[str]:
+        province = self._normalize_region_name(user.province) if user and user.province else "本省"
+        subject = user.subjects if user and user.subjects else "对应科类"
+        return [
+            f"{province}教育考试院：近三年本科批/普通批投档表，先看{subject}位次。",
+            f"{school_name}本科招生网：当年招生计划，确认{major_name}是否在目标省份招生。",
+            f"{school_name}本科招生网：近三年{province}{major_name}专业最低分和最低位次。",
+            "阳光高考或招生章程：专业组包含专业、选科要求、调剂规则和转专业规则。",
+        ]
+
+    def _missing_key_data(
+        self,
+        school: dict,
+        user: UserPreferences | None,
+        school_name: str,
+        major_name: str,
+        citations: list[str],
+    ) -> list[str]:
+        province = self._normalize_region_name(user.province) if user and user.province else "本省"
+        missing: list[str] = []
+        if not (user and user.rank):
+            missing.append("考生位次未确认，冲稳保档位只能粗排。")
+        if not self._school_admissions_entry_url(school, school_name):
+            missing.append(f"缺{school_name}本科招生网入口，需要人工核验官网。")
+        missing.extend(
+            [
+                f"缺近三年{province}{major_name}专业最低分/最低位次的结构化记录。",
+                "缺当年招生计划人数、专业组包含专业和调剂规则的官方确认。",
+                f"缺{major_name}所在学院培养方案和就业质量报告的逐项核对。",
+            ]
+        )
+        if not citations:
+            missing.append("本轮未拿到联网检索结果，当前只按本地规则和入口提示展示。")
+        return missing[:5]
+
+    def _build_sync_audit_bundle(
+        self,
+        school: dict,
+        major: dict,
+        user: UserPreferences | None,
+        risk_level: str,
+        citations: list[str],
+    ) -> dict:
+        school_name = school.get("name", "该校")
+        major_name = major.get("name", "该专业")
+        province = self._normalize_region_name(user.province) if user and user.province else None
+        official_links = self._official_verification_links(school, school_name, province)
+        has_school_admissions = any(item.get("type") == "学校招生网" for item in official_links)
+        missing = self._missing_key_data(school, user, school_name, major_name, citations)
+        risk_role, chance_label = self._risk_role_label(risk_level)
+        return {
+            "evidence_status": "入口已匹配，关键表待核验" if has_school_admissions else "缺学校招生网入口",
+            "official_verification": official_links,
+            "required_tables": self._required_verification_tables(user, school_name, major_name),
+            "missing_key_data": missing,
+            "audit_notes": [
+                f"录取概率只展示为{chance_label}，对应当前{risk_role}档，不代表官方录取概率。",
+                "模拟中位薪资只用于比较专业出口，不能替代学校就业质量报告。",
+                "先查官方表，再决定这所学校是保留、降档还是删除。",
+            ],
+        }
 
     def _build_structured_recommendations(
         self,
@@ -2261,13 +3386,38 @@ class ConsultOrchestrator:
                 probability=plan.probability,
                 fallback=plan.reason,
             )
+            if plan.fallback_strategy:
+                reason = f"替代路径【{plan.fallback_strategy}】：{plan.fallback_reason}；{reason}"
+            family_risk = build_family_risk_profile(school, major, user.family_background if user else None, plan.risk_level)
+            if plan.risk_tags:
+                family_risk["risk_tags"] = plan.risk_tags
+            if plan.family_strategy:
+                family_risk["family_strategy"] = plan.family_strategy
+            if plan.family_risk_summary:
+                family_risk["family_risk_summary"] = plan.family_risk_summary
             applicant_province = self._normalize_region_name(user.province) if user and user.province else None
+            sync_reason = self._build_sync_reason(
+                school=school,
+                major=major,
+                user=user,
+                risk_level=plan.risk_level,
+                fallback_strategy=plan.fallback_strategy,
+                fallback_reason=plan.fallback_reason,
+            )
+            audit_bundle = self._build_sync_audit_bundle(
+                school=school,
+                major=major,
+                user=user,
+                risk_level=plan.risk_level,
+                citations=citations,
+            )
             structured.append(
                 ConsultRecommendationPlan(
                     order=plan.order,
                     risk_level=plan.risk_level,
                     school=plan.school,
                     major=plan.major,
+                    school_level=school_level,
                     overview=overview,
                     recommendation_reason=reason,
                     probability=plan.probability,
@@ -2283,9 +3433,22 @@ class ConsultOrchestrator:
                     ),
                     salary_basis=self._salary_basis_text(school, plan.school, plan.major, salary),
                     data_basis=(
-                        "录取概率和中位数薪资均为模拟估计值；已扩大检索学校招生网、省考试院投档线、就业质量报告等入口。"
-                        "最终以考试院投档表、学校招生网和就业质量报告为准。"
+                        "录取概率和中位数薪资均为模拟估计值；联网检索只按2025年录取分数线、当前专业最低分口径核验。"
+                        "最终以省教育考试院、阳光高考和学校本科招生网为准。"
                     ),
+                    admissions_url=self._school_admissions_entry_url(school),
+                    admissions_query=self._school_admissions_query(applicant_province, plan.school, plan.major),
+                    risk_tags=family_risk["risk_tags"],
+                    family_strategy=family_risk["family_strategy"],
+                    family_risk_summary=family_risk["family_risk_summary"],
+                    fallback_strategy=plan.fallback_strategy,
+                    fallback_reason=plan.fallback_reason,
+                    sync_reason=sync_reason,
+                    evidence_status=audit_bundle["evidence_status"],
+                    official_verification=audit_bundle["official_verification"],
+                    required_tables=audit_bundle["required_tables"],
+                    missing_key_data=audit_bundle["missing_key_data"],
+                    audit_notes=audit_bundle["audit_notes"],
                     citations=citations[:5],
                 )
             )
@@ -2307,11 +3470,20 @@ class ConsultOrchestrator:
         tier = school.get("tier", "")
         salary = major.get("salary_median_5yr")
         irreplaceability = major.get("irreplaceability")
+        family_risk = build_family_risk_profile(
+            school,
+            major,
+            user.family_background if user else None,
+            risk_level,
+        )
+        risk_tags = family_risk.get("risk_tags") or []
 
         parts = [
             self._risk_sentence(risk_level, probability),
             f"学校差异点：{self._school_distinctive_angle(school, school_name, major_name)}",
             f"普通家庭落点：{self._family_warning_sentence(school, major, school_name, major_name)}",
+            f"家庭风险标签：{'、'.join(risk_tags[:4]) if risk_tags else '暂无明显结构性风险'}",
+            f"家庭分流建议：{family_risk.get('family_strategy', '')}",
             f"逐校核验点：{self._unique_school_checkpoint(school_name, major_name)}",
             self._specific_major_value(major, user),
         ]
@@ -2519,11 +3691,31 @@ class ConsultOrchestrator:
             probability=probability,
         )
         reason = f"{reason}；最终需核验当年招生计划、专业组和投档位次"
+        family_risk = build_family_risk_profile(
+            school,
+            major,
+            user.family_background if user else None,
+            risk_level,
+        )
+        sync_reason = self._build_sync_reason(
+            school=school,
+            major=major,
+            user=user,
+            risk_level=risk_level,
+        )
+        audit_bundle = self._build_sync_audit_bundle(
+            school=school,
+            major=major,
+            user=user,
+            risk_level=risk_level,
+            citations=citations,
+        )
         return ConsultRecommendationPlan(
             order=order,
             risk_level=risk_level,
             school=school_name,
             major=major_name,
+            school_level=school_level,
             overview=overview,
             recommendation_reason=reason,
             probability=probability,
@@ -2532,17 +3724,36 @@ class ConsultOrchestrator:
             irreplaceability=irreplaceability,
             probability_basis=self._probability_basis_text(school, school_name, major_name, probability),
             salary_basis=self._salary_basis_text(school, school_name, major_name, salary),
-            data_basis="从最终对话回答逐校提取后结构化；概率和中位数薪资为模拟估计值，已按学校招生网、投档线、就业质量报告口径提示核验。",
+            data_basis="从最终对话回答逐校提取后结构化；概率和中位数薪资为模拟估计值，已按2025年录取分数线、当前专业最低分口径提示核验。",
+            admissions_url=self._school_admissions_entry_url(school),
+            admissions_query=self._school_admissions_query(user.province if user else None, school_name, major_name),
+            risk_tags=family_risk["risk_tags"],
+            family_strategy=family_risk["family_strategy"],
+            family_risk_summary=family_risk["family_risk_summary"],
+            sync_reason=sync_reason,
+            evidence_status=audit_bundle["evidence_status"],
+            official_verification=audit_bundle["official_verification"],
+            required_tables=audit_bundle["required_tables"],
+            missing_key_data=audit_bundle["missing_key_data"],
+            audit_notes=audit_bundle["audit_notes"],
             citations=citations[:5],
         )
 
     def _build_insight_context(self, request: ConsultRequest, intent: IntentResult) -> str:
         user = self._build_user_preferences(request, allow_partial=True)
         target_name = (intent.major_names or intent.school_names or [""])[0]
+        should_backfill_major = any(marker in request.question for marker in [
+            "中位数", "薪资", "工资", "收入",
+            "这个专业", "该专业", "本专业", "这个方向", "当前方向", "我的方向",
+        ])
+        if not target_name and self._is_fact_data_question(request.question) and should_backfill_major:
+            target_name = self._fact_target_major(request, intent)
         if not target_name:
             return ""
 
         target_type = "major" if target_name in intent.major_names else "school"
+        if self._is_fact_data_question(request.question) and target_name not in intent.school_names:
+            target_type = "major"
         insight = agent_engine.insights(
             request=InsightRequest(
                 target_type=target_type,
@@ -2572,6 +3783,15 @@ class ConsultOrchestrator:
         if value >= 55:
             return f"{value}/100，壁垒一般，普通家庭要谨慎看就业出口"
         return f"{value}/100，壁垒偏低，容易卷成纯体力竞争"
+
+    def _build_admission_score_research_policy(self) -> str:
+        return (
+            "联网检索口径（必须在回答中遵守）：\n"
+            "1. 分数核验只围绕2025年高考录取分数线，不使用2024年旧分数线替代当前判断。\n"
+            "2. 涉及具体院校和专业时，按当前专业的最低录取分/专业最低分口径判断，不拿学校最低投档线冒充热门专业能上。\n"
+            "3. 来源优先级为省教育考试院、阳光高考、学校本科招生网；第三方平台只能作为入口，不能作为结论。\n"
+            "4. 如果本轮没有查到2025年当前专业最低分，必须明确说待官方核验，不能编造分数。"
+        )
 
     def _build_data_honesty_context(self) -> str:
         return (
@@ -2682,6 +3902,9 @@ class ConsultOrchestrator:
             if f"去{province}" in text or f"到{province}" in text or f"{province}上学" in text or f"{province}读" in text:
                 cities.append(province)
         compact = re.sub(r"\s+", "", text or "")
+        for alias in REGION_GROUP_ALIASES:
+            if alias in compact and alias not in cities:
+                cities.append(alias)
         for city in COMMON_CITY_NAMES:
             if city in compact and city not in cities:
                 cities.append(city)
@@ -2745,24 +3968,37 @@ class ConsultOrchestrator:
         )
 
     def _extract_major_preference(self, text: str) -> list[str]:
+        search_text = self._text_without_school_names(text)
         positioned: list[tuple[int, int, str]] = []
         for major in self.major_names:
-            index = text.find(major)
+            index = search_text.find(major)
             if index >= 0:
                 positioned.append((index, -len(major), major))
         for alias, major in MAJOR_ALIASES.items():
-            index = text.find(alias)
+            index = search_text.find(alias)
             if index >= 0:
                 positioned.append((index, -len(alias), major))
-        if "地理历史" in text or ("地理" in text and "历史" in text):
+        if "地理历史" in search_text or ("地理" in search_text and "历史" in search_text):
             for major in ["地理科学", "历史学"]:
-                index = text.find(major[:2])
-                positioned.append((index if index >= 0 else len(text), -len(major), major))
+                index = search_text.find(major[:2])
+                positioned.append((index if index >= 0 else len(search_text), -len(major), major))
         matches: list[str] = []
         for _, _, major in sorted(positioned):
             if major not in matches:
                 matches.append(major)
         return matches
+
+    def _text_without_school_names(self, text: str) -> str:
+        masked = str(text or "")
+        compact = re.sub(r"\s+", "", masked)
+        for name in sorted(self.school_names, key=len, reverse=True):
+            normalized_name = re.sub(r"[()（）]", "", name)
+            masked = masked.replace(name, " ")
+            if normalized_name and normalized_name in compact:
+                masked = masked.replace(normalized_name, " ")
+        for alias in sorted(SCHOOL_ALIASES.keys(), key=len, reverse=True):
+            masked = masked.replace(alias, " ")
+        return masked
 
     def _expand_major_preferences(self, preferences: Optional[list[str]]) -> list[str]:
         if not preferences:
@@ -2788,6 +4024,12 @@ class ConsultOrchestrator:
             return []
         known_regions = sorted(set(PROVINCES + COMMON_CITY_NAMES), key=len, reverse=True)
         expanded: list[str] = []
+
+        def add_region(region: str) -> None:
+            normalized_region = self._normalize_region_name(region)
+            if normalized_region and normalized_region not in expanded:
+                expanded.append(normalized_region)
+
         for raw in values:
             value = self._normalize_region_name(raw)
             if not value:
@@ -2795,6 +4037,16 @@ class ConsultOrchestrator:
             pieces = [piece for piece in re.split(r"[、,，\s/]+", value) if piece]
             for piece in pieces:
                 normalized_piece = self._normalize_region_name(piece)
+                alias_hits = [
+                    (normalized_piece.find(alias), alias)
+                    for alias in REGION_GROUP_ALIASES
+                    if alias in normalized_piece
+                ]
+                if alias_hits:
+                    for _, alias in sorted(alias_hits, key=lambda item: item[0]):
+                        for region in REGION_GROUP_ALIASES[alias]:
+                            add_region(region)
+                    continue
                 hits = [
                     (normalized_piece.find(region), region)
                     for region in known_regions
@@ -2802,11 +4054,9 @@ class ConsultOrchestrator:
                 ]
                 if hits:
                     for _, region in sorted(hits, key=lambda item: item[0]):
-                        if region not in expanded:
-                            expanded.append(region)
+                        add_region(region)
                     continue
-                if normalized_piece not in expanded:
-                    expanded.append(normalized_piece)
+                add_region(normalized_piece)
         return expanded
 
 

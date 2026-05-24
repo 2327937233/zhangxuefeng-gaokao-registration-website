@@ -1,0 +1,4929 @@
+{
+  "schema_version": 1,
+  "source_file": "全国双一流及非双一流高校本科招生网统一表.xlsx",
+  "description": "高校本科招生网地址映射。key 为高校名称，供后端推荐检索、招生入口展示和官方核验使用。",
+  "count": 492,
+  "duplicate_count": 2,
+  "schools": {
+    "三峡大学": {
+      "school": "三峡大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ctgu.edu.cn/",
+      "verification_url": "https://zsb.ctgu.edu.cn/",
+      "domain": "zsb.ctgu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海中医药大学": {
+      "school": "上海中医药大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://ygzs.shutcm.edu.cn/",
+      "verification_url": "https://ygzs.shutcm.edu.cn/",
+      "domain": "ygzs.shutcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海交通大学": {
+      "school": "上海交通大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://admissions.sjtu.edu.cn/",
+      "verification_url": "https://admissions.sjtu.edu.cn/",
+      "domain": "admissions.sjtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海体育大学": {
+      "school": "上海体育大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.sus.edu.cn/",
+      "verification_url": "https://bkzs.sus.edu.cn/",
+      "domain": "bkzs.sus.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海健康医学院": {
+      "school": "上海健康医学院",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sumhs.edu.cn/",
+      "verification_url": "https://zs.sumhs.edu.cn/",
+      "domain": "zs.sumhs.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海外国语大学": {
+      "school": "上海外国语大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://admissions.shisu.edu.cn/",
+      "verification_url": "https://admissions.shisu.edu.cn/",
+      "domain": "admissions.shisu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海大学": {
+      "school": "上海大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzsw.shu.edu.cn/",
+      "verification_url": "https://bkzsw.shu.edu.cn/",
+      "domain": "bkzsw.shu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海对外经贸大学": {
+      "school": "上海对外经贸大学",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.suibe.edu.cn/",
+      "verification_url": "https://zhaosheng.suibe.edu.cn/",
+      "domain": "zhaosheng.suibe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海工程技术大学": {
+      "school": "上海工程技术大学",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.sues.edu.cn/",
+      "verification_url": "https://zsb.sues.edu.cn/",
+      "domain": "zsb.sues.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海师范大学": {
+      "school": "上海师范大学",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://ssdzsb.shnu.edu.cn/",
+      "verification_url": "https://ssdzsb.shnu.edu.cn/",
+      "domain": "ssdzsb.shnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海应用技术大学": {
+      "school": "上海应用技术大学",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://adm.sit.edu.cn/",
+      "verification_url": "https://adm.sit.edu.cn/",
+      "domain": "adm.sit.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海戏剧学院": {
+      "school": "上海戏剧学院",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sta.edu.cn/",
+      "verification_url": "https://zs.sta.edu.cn/",
+      "domain": "zs.sta.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海政法学院": {
+      "school": "上海政法学院",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.shupl.edu.cn/",
+      "verification_url": "https://zs.shupl.edu.cn/",
+      "domain": "zs.shupl.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海海事大学": {
+      "school": "上海海事大学",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://admission.shmtu.edu.cn/",
+      "verification_url": "https://admission.shmtu.edu.cn/",
+      "domain": "admission.shmtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海海洋大学": {
+      "school": "上海海洋大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://zsjy.shou.edu.cn/",
+      "verification_url": "https://zsjy.shou.edu.cn/",
+      "domain": "zsjy.shou.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海理工大学": {
+      "school": "上海理工大学",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaoban.usst.edu.cn/",
+      "verification_url": "https://zhaoban.usst.edu.cn/",
+      "domain": "zhaoban.usst.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海电力大学": {
+      "school": "上海电力大学",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.shiep.edu.cn/",
+      "verification_url": "https://zs.shiep.edu.cn/",
+      "domain": "zs.shiep.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海科技大学": {
+      "school": "上海科技大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://admission.shanghaitech.edu.cn/",
+      "verification_url": "https://admission.shanghaitech.edu.cn/",
+      "domain": "admission.shanghaitech.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海立信会计金融学院": {
+      "school": "上海立信会计金融学院",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.lixin.edu.cn/",
+      "verification_url": "https://zsb.lixin.edu.cn/",
+      "domain": "zsb.lixin.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海财经大学": {
+      "school": "上海财经大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.sufe.edu.cn/",
+      "verification_url": "https://zs.sufe.edu.cn/",
+      "domain": "zs.sufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "上海音乐学院": {
+      "school": "上海音乐学院",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://jwc.shcmusic.edu.cn/437/list.htm",
+      "verification_url": "https://jwc.shcmusic.edu.cn/437/list.htm",
+      "domain": "jwc.shcmusic.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东北农业大学": {
+      "school": "东北农业大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.neau.edu.cn/",
+      "verification_url": "https://zsb.neau.edu.cn/",
+      "domain": "zsb.neau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东北大学": {
+      "school": "东北大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.neu.edu.cn/",
+      "verification_url": "https://zs.neu.edu.cn/",
+      "domain": "zs.neu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东北师范大学": {
+      "school": "东北师范大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.nenu.edu.cn/",
+      "verification_url": "https://zsb.nenu.edu.cn/",
+      "domain": "zsb.nenu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东北林业大学": {
+      "school": "东北林业大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.nefu.edu.cn/",
+      "verification_url": "https://zhaosheng.nefu.edu.cn/",
+      "domain": "zhaosheng.nefu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东北电力大学": {
+      "school": "东北电力大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.neepu.edu.cn/",
+      "verification_url": "https://zs.neepu.edu.cn/",
+      "domain": "zs.neepu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东北石油大学": {
+      "school": "东北石油大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.nepu.edu.cn/",
+      "verification_url": "https://zs.nepu.edu.cn/",
+      "domain": "zs.nepu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东北财经大学": {
+      "school": "东北财经大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.dufe.edu.cn/",
+      "verification_url": "https://zs.dufe.edu.cn/",
+      "domain": "zs.dufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东华大学": {
+      "school": "东华大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.dhu.edu.cn/",
+      "verification_url": "https://zs.dhu.edu.cn/",
+      "domain": "zs.dhu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东华理工大学": {
+      "school": "东华理工大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ecut.edu.cn/",
+      "verification_url": "https://zsb.ecut.edu.cn/",
+      "domain": "zsb.ecut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东南大学": {
+      "school": "东南大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.seu.edu.cn/",
+      "verification_url": "https://zsb.seu.edu.cn/",
+      "domain": "zsb.seu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "东莞理工学院": {
+      "school": "东莞理工学院",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.dgut.edu.cn/",
+      "verification_url": "https://zs.dgut.edu.cn/",
+      "domain": "zs.dgut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中北大学": {
+      "school": "中北大学",
+      "province": "山西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zb.nuc.edu.cn/",
+      "verification_url": "https://zb.nuc.edu.cn/",
+      "domain": "zb.nuc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中南大学": {
+      "school": "中南大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.csu.edu.cn/",
+      "verification_url": "https://zhaosheng.csu.edu.cn/",
+      "domain": "zhaosheng.csu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中南林业科技大学": {
+      "school": "中南林业科技大学",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.csuft.edu.cn/",
+      "verification_url": "https://zs.csuft.edu.cn/",
+      "domain": "zs.csuft.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中南民族大学": {
+      "school": "中南民族大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.scuec.edu.cn/",
+      "verification_url": "https://zsb.scuec.edu.cn/",
+      "domain": "zsb.scuec.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中南财经政法大学": {
+      "school": "中南财经政法大学",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.zuel.edu.cn/",
+      "verification_url": "https://bkzs.zuel.edu.cn/",
+      "domain": "bkzs.zuel.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中原工学院": {
+      "school": "中原工学院",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsc.zut.edu.cn/",
+      "verification_url": "https://zsc.zut.edu.cn/",
+      "domain": "zsc.zut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国人民公安大学": {
+      "school": "中国人民公安大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zsjy.ppsuc.edu.cn/",
+      "verification_url": "https://zsjy.ppsuc.edu.cn/",
+      "domain": "zsjy.ppsuc.edu.cn",
+      "note": "与另一分类表重名，请核对",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国人民大学": {
+      "school": "中国人民大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://rdzs.ruc.edu.cn/",
+      "verification_url": "https://rdzs.ruc.edu.cn/",
+      "domain": "rdzs.ruc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国人民警察大学": {
+      "school": "中国人民警察大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.cppu.edu.cn/zs/",
+      "verification_url": "https://www.cppu.edu.cn/zs/",
+      "domain": "www.cppu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国传媒大学": {
+      "school": "中国传媒大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.cuc.edu.cn/",
+      "verification_url": "https://zhaosheng.cuc.edu.cn/",
+      "domain": "zhaosheng.cuc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国农业大学": {
+      "school": "中国农业大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://jwzs.cau.edu.cn/",
+      "verification_url": "https://jwzs.cau.edu.cn/",
+      "domain": "jwzs.cau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国医科大学": {
+      "school": "中国医科大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://bkzs.cmu.edu.cn/",
+      "verification_url": "https://bkzs.cmu.edu.cn/",
+      "domain": "bkzs.cmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国地质大学（北京）": {
+      "school": "中国地质大学（北京）",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zhsh.cugb.edu.cn/",
+      "verification_url": "https://zhsh.cugb.edu.cn/",
+      "domain": "zhsh.cugb.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国地质大学（武汉）": {
+      "school": "中国地质大学（武汉）",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.cug.edu.cn/",
+      "verification_url": "https://zhaosheng.cug.edu.cn/",
+      "domain": "zhaosheng.cug.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国戏曲学院": {
+      "school": "中国戏曲学院",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.nacta.edu.cn/",
+      "verification_url": "https://zs.nacta.edu.cn/",
+      "domain": "zs.nacta.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国政法大学": {
+      "school": "中国政法大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.cupl.edu.cn/",
+      "verification_url": "https://zs.cupl.edu.cn/",
+      "domain": "zs.cupl.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国民航大学": {
+      "school": "中国民航大学",
+      "province": "天津",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.cauc.edu.cn/zsb/",
+      "verification_url": "https://www.cauc.edu.cn/zsb/",
+      "domain": "www.cauc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国海洋大学": {
+      "school": "中国海洋大学",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.ouc.edu.cn/",
+      "verification_url": "https://bkzs.ouc.edu.cn/",
+      "domain": "bkzs.ouc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国石油大学（北京）": {
+      "school": "中国石油大学（北京）",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.cup.edu.cn/",
+      "verification_url": "https://bkzs.cup.edu.cn/",
+      "domain": "bkzs.cup.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国石油大学（华东）": {
+      "school": "中国石油大学（华东）",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.upc.edu.cn/",
+      "verification_url": "https://zhaosheng.upc.edu.cn/",
+      "domain": "zhaosheng.upc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国矿业大学": {
+      "school": "中国矿业大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.cumt.edu.cn/",
+      "verification_url": "https://zs.cumt.edu.cn/",
+      "domain": "zs.cumt.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国矿业大学（北京）": {
+      "school": "中国矿业大学（北京）",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zb.cumtb.edu.cn/",
+      "verification_url": "https://zb.cumtb.edu.cn/",
+      "domain": "zb.cumtb.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国社会科学院大学": {
+      "school": "中国社会科学院大学",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://bkzs.ucass.edu.cn/",
+      "verification_url": "https://bkzs.ucass.edu.cn/",
+      "domain": "bkzs.ucass.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国科学技术大学": {
+      "school": "中国科学技术大学",
+      "province": "浙江、安徽、福建、江西",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.ustc.edu.cn/",
+      "verification_url": "https://zsb.ustc.edu.cn/",
+      "domain": "zsb.ustc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国科学院大学": {
+      "school": "中国科学院大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://admission.ucas.ac.cn/",
+      "verification_url": "https://admission.ucas.ac.cn/",
+      "domain": "admission.ucas.ac.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国美术学院": {
+      "school": "中国美术学院",
+      "province": "浙江、安徽、福建、江西",
+      "school_type": "双一流",
+      "admissions_url": "https://zb.caa.edu.cn/",
+      "verification_url": "https://zb.caa.edu.cn/",
+      "domain": "zb.caa.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国药科大学": {
+      "school": "中国药科大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zb.cpu.edu.cn/",
+      "verification_url": "https://zb.cpu.edu.cn/",
+      "domain": "zb.cpu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国计量大学": {
+      "school": "中国计量大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.cjlu.edu.cn/",
+      "verification_url": "https://zs.cjlu.edu.cn/",
+      "domain": "zs.cjlu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中国音乐学院": {
+      "school": "中国音乐学院",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://www.ccmusic.edu.cn/",
+      "verification_url": "https://www.ccmusic.edu.cn/",
+      "domain": "www.ccmusic.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中央司法警官学院": {
+      "school": "中央司法警官学院",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.cicp.edu.cn/",
+      "verification_url": "https://zs.cicp.edu.cn/",
+      "domain": "zs.cicp.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中央戏剧学院": {
+      "school": "中央戏剧学院",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.zhongxi.cn/",
+      "verification_url": "https://zhaosheng.zhongxi.cn/",
+      "domain": "zhaosheng.zhongxi.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中央民族大学": {
+      "school": "中央民族大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zb.muc.edu.cn/",
+      "verification_url": "https://zb.muc.edu.cn/",
+      "domain": "zb.muc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中央美术学院": {
+      "school": "中央美术学院",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://www.cafa.edu.cn/",
+      "verification_url": "https://www.cafa.edu.cn/",
+      "domain": "www.cafa.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中央财经大学": {
+      "school": "中央财经大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.cufe.edu.cn/",
+      "verification_url": "https://zs.cufe.edu.cn/",
+      "domain": "zs.cufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中央音乐学院": {
+      "school": "中央音乐学院",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaoban.ccom.edu.cn/",
+      "verification_url": "https://zhaoban.ccom.edu.cn/",
+      "domain": "zhaoban.ccom.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "中山大学": {
+      "school": "中山大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://admission.sysu.edu.cn/",
+      "verification_url": "https://admission.sysu.edu.cn/",
+      "domain": "admission.sysu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "临沂大学": {
+      "school": "临沂大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.lyu.edu.cn/",
+      "verification_url": "https://zhaosheng.lyu.edu.cn/",
+      "domain": "zhaosheng.lyu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "云南中医药大学": {
+      "school": "云南中医药大学",
+      "province": "云南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ynutcm.edu.cn/",
+      "verification_url": "https://zsb.ynutcm.edu.cn/",
+      "domain": "zsb.ynutcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "云南农业大学": {
+      "school": "云南农业大学",
+      "province": "云南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.ynau.edu.cn/",
+      "verification_url": "https://zjc.ynau.edu.cn/",
+      "domain": "zjc.ynau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "云南大学": {
+      "school": "云南大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.ynu.edu.cn/",
+      "verification_url": "https://zsb.ynu.edu.cn/",
+      "domain": "zsb.ynu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "云南师范大学": {
+      "school": "云南师范大学",
+      "province": "云南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.ynnu.edu.cn/",
+      "verification_url": "https://zhaosheng.ynnu.edu.cn/",
+      "domain": "zhaosheng.ynnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "云南民族大学": {
+      "school": "云南民族大学",
+      "province": "云南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ynni.edu.cn/",
+      "verification_url": "https://zsb.ynni.edu.cn/",
+      "domain": "zsb.ynni.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "云南艺术学院": {
+      "school": "云南艺术学院",
+      "province": "云南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ynart.edu.cn/",
+      "verification_url": "https://zs.ynart.edu.cn/",
+      "domain": "zs.ynart.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "云南财经大学": {
+      "school": "云南财经大学",
+      "province": "云南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ynufe.edu.cn/",
+      "verification_url": "https://zs.ynufe.edu.cn/",
+      "domain": "zs.ynufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "井冈山大学": {
+      "school": "井冈山大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jgsu.edu.cn/",
+      "verification_url": "https://zs.jgsu.edu.cn/",
+      "domain": "zs.jgsu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "伊犁师范大学": {
+      "school": "伊犁师范大学",
+      "province": "新疆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ylnu.edu.cn/",
+      "verification_url": "https://zsb.ylnu.edu.cn/",
+      "domain": "zsb.ylnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "佛山大学": {
+      "school": "佛山大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.fosu.edu.cn/",
+      "verification_url": "https://zsb.fosu.edu.cn/",
+      "domain": "zsb.fosu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "佳木斯大学": {
+      "school": "佳木斯大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jmsu.edu.cn/",
+      "verification_url": "https://zs.jmsu.edu.cn/",
+      "domain": "zs.jmsu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "信阳师范大学": {
+      "school": "信阳师范大学",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.xynu.edu.cn/",
+      "verification_url": "https://zhaosheng.xynu.edu.cn/",
+      "domain": "zhaosheng.xynu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "兰州交通大学": {
+      "school": "兰州交通大学",
+      "province": "甘肃",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.lzjtu.edu.cn/",
+      "verification_url": "https://zsb.lzjtu.edu.cn/",
+      "domain": "zsb.lzjtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "兰州大学": {
+      "school": "兰州大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.lzu.edu.cn/",
+      "verification_url": "https://zsb.lzu.edu.cn/",
+      "domain": "zsb.lzu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "兰州理工大学": {
+      "school": "兰州理工大学",
+      "province": "甘肃",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.lut.edu.cn/",
+      "verification_url": "https://zhaosheng.lut.edu.cn/",
+      "domain": "zhaosheng.lut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "兰州财经大学": {
+      "school": "兰州财经大学",
+      "province": "甘肃",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.lzufe.edu.cn/",
+      "verification_url": "https://zjc.lzufe.edu.cn/",
+      "domain": "zjc.lzufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "内蒙古农业大学": {
+      "school": "内蒙古农业大学",
+      "province": "内蒙古",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.imau.edu.cn/",
+      "verification_url": "https://zhaosheng.imau.edu.cn/",
+      "domain": "zhaosheng.imau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "内蒙古医科大学": {
+      "school": "内蒙古医科大学",
+      "province": "内蒙古",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.immu.edu.cn/",
+      "verification_url": "https://zsb.immu.edu.cn/",
+      "domain": "zsb.immu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "内蒙古大学": {
+      "school": "内蒙古大学",
+      "province": "天津、河北、山西、内蒙古",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.imu.edu.cn/",
+      "verification_url": "https://zhaosheng.imu.edu.cn/",
+      "domain": "zhaosheng.imu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "内蒙古工业大学": {
+      "school": "内蒙古工业大学",
+      "province": "内蒙古",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.imut.edu.cn/",
+      "verification_url": "https://zhaosheng.imut.edu.cn/",
+      "domain": "zhaosheng.imut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "内蒙古师范大学": {
+      "school": "内蒙古师范大学",
+      "province": "内蒙古",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.imnu.edu.cn/",
+      "verification_url": "https://zhaosheng.imnu.edu.cn/",
+      "domain": "zhaosheng.imnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "内蒙古科技大学": {
+      "school": "内蒙古科技大学",
+      "province": "内蒙古",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.imust.edu.cn/",
+      "verification_url": "https://zhaosheng.imust.edu.cn/",
+      "domain": "zhaosheng.imust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "内蒙古财经大学": {
+      "school": "内蒙古财经大学",
+      "province": "内蒙古",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.imufe.edu.cn/",
+      "verification_url": "https://zs.imufe.edu.cn/",
+      "domain": "zs.imufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京中医药大学": {
+      "school": "北京中医药大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.bucm.edu.cn/",
+      "verification_url": "https://bkzs.bucm.edu.cn/",
+      "domain": "bkzs.bucm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京交通大学": {
+      "school": "北京交通大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zsw.bjtu.edu.cn/",
+      "verification_url": "https://zsw.bjtu.edu.cn/",
+      "domain": "zsw.bjtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京体育大学": {
+      "school": "北京体育大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.bsu.edu.cn/bkzsw/",
+      "verification_url": "https://zs.bsu.edu.cn/bkzsw/",
+      "domain": "zs.bsu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京信息科技大学": {
+      "school": "北京信息科技大学",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.bistu.edu.cn/",
+      "verification_url": "https://zhaosheng.bistu.edu.cn/",
+      "domain": "zhaosheng.bistu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京化工大学": {
+      "school": "北京化工大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://goto.buct.edu.cn/",
+      "verification_url": "https://goto.buct.edu.cn/",
+      "domain": "goto.buct.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京协和医学院": {
+      "school": "北京协和医学院",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://gkxc.pumc.edu.cn/",
+      "verification_url": "https://gkxc.pumc.edu.cn/",
+      "domain": "gkxc.pumc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京外国语大学": {
+      "school": "北京外国语大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://joinus.bfsu.edu.cn/",
+      "verification_url": "https://joinus.bfsu.edu.cn/",
+      "domain": "joinus.bfsu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京大学": {
+      "school": "北京大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://www.gotopku.cn/",
+      "verification_url": "https://www.gotopku.cn/",
+      "domain": "www.gotopku.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京工业大学": {
+      "school": "北京工业大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://admissions.bjut.edu.cn/",
+      "verification_url": "https://admissions.bjut.edu.cn/",
+      "domain": "admissions.bjut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京工商大学": {
+      "school": "北京工商大学",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.btbu.edu.cn/",
+      "verification_url": "https://zsb.btbu.edu.cn/",
+      "domain": "zsb.btbu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京师范大学": {
+      "school": "北京师范大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://admission.bnu.edu.cn/",
+      "verification_url": "https://admission.bnu.edu.cn/",
+      "domain": "admission.bnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京师范大学-香港浸会大学联合国际学院": {
+      "school": "北京师范大学-香港浸会大学联合国际学院",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://admission.uic.edu.cn/",
+      "verification_url": "https://admission.uic.edu.cn/",
+      "domain": "admission.uic.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京建筑大学": {
+      "school": "北京建筑大学",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.bucea.edu.cn/",
+      "verification_url": "https://zsb.bucea.edu.cn/",
+      "domain": "zsb.bucea.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京林业大学": {
+      "school": "北京林业大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.bjfu.edu.cn/",
+      "verification_url": "https://zsb.bjfu.edu.cn/",
+      "domain": "zsb.bjfu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京物资学院": {
+      "school": "北京物资学院",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.bwu.edu.cn/",
+      "verification_url": "https://zs.bwu.edu.cn/",
+      "domain": "zs.bwu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京理工大学": {
+      "school": "北京理工大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://admission.bit.edu.cn/",
+      "verification_url": "https://admission.bit.edu.cn/",
+      "domain": "admission.bit.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京电影学院": {
+      "school": "北京电影学院",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.bfa.edu.cn/zs/",
+      "verification_url": "https://www.bfa.edu.cn/zs/",
+      "domain": "www.bfa.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京科技大学": {
+      "school": "北京科技大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.ustb.edu.cn/",
+      "verification_url": "https://zhaosheng.ustb.edu.cn/",
+      "domain": "zhaosheng.ustb.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京第二外国语学院": {
+      "school": "北京第二外国语学院",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.bisu.edu.cn/",
+      "verification_url": "https://zs.bisu.edu.cn/",
+      "domain": "zs.bisu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京航空航天大学": {
+      "school": "北京航空航天大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.buaa.edu.cn/",
+      "verification_url": "https://zs.buaa.edu.cn/",
+      "domain": "zs.buaa.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京语言大学": {
+      "school": "北京语言大学",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.blcu.edu.cn/",
+      "verification_url": "https://zsb.blcu.edu.cn/",
+      "domain": "zsb.blcu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北京邮电大学": {
+      "school": "北京邮电大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.bupt.edu.cn/",
+      "verification_url": "https://zsb.bupt.edu.cn/",
+      "domain": "zsb.bupt.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北华大学": {
+      "school": "北华大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.beihua.edu.cn/",
+      "verification_url": "https://zsb.beihua.edu.cn/",
+      "domain": "zsb.beihua.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北方工业大学": {
+      "school": "北方工业大学",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ncut.edu.cn/",
+      "verification_url": "https://zs.ncut.edu.cn/",
+      "domain": "zs.ncut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "北方民族大学": {
+      "school": "北方民族大学",
+      "province": "宁夏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.nmu.edu.cn/",
+      "verification_url": "https://zsb.nmu.edu.cn/",
+      "domain": "zsb.nmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华东交通大学": {
+      "school": "华东交通大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.ecjtu.edu.cn/",
+      "verification_url": "https://zjc.ecjtu.edu.cn/",
+      "domain": "zjc.ecjtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华东师范大学": {
+      "school": "华东师范大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.ecnu.edu.cn/",
+      "verification_url": "https://zsb.ecnu.edu.cn/",
+      "domain": "zsb.ecnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华东政法大学": {
+      "school": "华东政法大学",
+      "province": "上海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ecupl.edu.cn/",
+      "verification_url": "https://zsb.ecupl.edu.cn/",
+      "domain": "zsb.ecupl.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华东理工大学": {
+      "school": "华东理工大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.ecust.edu.cn/",
+      "verification_url": "https://zsb.ecust.edu.cn/",
+      "domain": "zsb.ecust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华中农业大学": {
+      "school": "华中农业大学",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.hzau.edu.cn/",
+      "verification_url": "https://zs.hzau.edu.cn/",
+      "domain": "zs.hzau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华中师范大学": {
+      "school": "华中师范大学",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.ccnu.edu.cn/",
+      "verification_url": "https://zs.ccnu.edu.cn/",
+      "domain": "zs.ccnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华中科技大学": {
+      "school": "华中科技大学",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.hust.edu.cn/",
+      "verification_url": "https://zsb.hust.edu.cn/",
+      "domain": "zsb.hust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华侨大学": {
+      "school": "华侨大学",
+      "province": "福建",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsc.hqu.edu.cn/",
+      "verification_url": "https://zsc.hqu.edu.cn/",
+      "domain": "zsc.hqu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华北水利水电大学": {
+      "school": "华北水利水电大学",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://www2.ncwu.edu.cn/zhaosheng/",
+      "verification_url": "https://www2.ncwu.edu.cn/zhaosheng/",
+      "domain": "www2.ncwu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华北理工大学": {
+      "school": "华北理工大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsjyc.ncst.edu.cn/",
+      "verification_url": "https://zsjyc.ncst.edu.cn/",
+      "domain": "zsjyc.ncst.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华北电力大学": {
+      "school": "华北电力大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://goto.ncepu.edu.cn/",
+      "verification_url": "https://goto.ncepu.edu.cn/",
+      "domain": "goto.ncepu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华南农业大学": {
+      "school": "华南农业大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.scau.edu.cn/",
+      "verification_url": "https://zsb.scau.edu.cn/",
+      "domain": "zsb.scau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华南师范大学": {
+      "school": "华南师范大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.scnu.edu.cn/",
+      "verification_url": "https://zsb.scnu.edu.cn/",
+      "domain": "zsb.scnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "华南理工大学": {
+      "school": "华南理工大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://admission.scut.edu.cn/",
+      "verification_url": "https://admission.scut.edu.cn/",
+      "domain": "admission.scut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京中医药大学": {
+      "school": "南京中医药大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.njucm.edu.cn/",
+      "verification_url": "https://zs.njucm.edu.cn/",
+      "domain": "zs.njucm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京信息工程大学": {
+      "school": "南京信息工程大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.nuist.edu.cn/",
+      "verification_url": "https://zs.nuist.edu.cn/",
+      "domain": "zs.nuist.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京农业大学": {
+      "school": "南京农业大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zsxx.njau.edu.cn/",
+      "verification_url": "https://zsxx.njau.edu.cn/",
+      "domain": "zsxx.njau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京医科大学": {
+      "school": "南京医科大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.njmu.edu.cn/",
+      "verification_url": "https://zs.njmu.edu.cn/",
+      "domain": "zs.njmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京大学": {
+      "school": "南京大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.nju.edu.cn/",
+      "verification_url": "https://bkzs.nju.edu.cn/",
+      "domain": "bkzs.nju.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京审计大学": {
+      "school": "南京审计大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.nau.edu.cn/",
+      "verification_url": "https://zs.nau.edu.cn/",
+      "domain": "zs.nau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京工业大学": {
+      "school": "南京工业大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.njtech.edu.cn/",
+      "verification_url": "https://zhaosheng.njtech.edu.cn/",
+      "domain": "zhaosheng.njtech.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京工程学院": {
+      "school": "南京工程学院",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.njit.edu.cn/",
+      "verification_url": "https://zsb.njit.edu.cn/",
+      "domain": "zsb.njit.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京师范大学": {
+      "school": "南京师范大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.njnu.edu.cn/",
+      "verification_url": "https://bkzs.njnu.edu.cn/",
+      "domain": "bkzs.njnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京林业大学": {
+      "school": "南京林业大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.njfu.edu.cn/",
+      "verification_url": "https://zsb.njfu.edu.cn/",
+      "domain": "zsb.njfu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京理工大学": {
+      "school": "南京理工大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.njust.edu.cn/",
+      "verification_url": "https://zsb.njust.edu.cn/",
+      "domain": "zsb.njust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京航空航天大学": {
+      "school": "南京航空航天大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.nuaa.edu.cn/",
+      "verification_url": "https://zs.nuaa.edu.cn/",
+      "domain": "zs.nuaa.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京艺术学院": {
+      "school": "南京艺术学院",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.nua.edu.cn/",
+      "verification_url": "https://zhaosheng.nua.edu.cn/",
+      "domain": "zhaosheng.nua.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京财经大学": {
+      "school": "南京财经大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.nufe.edu.cn/",
+      "verification_url": "https://zhaosheng.nufe.edu.cn/",
+      "domain": "zhaosheng.nufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南京邮电大学": {
+      "school": "南京邮电大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.njupt.edu.cn/",
+      "verification_url": "https://zs.njupt.edu.cn/",
+      "domain": "zs.njupt.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南华大学": {
+      "school": "南华大学",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.usc.edu.cn/",
+      "verification_url": "https://zsw.usc.edu.cn/",
+      "domain": "zsw.usc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南宁师范大学": {
+      "school": "南宁师范大学",
+      "province": "广西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.nnnu.edu.cn/",
+      "verification_url": "https://zsb.nnnu.edu.cn/",
+      "domain": "zsb.nnnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南开大学": {
+      "school": "南开大学",
+      "province": "天津、河北、山西、内蒙古",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.nankai.edu.cn/",
+      "verification_url": "https://zsb.nankai.edu.cn/",
+      "domain": "zsb.nankai.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南方医科大学": {
+      "school": "南方医科大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.smu.edu.cn/",
+      "verification_url": "https://zhaosheng.smu.edu.cn/",
+      "domain": "zhaosheng.smu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南方科技大学": {
+      "school": "南方科技大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.sustech.edu.cn/",
+      "verification_url": "https://zs.sustech.edu.cn/",
+      "domain": "zs.sustech.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南昌大学": {
+      "school": "南昌大学",
+      "province": "浙江、安徽、福建、江西",
+      "school_type": "双一流",
+      "admissions_url": "https://zjc.ncu.edu.cn/zs/",
+      "verification_url": "https://zjc.ncu.edu.cn/zs/",
+      "domain": "zjc.ncu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南昌工程学院": {
+      "school": "南昌工程学院",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjb.nit.edu.cn/",
+      "verification_url": "https://zjb.nit.edu.cn/",
+      "domain": "zjb.nit.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南昌航空大学": {
+      "school": "南昌航空大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.nchu.edu.cn/",
+      "verification_url": "https://zsw.nchu.edu.cn/",
+      "domain": "zsw.nchu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "南通大学": {
+      "school": "南通大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ntu.edu.cn/",
+      "verification_url": "https://zs.ntu.edu.cn/",
+      "domain": "zs.ntu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "厦门医学院": {
+      "school": "厦门医学院",
+      "province": "福建",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xmmc.edu.cn/",
+      "verification_url": "https://zsb.xmmc.edu.cn/",
+      "domain": "zsb.xmmc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "厦门大学": {
+      "school": "厦门大学",
+      "province": "浙江、安徽、福建、江西",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.xmu.edu.cn/",
+      "verification_url": "https://zs.xmu.edu.cn/",
+      "domain": "zs.xmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "厦门理工学院": {
+      "school": "厦门理工学院",
+      "province": "福建",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xmut.edu.cn/",
+      "verification_url": "https://zsb.xmut.edu.cn/",
+      "domain": "zsb.xmut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "右江民族医学院": {
+      "school": "右江民族医学院",
+      "province": "广西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ymun.edu.cn/",
+      "verification_url": "https://zsb.ymun.edu.cn/",
+      "domain": "zsb.ymun.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "合肥工业大学": {
+      "school": "合肥工业大学",
+      "province": "浙江、安徽、福建、江西",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.hfut.edu.cn/",
+      "verification_url": "https://bkzs.hfut.edu.cn/",
+      "domain": "bkzs.hfut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "吉林农业大学": {
+      "school": "吉林农业大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jlau.edu.cn/",
+      "verification_url": "https://zs.jlau.edu.cn/",
+      "domain": "zs.jlau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "吉林化工学院": {
+      "school": "吉林化工学院",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.jlict.edu.cn/",
+      "verification_url": "https://zsb.jlict.edu.cn/",
+      "domain": "zsb.jlict.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "吉林大学": {
+      "school": "吉林大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.jlu.edu.cn/",
+      "verification_url": "https://zsb.jlu.edu.cn/",
+      "domain": "zsb.jlu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "吉林师范大学": {
+      "school": "吉林师范大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jlnu.edu.cn/",
+      "verification_url": "https://zs.jlnu.edu.cn/",
+      "domain": "zs.jlnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "吉林建筑大学": {
+      "school": "吉林建筑大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jlju.edu.cn/",
+      "verification_url": "https://zs.jlju.edu.cn/",
+      "domain": "zs.jlju.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "吉林财经大学": {
+      "school": "吉林财经大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jlufe.edu.cn/",
+      "verification_url": "https://zs.jlufe.edu.cn/",
+      "domain": "zs.jlufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "吉首大学": {
+      "school": "吉首大学",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.jsu.edu.cn/",
+      "verification_url": "https://zsb.jsu.edu.cn/",
+      "domain": "zsb.jsu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "同济大学": {
+      "school": "同济大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.tongji.edu.cn/",
+      "verification_url": "https://bkzs.tongji.edu.cn/",
+      "domain": "bkzs.tongji.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "哈尔滨医科大学": {
+      "school": "哈尔滨医科大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hrbmu.edu.cn/",
+      "verification_url": "https://zsb.hrbmu.edu.cn/",
+      "domain": "zsb.hrbmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "哈尔滨商业大学": {
+      "school": "哈尔滨商业大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hrbcu.edu.cn/",
+      "verification_url": "https://zs.hrbcu.edu.cn/",
+      "domain": "zs.hrbcu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "哈尔滨工业大学": {
+      "school": "哈尔滨工业大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.hit.edu.cn/",
+      "verification_url": "https://zsb.hit.edu.cn/",
+      "domain": "zsb.hit.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "哈尔滨工程大学": {
+      "school": "哈尔滨工程大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.hrbeu.edu.cn/",
+      "verification_url": "https://zsb.hrbeu.edu.cn/",
+      "domain": "zsb.hrbeu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "哈尔滨师范大学": {
+      "school": "哈尔滨师范大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hrbnu.edu.cn/",
+      "verification_url": "https://zsb.hrbnu.edu.cn/",
+      "domain": "zsb.hrbnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "哈尔滨理工大学": {
+      "school": "哈尔滨理工大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hrbust.edu.cn/",
+      "verification_url": "https://zs.hrbust.edu.cn/",
+      "domain": "zs.hrbust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "嘉兴大学": {
+      "school": "嘉兴大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.zjxu.edu.cn/",
+      "verification_url": "https://zsb.zjxu.edu.cn/",
+      "domain": "zsb.zjxu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "四川农业大学": {
+      "school": "四川农业大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.sicau.edu.cn/",
+      "verification_url": "https://zs.sicau.edu.cn/",
+      "domain": "zs.sicau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "四川外国语大学": {
+      "school": "四川外国语大学",
+      "province": "重庆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sisu.edu.cn/",
+      "verification_url": "https://zs.sisu.edu.cn/",
+      "domain": "zs.sisu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "四川大学": {
+      "school": "四川大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.scu.edu.cn/",
+      "verification_url": "https://zs.scu.edu.cn/",
+      "domain": "zs.scu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "四川师范大学": {
+      "school": "四川师范大学",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sicnu.edu.cn/",
+      "verification_url": "https://zs.sicnu.edu.cn/",
+      "domain": "zs.sicnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "四川美术学院": {
+      "school": "四川美术学院",
+      "province": "重庆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.scfai.edu.cn/",
+      "verification_url": "https://zsb.scfai.edu.cn/",
+      "domain": "zsb.scfai.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "国防科技大学": {
+      "school": "国防科技大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://www.gotonudt.cn/",
+      "verification_url": "https://www.gotonudt.cn/",
+      "domain": "www.gotonudt.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "国际关系学院": {
+      "school": "国际关系学院",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.uir.cn/",
+      "verification_url": "https://zs.uir.cn/",
+      "domain": "zs.uir.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "塔里木大学": {
+      "school": "塔里木大学",
+      "province": "新疆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.taru.edu.cn/",
+      "verification_url": "https://zsb.taru.edu.cn/",
+      "domain": "zsb.taru.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "复旦大学": {
+      "school": "复旦大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://ao.fudan.edu.cn/",
+      "verification_url": "https://ao.fudan.edu.cn/",
+      "domain": "ao.fudan.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "外交学院": {
+      "school": "外交学院",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.cfau.edu.cn/",
+      "verification_url": "https://zs.cfau.edu.cn/",
+      "domain": "zs.cfau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "大理大学": {
+      "school": "大理大学",
+      "province": "云南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.dali.edu.cn/",
+      "verification_url": "https://zs.dali.edu.cn/",
+      "domain": "zs.dali.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "大连交通大学": {
+      "school": "大连交通大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.djtu.edu.cn/",
+      "verification_url": "https://zsw.djtu.edu.cn/",
+      "domain": "zsw.djtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "大连医科大学": {
+      "school": "大连医科大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.dmu.edu.cn/",
+      "verification_url": "https://zsb.dmu.edu.cn/",
+      "domain": "zsb.dmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "大连外国语大学": {
+      "school": "大连外国语大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.dlufl.edu.cn/",
+      "verification_url": "https://zs.dlufl.edu.cn/",
+      "domain": "zs.dlufl.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "大连大学": {
+      "school": "大连大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.dlu.edu.cn/",
+      "verification_url": "https://zsw.dlu.edu.cn/",
+      "domain": "zsw.dlu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "大连工业大学": {
+      "school": "大连工业大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.dlpu.edu.cn/",
+      "verification_url": "https://zsb.dlpu.edu.cn/",
+      "domain": "zsb.dlpu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "大连民族大学": {
+      "school": "大连民族大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.dlnu.edu.cn/",
+      "verification_url": "https://zs.dlnu.edu.cn/",
+      "domain": "zs.dlnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "大连海事大学": {
+      "school": "大连海事大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.dlmu.edu.cn/",
+      "verification_url": "https://bkzs.dlmu.edu.cn/",
+      "domain": "bkzs.dlmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "大连海洋大学": {
+      "school": "大连海洋大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.dlou.edu.cn/",
+      "verification_url": "https://zsb.dlou.edu.cn/",
+      "domain": "zsb.dlou.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "大连理工大学": {
+      "school": "大连理工大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.dlut.edu.cn/",
+      "verification_url": "https://zs.dlut.edu.cn/",
+      "domain": "zs.dlut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天水师范学院": {
+      "school": "天水师范学院",
+      "province": "甘肃",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.tsnu.edu.cn/",
+      "verification_url": "https://zjc.tsnu.edu.cn/",
+      "domain": "zjc.tsnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津中医药大学": {
+      "school": "天津中医药大学",
+      "province": "天津、河北、山西、内蒙古",
+      "school_type": "双一流",
+      "admissions_url": "https://zsjy.tjutcm.edu.cn/",
+      "verification_url": "https://zsjy.tjutcm.edu.cn/",
+      "domain": "zsjy.tjutcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津体育学院": {
+      "school": "天津体育学院",
+      "province": "天津",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.tjus.edu.cn/",
+      "verification_url": "https://zs.tjus.edu.cn/",
+      "domain": "zs.tjus.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津医科大学": {
+      "school": "天津医科大学",
+      "province": "天津、河北、山西、内蒙古",
+      "school_type": "双一流",
+      "admissions_url": "https://www.tmu.edu.cn/bkzs/",
+      "verification_url": "https://www.tmu.edu.cn/bkzs/",
+      "domain": "www.tmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津商业大学": {
+      "school": "天津商业大学",
+      "province": "天津",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.tjcu.edu.cn/",
+      "verification_url": "https://zs.tjcu.edu.cn/",
+      "domain": "zs.tjcu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津城建大学": {
+      "school": "天津城建大学",
+      "province": "天津",
+      "school_type": "非双一流",
+      "admissions_url": "https://recruit.tcu.edu.cn/",
+      "verification_url": "https://recruit.tcu.edu.cn/",
+      "domain": "recruit.tcu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津外国语大学": {
+      "school": "天津外国语大学",
+      "province": "天津",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.tjfsu.edu.cn/",
+      "verification_url": "https://zsb.tjfsu.edu.cn/",
+      "domain": "zsb.tjfsu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津大学": {
+      "school": "天津大学",
+      "province": "天津、河北、山西、内蒙古",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.tju.edu.cn/",
+      "verification_url": "https://zs.tju.edu.cn/",
+      "domain": "zs.tju.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津工业大学": {
+      "school": "天津工业大学",
+      "province": "天津、河北、山西、内蒙古",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.tiangong.edu.cn/",
+      "verification_url": "https://zsb.tiangong.edu.cn/",
+      "domain": "zsb.tiangong.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津师范大学": {
+      "school": "天津师范大学",
+      "province": "天津",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.tjnu.edu.cn/",
+      "verification_url": "https://zsb.tjnu.edu.cn/",
+      "domain": "zsb.tjnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津理工大学": {
+      "school": "天津理工大学",
+      "province": "天津",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.tjut.edu.cn/",
+      "verification_url": "https://zs.tjut.edu.cn/",
+      "domain": "zs.tjut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津科技大学": {
+      "school": "天津科技大学",
+      "province": "天津",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.tust.edu.cn/",
+      "verification_url": "https://zsb.tust.edu.cn/",
+      "domain": "zsb.tust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津职业技术师范大学": {
+      "school": "天津职业技术师范大学",
+      "province": "天津",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.tute.edu.cn/",
+      "verification_url": "https://zsb.tute.edu.cn/",
+      "domain": "zsb.tute.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "天津财经大学": {
+      "school": "天津财经大学",
+      "province": "天津",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.tjufe.edu.cn/",
+      "verification_url": "https://zhaosheng.tjufe.edu.cn/",
+      "domain": "zhaosheng.tjufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "太原理工大学": {
+      "school": "太原理工大学",
+      "province": "天津、河北、山西、内蒙古",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.tyut.edu.cn/",
+      "verification_url": "https://zs.tyut.edu.cn/",
+      "domain": "zs.tyut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "太原科技大学": {
+      "school": "太原科技大学",
+      "province": "山西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.tyust.edu.cn/",
+      "verification_url": "https://zsb.tyust.edu.cn/",
+      "domain": "zsb.tyust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "宁夏医科大学": {
+      "school": "宁夏医科大学",
+      "province": "宁夏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.nxmu.edu.cn/",
+      "verification_url": "https://zsb.nxmu.edu.cn/",
+      "domain": "zsb.nxmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "宁夏大学": {
+      "school": "宁夏大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.nxu.edu.cn/",
+      "verification_url": "https://zs.nxu.edu.cn/",
+      "domain": "zs.nxu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "宁波大学": {
+      "school": "宁波大学",
+      "province": "浙江、安徽、福建、江西",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.nbu.edu.cn/",
+      "verification_url": "https://zsb.nbu.edu.cn/",
+      "domain": "zsb.nbu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "宁波诺丁汉大学": {
+      "school": "宁波诺丁汉大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.nottingham.edu.cn/cn/study-with-us/undergraduate/index.aspx",
+      "verification_url": "https://www.nottingham.edu.cn/cn/study-with-us/undergraduate/index.aspx",
+      "domain": "www.nottingham.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安庆师范大学": {
+      "school": "安庆师范大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.aqnu.edu.cn/",
+      "verification_url": "https://zsw.aqnu.edu.cn/",
+      "domain": "zsw.aqnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安徽中医药大学": {
+      "school": "安徽中医药大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ahtcm.edu.cn/",
+      "verification_url": "https://zs.ahtcm.edu.cn/",
+      "domain": "zs.ahtcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安徽农业大学": {
+      "school": "安徽农业大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ahau.edu.cn/",
+      "verification_url": "https://zsb.ahau.edu.cn/",
+      "domain": "zsb.ahau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安徽医科大学": {
+      "school": "安徽医科大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ahmu.edu.cn/",
+      "verification_url": "https://zs.ahmu.edu.cn/",
+      "domain": "zs.ahmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安徽大学": {
+      "school": "安徽大学",
+      "province": "浙江、安徽、福建、江西",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.ahu.edu.cn/",
+      "verification_url": "https://zsb.ahu.edu.cn/",
+      "domain": "zsb.ahu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安徽工业大学": {
+      "school": "安徽工业大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ahut.edu.cn/",
+      "verification_url": "https://zs.ahut.edu.cn/",
+      "domain": "zs.ahut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安徽工程大学": {
+      "school": "安徽工程大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ahpu.edu.cn/",
+      "verification_url": "https://zsb.ahpu.edu.cn/",
+      "domain": "zsb.ahpu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安徽师范大学": {
+      "school": "安徽师范大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ahnu.edu.cn/",
+      "verification_url": "https://zs.ahnu.edu.cn/",
+      "domain": "zs.ahnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安徽建筑大学": {
+      "school": "安徽建筑大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ahjzu.edu.cn/",
+      "verification_url": "https://zsb.ahjzu.edu.cn/",
+      "domain": "zsb.ahjzu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安徽理工大学": {
+      "school": "安徽理工大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.aust.edu.cn/",
+      "verification_url": "https://zs.aust.edu.cn/",
+      "domain": "zs.aust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "安徽财经大学": {
+      "school": "安徽财经大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.aufe.edu.cn/",
+      "verification_url": "https://zs.aufe.edu.cn/",
+      "domain": "zs.aufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "对外经济贸易大学": {
+      "school": "对外经济贸易大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.uibe.edu.cn/",
+      "verification_url": "https://zhaosheng.uibe.edu.cn/",
+      "domain": "zhaosheng.uibe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东中医药大学": {
+      "school": "山东中医药大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.sdutcm.edu.cn/",
+      "verification_url": "https://zhaosheng.sdutcm.edu.cn/",
+      "domain": "zhaosheng.sdutcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东农业大学": {
+      "school": "山东农业大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.sdau.edu.cn/",
+      "verification_url": "https://zhaosheng.sdau.edu.cn/",
+      "domain": "zhaosheng.sdau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东大学": {
+      "school": "山东大学",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://www.bkzs.sdu.edu.cn/",
+      "verification_url": "https://www.bkzs.sdu.edu.cn/",
+      "domain": "www.bkzs.sdu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东师范大学": {
+      "school": "山东师范大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.zsb.sdnu.edu.cn/",
+      "verification_url": "https://www.zsb.sdnu.edu.cn/",
+      "domain": "www.zsb.sdnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东建筑大学": {
+      "school": "山东建筑大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.sdjzu.edu.cn/",
+      "verification_url": "https://zsb.sdjzu.edu.cn/",
+      "domain": "zsb.sdjzu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东政法学院": {
+      "school": "山东政法学院",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.sdupsl.edu.cn/",
+      "verification_url": "https://zsb.sdupsl.edu.cn/",
+      "domain": "zsb.sdupsl.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东理工大学": {
+      "school": "山东理工大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zszx.sdut.edu.cn/",
+      "verification_url": "https://zszx.sdut.edu.cn/",
+      "domain": "zszx.sdut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东科技大学": {
+      "school": "山东科技大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sdust.edu.cn/",
+      "verification_url": "https://zs.sdust.edu.cn/",
+      "domain": "zs.sdust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东第一医科大学": {
+      "school": "山东第一医科大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://enrollment.sdfmu.edu.cn/",
+      "verification_url": "https://enrollment.sdfmu.edu.cn/",
+      "domain": "enrollment.sdfmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东第二医科大学": {
+      "school": "山东第二医科大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.sdsmu.edu.cn/",
+      "verification_url": "https://zsb.sdsmu.edu.cn/",
+      "domain": "zsb.sdsmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山东财经大学": {
+      "school": "山东财经大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.sdufe.edu.cn/",
+      "verification_url": "https://zhaosheng.sdufe.edu.cn/",
+      "domain": "zhaosheng.sdufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山西中医药大学": {
+      "school": "山西中医药大学",
+      "province": "山西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.sxtcm.edu.cn/",
+      "verification_url": "https://zsb.sxtcm.edu.cn/",
+      "domain": "zsb.sxtcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山西农业大学": {
+      "school": "山西农业大学",
+      "province": "山西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.sxau.edu.cn/",
+      "verification_url": "https://zsb.sxau.edu.cn/",
+      "domain": "zsb.sxau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山西医科大学": {
+      "school": "山西医科大学",
+      "province": "山西",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.sxmu.edu.cn/bkszs/",
+      "verification_url": "https://www.sxmu.edu.cn/bkszs/",
+      "domain": "www.sxmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山西大同大学": {
+      "school": "山西大同大学",
+      "province": "山西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sxdtdx.edu.cn/",
+      "verification_url": "https://zs.sxdtdx.edu.cn/",
+      "domain": "zs.sxdtdx.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山西大学": {
+      "school": "山西大学",
+      "province": "天津、河北、山西、内蒙古",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.sxu.edu.cn/",
+      "verification_url": "https://bkzs.sxu.edu.cn/",
+      "domain": "bkzs.sxu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山西师范大学": {
+      "school": "山西师范大学",
+      "province": "山西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.sxnu.edu.cn/",
+      "verification_url": "https://zsb.sxnu.edu.cn/",
+      "domain": "zsb.sxnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "山西财经大学": {
+      "school": "山西财经大学",
+      "province": "山西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.sxufe.edu.cn/",
+      "verification_url": "https://zhaosheng.sxufe.edu.cn/",
+      "domain": "zhaosheng.sxufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "川北医学院": {
+      "school": "川北医学院",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://admission.nsmc.edu.cn/",
+      "verification_url": "https://admission.nsmc.edu.cn/",
+      "domain": "admission.nsmc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "常州大学": {
+      "school": "常州大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.cczu.edu.cn/",
+      "verification_url": "https://zs.cczu.edu.cn/",
+      "domain": "zs.cczu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广东医科大学": {
+      "school": "广东医科大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.gdmu.edu.cn/",
+      "verification_url": "https://zs.gdmu.edu.cn/",
+      "domain": "zs.gdmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广东外语外贸大学": {
+      "school": "广东外语外贸大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.gdufs.edu.cn/",
+      "verification_url": "https://zsb.gdufs.edu.cn/",
+      "domain": "zsb.gdufs.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广东工业大学": {
+      "school": "广东工业大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.gdut.edu.cn/",
+      "verification_url": "https://zsb.gdut.edu.cn/",
+      "domain": "zsb.gdut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广东技术师范大学": {
+      "school": "广东技术师范大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.gpnu.edu.cn/",
+      "verification_url": "https://zs.gpnu.edu.cn/",
+      "domain": "zs.gpnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广东海洋大学": {
+      "school": "广东海洋大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsjy.gdou.edu.cn/",
+      "verification_url": "https://zsjy.gdou.edu.cn/",
+      "domain": "zsjy.gdou.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广东药科大学": {
+      "school": "广东药科大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.gdpu.edu.cn/",
+      "verification_url": "https://zsb.gdpu.edu.cn/",
+      "domain": "zsb.gdpu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广东财经大学": {
+      "school": "广东财经大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.gdufe.edu.cn/",
+      "verification_url": "https://zsb.gdufe.edu.cn/",
+      "domain": "zsb.gdufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广州中医药大学": {
+      "school": "广州中医药大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.gzucm.edu.cn/",
+      "verification_url": "https://zsb.gzucm.edu.cn/",
+      "domain": "zsb.gzucm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广州医科大学": {
+      "school": "广州医科大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.gzhmu.edu.cn/",
+      "verification_url": "https://zs.gzhmu.edu.cn/",
+      "domain": "zs.gzhmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广州大学": {
+      "school": "广州大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsjy.gzhu.edu.cn/",
+      "verification_url": "https://zsjy.gzhu.edu.cn/",
+      "domain": "zsjy.gzhu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广州美术学院": {
+      "school": "广州美术学院",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.gzarts.edu.cn/",
+      "verification_url": "https://zs.gzarts.edu.cn/",
+      "domain": "zs.gzarts.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广西中医药大学": {
+      "school": "广西中医药大学",
+      "province": "广西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.gxtcmu.edu.cn/",
+      "verification_url": "https://zsb.gxtcmu.edu.cn/",
+      "domain": "zsb.gxtcmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广西医科大学": {
+      "school": "广西医科大学",
+      "province": "广西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.gxmu.edu.cn/",
+      "verification_url": "https://zhaosheng.gxmu.edu.cn/",
+      "domain": "zhaosheng.gxmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广西大学": {
+      "school": "广西大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.gxu.edu.cn/",
+      "verification_url": "https://zs.gxu.edu.cn/",
+      "domain": "zs.gxu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广西师范大学": {
+      "school": "广西师范大学",
+      "province": "广西",
+      "school_type": "非双一流",
+      "admissions_url": "https://bkzs.gxnu.edu.cn/",
+      "verification_url": "https://bkzs.gxnu.edu.cn/",
+      "domain": "bkzs.gxnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广西民族大学": {
+      "school": "广西民族大学",
+      "province": "广西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.gxun.edu.cn/",
+      "verification_url": "https://zjc.gxun.edu.cn/",
+      "domain": "zjc.gxun.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "广西科技大学": {
+      "school": "广西科技大学",
+      "province": "广西",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.gxust.edu.cn/zs/",
+      "verification_url": "https://www.gxust.edu.cn/zs/",
+      "domain": "www.gxust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "延安大学": {
+      "school": "延安大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.yau.edu.cn/",
+      "verification_url": "https://zsw.yau.edu.cn/",
+      "domain": "zsw.yau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "延边大学": {
+      "school": "延边大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.ybu.edu.cn/",
+      "verification_url": "https://zsb.ybu.edu.cn/",
+      "domain": "zsb.ybu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "徐州医科大学": {
+      "school": "徐州医科大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xzhmu.edu.cn/",
+      "verification_url": "https://zsb.xzhmu.edu.cn/",
+      "domain": "zsb.xzhmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "成都中医药大学": {
+      "school": "成都中医药大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.cdutcm.edu.cn/",
+      "verification_url": "https://zs.cdutcm.edu.cn/",
+      "domain": "zs.cdutcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "成都体育学院": {
+      "school": "成都体育学院",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.cdsu.edu.cn/",
+      "verification_url": "https://zs.cdsu.edu.cn/",
+      "domain": "zs.cdsu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "成都信息工程大学": {
+      "school": "成都信息工程大学",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.cuit.edu.cn/",
+      "verification_url": "https://zjc.cuit.edu.cn/",
+      "domain": "zjc.cuit.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "成都医学院": {
+      "school": "成都医学院",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.cmc.edu.cn/",
+      "verification_url": "https://zs.cmc.edu.cn/",
+      "domain": "zs.cmc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "成都大学": {
+      "school": "成都大学",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.cdu.edu.cn/",
+      "verification_url": "https://zhaosheng.cdu.edu.cn/",
+      "domain": "zhaosheng.cdu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "成都理工大学": {
+      "school": "成都理工大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://www.zs.cdut.edu.cn/",
+      "verification_url": "https://www.zs.cdut.edu.cn/",
+      "domain": "www.zs.cdut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "扬州大学": {
+      "school": "扬州大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaoban.yzu.edu.cn/",
+      "verification_url": "https://zhaoban.yzu.edu.cn/",
+      "domain": "zhaoban.yzu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "承德医学院": {
+      "school": "承德医学院",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.cdmc.edu.cn/",
+      "verification_url": "https://zsb.cdmc.edu.cn/",
+      "domain": "zsb.cdmc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "新乡医学院": {
+      "school": "新乡医学院",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.xxmu.edu.cn/",
+      "verification_url": "https://zsw.xxmu.edu.cn/",
+      "domain": "zsw.xxmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "新疆农业大学": {
+      "school": "新疆农业大学",
+      "province": "新疆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xjau.edu.cn/",
+      "verification_url": "https://zsb.xjau.edu.cn/",
+      "domain": "zsb.xjau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "新疆医科大学": {
+      "school": "新疆医科大学",
+      "province": "新疆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xjmu.edu.cn/",
+      "verification_url": "https://zsb.xjmu.edu.cn/",
+      "domain": "zsb.xjmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "新疆大学": {
+      "school": "新疆大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zsjy.xju.edu.cn/",
+      "verification_url": "https://zsjy.xju.edu.cn/",
+      "domain": "zsjy.xju.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "新疆师范大学": {
+      "school": "新疆师范大学",
+      "province": "新疆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xjnu.edu.cn/",
+      "verification_url": "https://zsb.xjnu.edu.cn/",
+      "domain": "zsb.xjnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "新疆财经大学": {
+      "school": "新疆财经大学",
+      "province": "新疆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xjufe.edu.cn/",
+      "verification_url": "https://zsb.xjufe.edu.cn/",
+      "domain": "zsb.xjufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "昆明医科大学": {
+      "school": "昆明医科大学",
+      "province": "云南",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.kmmu.edu.cn/zs/",
+      "verification_url": "https://www.kmmu.edu.cn/zs/",
+      "domain": "www.kmmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "昆明理工大学": {
+      "school": "昆明理工大学",
+      "province": "云南",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.kmust.edu.cn/zs/",
+      "verification_url": "https://www.kmust.edu.cn/zs/",
+      "domain": "www.kmust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "星海音乐学院": {
+      "school": "星海音乐学院",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.xhcom.edu.cn/",
+      "verification_url": "https://zs.xhcom.edu.cn/",
+      "domain": "zs.xhcom.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "景德镇陶瓷大学": {
+      "school": "景德镇陶瓷大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jcu.edu.cn/",
+      "verification_url": "https://zs.jcu.edu.cn/",
+      "domain": "zs.jcu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "暨南大学": {
+      "school": "暨南大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.jnu.edu.cn/",
+      "verification_url": "https://zsb.jnu.edu.cn/",
+      "domain": "zsb.jnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "曲阜师范大学": {
+      "school": "曲阜师范大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.qfnu.edu.cn/",
+      "verification_url": "https://zsb.qfnu.edu.cn/",
+      "domain": "zsb.qfnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "杭州师范大学": {
+      "school": "杭州师范大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://bkzs.hznu.edu.cn/",
+      "verification_url": "https://bkzs.hznu.edu.cn/",
+      "domain": "bkzs.hznu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "杭州电子科技大学": {
+      "school": "杭州电子科技大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.hdu.edu.cn/",
+      "verification_url": "https://zhaosheng.hdu.edu.cn/",
+      "domain": "zhaosheng.hdu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "桂林理工大学": {
+      "school": "桂林理工大学",
+      "province": "广西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zj.glut.edu.cn/",
+      "verification_url": "https://zj.glut.edu.cn/",
+      "domain": "zj.glut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "桂林电子科技大学": {
+      "school": "桂林电子科技大学",
+      "province": "广西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.guet.edu.cn/",
+      "verification_url": "https://zhaosheng.guet.edu.cn/",
+      "domain": "zhaosheng.guet.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "武汉体育学院": {
+      "school": "武汉体育学院",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.whsu.edu.cn/",
+      "verification_url": "https://zs.whsu.edu.cn/",
+      "domain": "zs.whsu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "武汉大学": {
+      "school": "武汉大学",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://aoff.whu.edu.cn/",
+      "verification_url": "https://aoff.whu.edu.cn/",
+      "domain": "aoff.whu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "武汉工程大学": {
+      "school": "武汉工程大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.wit.edu.cn/",
+      "verification_url": "https://zsb.wit.edu.cn/",
+      "domain": "zsb.wit.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "武汉理工大学": {
+      "school": "武汉理工大学",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.whut.edu.cn/",
+      "verification_url": "https://zs.whut.edu.cn/",
+      "domain": "zs.whut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "武汉科技大学": {
+      "school": "武汉科技大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.wust.edu.cn/",
+      "verification_url": "https://zs.wust.edu.cn/",
+      "domain": "zs.wust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "武汉纺织大学": {
+      "school": "武汉纺织大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.wtu.edu.cn/",
+      "verification_url": "https://zjc.wtu.edu.cn/",
+      "domain": "zjc.wtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "武汉轻工大学": {
+      "school": "武汉轻工大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.whpu.edu.cn/",
+      "verification_url": "https://zsb.whpu.edu.cn/",
+      "domain": "zsb.whpu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "汕头大学": {
+      "school": "汕头大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.stu.edu.cn/",
+      "verification_url": "https://zs.stu.edu.cn/",
+      "domain": "zs.stu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江南大学": {
+      "school": "江南大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://admission.jiangnan.edu.cn/",
+      "verification_url": "https://admission.jiangnan.edu.cn/",
+      "domain": "admission.jiangnan.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江汉大学": {
+      "school": "江汉大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.jhun.edu.cn/",
+      "verification_url": "https://zsb.jhun.edu.cn/",
+      "domain": "zsb.jhun.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江苏大学": {
+      "school": "江苏大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zb.ujs.edu.cn/",
+      "verification_url": "https://zb.ujs.edu.cn/",
+      "domain": "zb.ujs.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江苏师范大学": {
+      "school": "江苏师范大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://bkzs.jsnu.edu.cn/",
+      "verification_url": "https://bkzs.jsnu.edu.cn/",
+      "domain": "bkzs.jsnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江苏海洋大学": {
+      "school": "江苏海洋大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jou.edu.cn/",
+      "verification_url": "https://zs.jou.edu.cn/",
+      "domain": "zs.jou.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江苏科技大学": {
+      "school": "江苏科技大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.just.edu.cn/",
+      "verification_url": "https://zhaosheng.just.edu.cn/",
+      "domain": "zhaosheng.just.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江西中医药大学": {
+      "school": "江西中医药大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jxutcm.edu.cn/",
+      "verification_url": "https://zs.jxutcm.edu.cn/",
+      "domain": "zs.jxutcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江西农业大学": {
+      "school": "江西农业大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jxau.edu.cn/",
+      "verification_url": "https://zs.jxau.edu.cn/",
+      "domain": "zs.jxau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江西师范大学": {
+      "school": "江西师范大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jxnu.edu.cn/",
+      "verification_url": "https://zs.jxnu.edu.cn/",
+      "domain": "zs.jxnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江西理工大学": {
+      "school": "江西理工大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.jxust.edu.cn/",
+      "verification_url": "https://zsw.jxust.edu.cn/",
+      "domain": "zsw.jxust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "江西财经大学": {
+      "school": "江西财经大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.jxufe.edu.cn/",
+      "verification_url": "https://zs.jxufe.edu.cn/",
+      "domain": "zs.jxufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "沈阳农业大学": {
+      "school": "沈阳农业大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.syau.edu.cn/",
+      "verification_url": "https://zs.syau.edu.cn/",
+      "domain": "zs.syau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "沈阳化工大学": {
+      "school": "沈阳化工大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.syuct.edu.cn/",
+      "verification_url": "https://zsb.syuct.edu.cn/",
+      "domain": "zsb.syuct.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "沈阳医学院": {
+      "school": "沈阳医学院",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.symc.edu.cn/",
+      "verification_url": "https://zsb.symc.edu.cn/",
+      "domain": "zsb.symc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "沈阳工业大学": {
+      "school": "沈阳工业大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sut.edu.cn/",
+      "verification_url": "https://zs.sut.edu.cn/",
+      "domain": "zs.sut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "沈阳师范大学": {
+      "school": "沈阳师范大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.synu.edu.cn/",
+      "verification_url": "https://zs.synu.edu.cn/",
+      "domain": "zs.synu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "沈阳建筑大学": {
+      "school": "沈阳建筑大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sjzu.edu.cn/",
+      "verification_url": "https://zs.sjzu.edu.cn/",
+      "domain": "zs.sjzu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "沈阳理工大学": {
+      "school": "沈阳理工大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.sylu.edu.cn/",
+      "verification_url": "https://zsb.sylu.edu.cn/",
+      "domain": "zsb.sylu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "沈阳航空航天大学": {
+      "school": "沈阳航空航天大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sau.edu.cn/",
+      "verification_url": "https://zs.sau.edu.cn/",
+      "domain": "zs.sau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "沈阳药科大学": {
+      "school": "沈阳药科大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.syphu.edu.cn/",
+      "verification_url": "https://zs.syphu.edu.cn/",
+      "domain": "zs.syphu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北中医药大学": {
+      "school": "河北中医药大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hebcm.edu.cn/",
+      "verification_url": "https://zsb.hebcm.edu.cn/",
+      "domain": "zsb.hebcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北农业大学": {
+      "school": "河北农业大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.hebau.edu.cn/",
+      "verification_url": "https://zhaosheng.hebau.edu.cn/",
+      "domain": "zhaosheng.hebau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北北方学院": {
+      "school": "河北北方学院",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hebeinu.edu.cn/",
+      "verification_url": "https://zsb.hebeinu.edu.cn/",
+      "domain": "zsb.hebeinu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北医科大学": {
+      "school": "河北医科大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hebmu.edu.cn/",
+      "verification_url": "https://zsb.hebmu.edu.cn/",
+      "domain": "zsb.hebmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北地质大学": {
+      "school": "河北地质大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hgu.edu.cn/",
+      "verification_url": "https://zs.hgu.edu.cn/",
+      "domain": "zs.hgu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北大学": {
+      "school": "河北大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaoban.hbu.edu.cn/",
+      "verification_url": "https://zhaoban.hbu.edu.cn/",
+      "domain": "zhaoban.hbu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北工业大学": {
+      "school": "河北工业大学",
+      "province": "天津、河北、山西、内蒙古",
+      "school_type": "双一流",
+      "admissions_url": "https://ugs.hebut.edu.cn/",
+      "verification_url": "https://ugs.hebut.edu.cn/",
+      "domain": "ugs.hebut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北工程大学": {
+      "school": "河北工程大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.hebeu.edu.cn/",
+      "verification_url": "https://zhaosheng.hebeu.edu.cn/",
+      "domain": "zhaosheng.hebeu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北师范大学": {
+      "school": "河北师范大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsjyc.hebtu.edu.cn/",
+      "verification_url": "https://zsjyc.hebtu.edu.cn/",
+      "domain": "zsjyc.hebtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北科技大学": {
+      "school": "河北科技大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://bkzs.hebust.edu.cn/",
+      "verification_url": "https://bkzs.hebust.edu.cn/",
+      "domain": "bkzs.hebust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河北经贸大学": {
+      "school": "河北经贸大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.hueb.edu.cn/",
+      "verification_url": "https://zhaosheng.hueb.edu.cn/",
+      "domain": "zhaosheng.hueb.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河南中医药大学": {
+      "school": "河南中医药大学",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hactcm.edu.cn/",
+      "verification_url": "https://zs.hactcm.edu.cn/",
+      "domain": "zs.hactcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河南农业大学": {
+      "school": "河南农业大学",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsjyc.henau.edu.cn/",
+      "verification_url": "https://zsjyc.henau.edu.cn/",
+      "domain": "zsjyc.henau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河南大学": {
+      "school": "河南大学",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.henu.edu.cn/",
+      "verification_url": "https://zs.henu.edu.cn/",
+      "domain": "zs.henu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河南工业大学": {
+      "school": "河南工业大学",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.haut.edu.cn/",
+      "verification_url": "https://zs.haut.edu.cn/",
+      "domain": "zs.haut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河南师范大学": {
+      "school": "河南师范大学",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.htu.edu.cn/zs/",
+      "verification_url": "https://www.htu.edu.cn/zs/",
+      "domain": "www.htu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河南理工大学": {
+      "school": "河南理工大学",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hpu.edu.cn/",
+      "verification_url": "https://zs.hpu.edu.cn/",
+      "domain": "zs.hpu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河南科技大学": {
+      "school": "河南科技大学",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.haust.edu.cn/",
+      "verification_url": "https://zjc.haust.edu.cn/",
+      "domain": "zjc.haust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河南财经政法大学": {
+      "school": "河南财经政法大学",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.huel.edu.cn/",
+      "verification_url": "https://zs.huel.edu.cn/",
+      "domain": "zs.huel.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "河海大学": {
+      "school": "河海大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zsw.hhu.edu.cn/",
+      "verification_url": "https://zsw.hhu.edu.cn/",
+      "domain": "zsw.hhu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "泉州师范学院": {
+      "school": "泉州师范学院",
+      "province": "福建",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.qztc.edu.cn/",
+      "verification_url": "https://zsb.qztc.edu.cn/",
+      "domain": "zsb.qztc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "济南大学": {
+      "school": "济南大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://admission.ujn.edu.cn/",
+      "verification_url": "https://admission.ujn.edu.cn/",
+      "domain": "admission.ujn.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "浙江中医药大学": {
+      "school": "浙江中医药大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.zcmu.edu.cn/",
+      "verification_url": "https://zsb.zcmu.edu.cn/",
+      "domain": "zsb.zcmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "浙江传媒学院": {
+      "school": "浙江传媒学院",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.cuz.edu.cn/",
+      "verification_url": "https://zsw.cuz.edu.cn/",
+      "domain": "zsw.cuz.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "浙江农林大学": {
+      "school": "浙江农林大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.zafu.edu.cn/",
+      "verification_url": "https://zs.zafu.edu.cn/",
+      "domain": "zs.zafu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "浙江大学": {
+      "school": "浙江大学",
+      "province": "浙江、安徽、福建、江西",
+      "school_type": "双一流",
+      "admissions_url": "https://zdzsc.zju.edu.cn/",
+      "verification_url": "https://zdzsc.zju.edu.cn/",
+      "domain": "zdzsc.zju.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "浙江工业大学": {
+      "school": "浙江工业大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.zjut.edu.cn/",
+      "verification_url": "https://zs.zjut.edu.cn/",
+      "domain": "zs.zjut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "浙江工商大学": {
+      "school": "浙江工商大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaoban.zjgsu.edu.cn/",
+      "verification_url": "https://zhaoban.zjgsu.edu.cn/",
+      "domain": "zhaoban.zjgsu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "浙江师范大学": {
+      "school": "浙江师范大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.zjnu.edu.cn/",
+      "verification_url": "https://zs.zjnu.edu.cn/",
+      "domain": "zs.zjnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "浙江理工大学": {
+      "school": "浙江理工大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.zstu.edu.cn/",
+      "verification_url": "https://zs.zstu.edu.cn/",
+      "domain": "zs.zstu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "浙江科技大学": {
+      "school": "浙江科技大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.zust.edu.cn/",
+      "verification_url": "https://zs.zust.edu.cn/",
+      "domain": "zs.zust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "浙江财经大学": {
+      "school": "浙江财经大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.zufe.edu.cn/",
+      "verification_url": "https://zs.zufe.edu.cn/",
+      "domain": "zs.zufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "海军军医大学": {
+      "school": "海军军医大学",
+      "province": "上海",
+      "school_type": "双一流",
+      "admissions_url": "https://ao.smmu.edu.cn/",
+      "verification_url": "https://ao.smmu.edu.cn/",
+      "domain": "ao.smmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "海南医科大学": {
+      "school": "海南医科大学",
+      "province": "海南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hainmc.edu.cn/",
+      "verification_url": "https://zsb.hainmc.edu.cn/",
+      "domain": "zsb.hainmc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "海南大学": {
+      "school": "海南大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.hainanu.edu.cn/",
+      "verification_url": "https://bkzs.hainanu.edu.cn/",
+      "domain": "bkzs.hainanu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "海南师范大学": {
+      "school": "海南师范大学",
+      "province": "海南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.hainnu.edu.cn/",
+      "verification_url": "https://zhaosheng.hainnu.edu.cn/",
+      "domain": "zhaosheng.hainnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "淮北师范大学": {
+      "school": "淮北师范大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.chnu.edu.cn/",
+      "verification_url": "https://zsb.chnu.edu.cn/",
+      "domain": "zsb.chnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "深圳北理莫斯科大学": {
+      "school": "深圳北理莫斯科大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://admission.smbu.edu.cn/",
+      "verification_url": "https://admission.smbu.edu.cn/",
+      "domain": "admission.smbu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "深圳大学": {
+      "school": "深圳大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.szu.edu.cn/",
+      "verification_url": "https://zs.szu.edu.cn/",
+      "domain": "zs.szu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "深圳技术大学": {
+      "school": "深圳技术大学",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sztu.edu.cn/",
+      "verification_url": "https://zs.sztu.edu.cn/",
+      "domain": "zs.sztu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "清华大学": {
+      "school": "清华大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://www.join-tsinghua.edu.cn/",
+      "verification_url": "https://www.join-tsinghua.edu.cn/",
+      "domain": "www.join-tsinghua.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "渤海大学": {
+      "school": "渤海大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.bhu.edu.cn/",
+      "verification_url": "https://zsb.bhu.edu.cn/",
+      "domain": "zsb.bhu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "温州医科大学": {
+      "school": "温州医科大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.wmu.edu.cn/",
+      "verification_url": "https://zhaosheng.wmu.edu.cn/",
+      "domain": "zhaosheng.wmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "温州大学": {
+      "school": "温州大学",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.wzu.edu.cn/",
+      "verification_url": "https://zs.wzu.edu.cn/",
+      "domain": "zs.wzu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖北中医药大学": {
+      "school": "湖北中医药大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hbtcm.edu.cn/",
+      "verification_url": "https://zsb.hbtcm.edu.cn/",
+      "domain": "zsb.hbtcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖北医药学院": {
+      "school": "湖北医药学院",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hbmu.edu.cn/",
+      "verification_url": "https://zsb.hbmu.edu.cn/",
+      "domain": "zsb.hbmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖北大学": {
+      "school": "湖北大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsxx.hubu.edu.cn/",
+      "verification_url": "https://zsxx.hubu.edu.cn/",
+      "domain": "zsxx.hubu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖北工业大学": {
+      "school": "湖北工业大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hbut.edu.cn/",
+      "verification_url": "https://zsb.hbut.edu.cn/",
+      "domain": "zsb.hbut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖北师范大学": {
+      "school": "湖北师范大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hbnu.edu.cn/",
+      "verification_url": "https://zsb.hbnu.edu.cn/",
+      "domain": "zsb.hbnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖南中医药大学": {
+      "school": "湖南中医药大学",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hnucm.edu.cn/",
+      "verification_url": "https://zsb.hnucm.edu.cn/",
+      "domain": "zsb.hnucm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖南农业大学": {
+      "school": "湖南农业大学",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hunau.edu.cn/",
+      "verification_url": "https://zs.hunau.edu.cn/",
+      "domain": "zs.hunau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖南大学": {
+      "school": "湖南大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://admi.hnu.edu.cn/",
+      "verification_url": "https://admi.hnu.edu.cn/",
+      "domain": "admi.hnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖南工业大学": {
+      "school": "湖南工业大学",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hut.edu.cn/",
+      "verification_url": "https://zsb.hut.edu.cn/",
+      "domain": "zsb.hut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖南工商大学": {
+      "school": "湖南工商大学",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hutb.edu.cn/",
+      "verification_url": "https://zs.hutb.edu.cn/",
+      "domain": "zs.hutb.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖南师范大学": {
+      "school": "湖南师范大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.hunnu.edu.cn/",
+      "verification_url": "https://zsb.hunnu.edu.cn/",
+      "domain": "zsb.hunnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖南理工学院": {
+      "school": "湖南理工学院",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.hnist.edu.cn/",
+      "verification_url": "https://zsb.hnist.edu.cn/",
+      "domain": "zsb.hnist.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖南科技大学": {
+      "school": "湖南科技大学",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hnust.edu.cn/",
+      "verification_url": "https://zs.hnust.edu.cn/",
+      "domain": "zs.hnust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湖州师范学院": {
+      "school": "湖州师范学院",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.zjhu.edu.cn/",
+      "verification_url": "https://zsw.zjhu.edu.cn/",
+      "domain": "zsw.zjhu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "湘潭大学": {
+      "school": "湘潭大学",
+      "province": "湖南、广东、广西、海南",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.xtu.edu.cn/",
+      "verification_url": "https://zs.xtu.edu.cn/",
+      "domain": "zs.xtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "烟台大学": {
+      "school": "烟台大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://bkzs.ytu.edu.cn/",
+      "verification_url": "https://bkzs.ytu.edu.cn/",
+      "domain": "bkzs.ytu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "燕山大学": {
+      "school": "燕山大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsjyc.ysu.edu.cn/",
+      "verification_url": "https://zsjyc.ysu.edu.cn/",
+      "domain": "zsjyc.ysu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "牡丹江医科大学": {
+      "school": "牡丹江医科大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.mdjmu.cn/",
+      "verification_url": "https://zsb.mdjmu.cn/",
+      "domain": "zsb.mdjmu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "甘肃中医药大学": {
+      "school": "甘肃中医药大学",
+      "province": "甘肃",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.gszy.edu.cn/",
+      "verification_url": "https://zsb.gszy.edu.cn/",
+      "domain": "zsb.gszy.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "甘肃农业大学": {
+      "school": "甘肃农业大学",
+      "province": "甘肃",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.gsau.edu.cn/",
+      "verification_url": "https://zsb.gsau.edu.cn/",
+      "domain": "zsb.gsau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "电子科技大学": {
+      "school": "电子科技大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.uestc.edu.cn/",
+      "verification_url": "https://zs.uestc.edu.cn/",
+      "domain": "zs.uestc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "皖南医学院": {
+      "school": "皖南医学院",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.wnmc.edu.cn/",
+      "verification_url": "https://zsb.wnmc.edu.cn/",
+      "domain": "zsb.wnmc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "石家庄铁道大学": {
+      "school": "石家庄铁道大学",
+      "province": "河北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.stdu.edu.cn/",
+      "verification_url": "https://zs.stdu.edu.cn/",
+      "domain": "zs.stdu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "石河子大学": {
+      "school": "石河子大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.shzu.edu.cn/",
+      "verification_url": "https://zsb.shzu.edu.cn/",
+      "domain": "zsb.shzu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "福州大学": {
+      "school": "福州大学",
+      "province": "浙江、安徽、福建、江西",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.fzu.edu.cn/",
+      "verification_url": "https://zsb.fzu.edu.cn/",
+      "domain": "zsb.fzu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "福建中医药大学": {
+      "school": "福建中医药大学",
+      "province": "福建",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.fjtcm.edu.cn/",
+      "verification_url": "https://zsb.fjtcm.edu.cn/",
+      "domain": "zsb.fjtcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "福建农林大学": {
+      "school": "福建农林大学",
+      "province": "福建",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.fafu.edu.cn/",
+      "verification_url": "https://zsb.fafu.edu.cn/",
+      "domain": "zsb.fafu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "福建医科大学": {
+      "school": "福建医科大学",
+      "province": "福建",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.fjmu.edu.cn/",
+      "verification_url": "https://zsb.fjmu.edu.cn/",
+      "domain": "zsb.fjmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "福建师范大学": {
+      "school": "福建师范大学",
+      "province": "福建",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.fjnu.edu.cn/",
+      "verification_url": "https://zsb.fjnu.edu.cn/",
+      "domain": "zsb.fjnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "空军军医大学": {
+      "school": "空军军医大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://www.fmmu.edu.cn/",
+      "verification_url": "https://www.fmmu.edu.cn/",
+      "domain": "www.fmmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "绍兴文理学院": {
+      "school": "绍兴文理学院",
+      "province": "浙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.usx.edu.cn/",
+      "verification_url": "https://zs.usx.edu.cn/",
+      "domain": "zs.usx.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "聊城大学": {
+      "school": "聊城大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://admission.lcu.edu.cn/",
+      "verification_url": "https://admission.lcu.edu.cn/",
+      "domain": "admission.lcu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "苏州大学": {
+      "school": "苏州大学",
+      "province": "江苏",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.suda.edu.cn/",
+      "verification_url": "https://zsb.suda.edu.cn/",
+      "domain": "zsb.suda.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "苏州科技大学": {
+      "school": "苏州科技大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.usts.edu.cn/",
+      "verification_url": "https://zsb.usts.edu.cn/",
+      "domain": "zsb.usts.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "蚌埠医科大学": {
+      "school": "蚌埠医科大学",
+      "province": "安徽",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.bbmc.edu.cn/",
+      "verification_url": "https://zs.bbmc.edu.cn/",
+      "domain": "zs.bbmc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "衡阳师范学院": {
+      "school": "衡阳师范学院",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hynu.edu.cn/",
+      "verification_url": "https://zs.hynu.edu.cn/",
+      "domain": "zs.hynu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西交利物浦大学": {
+      "school": "西交利物浦大学",
+      "province": "江苏",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.xjtlu.edu.cn/zh/study/undergraduate",
+      "verification_url": "https://www.xjtlu.edu.cn/zh/study/undergraduate",
+      "domain": "www.xjtlu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西北农林科技大学": {
+      "school": "西北农林科技大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zhshw.nwafu.edu.cn/",
+      "verification_url": "https://zhshw.nwafu.edu.cn/",
+      "domain": "zhshw.nwafu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西北大学": {
+      "school": "西北大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.nwu.edu.cn/",
+      "verification_url": "https://zsb.nwu.edu.cn/",
+      "domain": "zsb.nwu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西北工业大学": {
+      "school": "西北工业大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.nwpu.edu.cn/",
+      "verification_url": "https://zsb.nwpu.edu.cn/",
+      "domain": "zsb.nwpu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西北师范大学": {
+      "school": "西北师范大学",
+      "province": "甘肃",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.nwnu.edu.cn/",
+      "verification_url": "https://zsb.nwnu.edu.cn/",
+      "domain": "zsb.nwnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西北政法大学": {
+      "school": "西北政法大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.nwupl.edu.cn/",
+      "verification_url": "https://zsb.nwupl.edu.cn/",
+      "domain": "zsb.nwupl.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西北民族大学": {
+      "school": "西北民族大学",
+      "province": "甘肃",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xbmu.edu.cn/",
+      "verification_url": "https://zsb.xbmu.edu.cn/",
+      "domain": "zsb.xbmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西华大学": {
+      "school": "西华大学",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.xhu.edu.cn/",
+      "verification_url": "https://zjc.xhu.edu.cn/",
+      "domain": "zjc.xhu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西华师范大学": {
+      "school": "西华师范大学",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.cwnu.edu.cn/",
+      "verification_url": "https://zsb.cwnu.edu.cn/",
+      "domain": "zsb.cwnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西南交通大学": {
+      "school": "西南交通大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.swjtu.edu.cn/",
+      "verification_url": "https://zhaosheng.swjtu.edu.cn/",
+      "domain": "zhaosheng.swjtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西南医科大学": {
+      "school": "西南医科大学",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.swmu.edu.cn/",
+      "verification_url": "https://zsb.swmu.edu.cn/",
+      "domain": "zsb.swmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西南大学": {
+      "school": "西南大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzsw.swu.edu.cn/",
+      "verification_url": "https://bkzsw.swu.edu.cn/",
+      "domain": "bkzsw.swu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西南政法大学": {
+      "school": "西南政法大学",
+      "province": "重庆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.swupl.edu.cn/",
+      "verification_url": "https://zs.swupl.edu.cn/",
+      "domain": "zs.swupl.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西南林业大学": {
+      "school": "西南林业大学",
+      "province": "云南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.swfu.edu.cn/",
+      "verification_url": "https://zsb.swfu.edu.cn/",
+      "domain": "zsb.swfu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西南民族大学": {
+      "school": "西南民族大学",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.swun.edu.cn/",
+      "verification_url": "https://zs.swun.edu.cn/",
+      "domain": "zs.swun.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西南石油大学": {
+      "school": "西南石油大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.swpu.edu.cn/",
+      "verification_url": "https://zsb.swpu.edu.cn/",
+      "domain": "zsb.swpu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西南科技大学": {
+      "school": "西南科技大学",
+      "province": "四川",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.swust.edu.cn/",
+      "verification_url": "https://zs.swust.edu.cn/",
+      "domain": "zs.swust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西南财经大学": {
+      "school": "西南财经大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://zb.swufe.edu.cn/",
+      "verification_url": "https://zb.swufe.edu.cn/",
+      "domain": "zb.swufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安交通大学": {
+      "school": "西安交通大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.xjtu.edu.cn/",
+      "verification_url": "https://zs.xjtu.edu.cn/",
+      "domain": "zs.xjtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安医学院": {
+      "school": "西安医学院",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xiyi.edu.cn/",
+      "verification_url": "https://zsb.xiyi.edu.cn/",
+      "domain": "zsb.xiyi.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安外国语大学": {
+      "school": "西安外国语大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.xisu.edu.cn/",
+      "verification_url": "https://zhaosheng.xisu.edu.cn/",
+      "domain": "zhaosheng.xisu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安工业大学": {
+      "school": "西安工业大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xatu.edu.cn/",
+      "verification_url": "https://zsb.xatu.edu.cn/",
+      "domain": "zsb.xatu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安工程大学": {
+      "school": "西安工程大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xpu.edu.cn/",
+      "verification_url": "https://zsb.xpu.edu.cn/",
+      "domain": "zsb.xpu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安建筑科技大学": {
+      "school": "西安建筑科技大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.xauat.edu.cn/",
+      "verification_url": "https://zhaosheng.xauat.edu.cn/",
+      "domain": "zhaosheng.xauat.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安理工大学": {
+      "school": "西安理工大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.xaut.edu.cn/",
+      "verification_url": "https://zhaosheng.xaut.edu.cn/",
+      "domain": "zhaosheng.xaut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安电子科技大学": {
+      "school": "西安电子科技大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.xidian.edu.cn/",
+      "verification_url": "https://zsb.xidian.edu.cn/",
+      "domain": "zsb.xidian.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安石油大学": {
+      "school": "西安石油大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xsyu.edu.cn/",
+      "verification_url": "https://zsb.xsyu.edu.cn/",
+      "domain": "zsb.xsyu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安科技大学": {
+      "school": "西安科技大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.xust.edu.cn/",
+      "verification_url": "https://zs.xust.edu.cn/",
+      "domain": "zs.xust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安美术学院": {
+      "school": "西安美术学院",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.xafa.edu.cn/",
+      "verification_url": "https://zs.xafa.edu.cn/",
+      "domain": "zs.xafa.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安财经大学": {
+      "school": "西安财经大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.xaufe.edu.cn/",
+      "verification_url": "https://zhaosheng.xaufe.edu.cn/",
+      "domain": "zhaosheng.xaufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安邮电大学": {
+      "school": "西安邮电大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.xiyou.edu.cn/",
+      "verification_url": "https://zhaosheng.xiyou.edu.cn/",
+      "domain": "zhaosheng.xiyou.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西安音乐学院": {
+      "school": "西安音乐学院",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.xacom.edu.cn/",
+      "verification_url": "https://zsb.xacom.edu.cn/",
+      "domain": "zsb.xacom.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西藏大学": {
+      "school": "西藏大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://zjc.utibet.edu.cn/",
+      "verification_url": "https://zjc.utibet.edu.cn/",
+      "domain": "zjc.utibet.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西藏民族大学": {
+      "school": "西藏民族大学",
+      "province": "西藏",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.xzmu.edu.cn/",
+      "verification_url": "https://zs.xzmu.edu.cn/",
+      "domain": "zs.xzmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "西藏藏医药大学": {
+      "school": "西藏藏医药大学",
+      "province": "西藏",
+      "school_type": "非双一流",
+      "admissions_url": "https://www.ttmc.edu.cn/",
+      "verification_url": "https://www.ttmc.edu.cn/",
+      "domain": "www.ttmc.edu.cn",
+      "note": "学校官网作为入口，独立本科招生页未明确稳定",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "贵州中医药大学": {
+      "school": "贵州中医药大学",
+      "province": "贵州",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.gzy.edu.cn/",
+      "verification_url": "https://zsb.gzy.edu.cn/",
+      "domain": "zsb.gzy.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "贵州医科大学": {
+      "school": "贵州医科大学",
+      "province": "贵州",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.gmc.edu.cn/",
+      "verification_url": "https://zs.gmc.edu.cn/",
+      "domain": "zs.gmc.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "贵州大学": {
+      "school": "贵州大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://rso.gzu.edu.cn/",
+      "verification_url": "https://rso.gzu.edu.cn/",
+      "domain": "rso.gzu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "贵州师范大学": {
+      "school": "贵州师范大学",
+      "province": "贵州",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.gznu.edu.cn/",
+      "verification_url": "https://zjc.gznu.edu.cn/",
+      "domain": "zjc.gznu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "贵州民族大学": {
+      "school": "贵州民族大学",
+      "province": "贵州",
+      "school_type": "非双一流",
+      "admissions_url": "https://zjc.gzmu.edu.cn/",
+      "verification_url": "https://zjc.gzmu.edu.cn/",
+      "domain": "zjc.gzmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "贵州财经大学": {
+      "school": "贵州财经大学",
+      "province": "贵州",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.gufe.edu.cn/",
+      "verification_url": "https://zhaosheng.gufe.edu.cn/",
+      "domain": "zhaosheng.gufe.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "赣南医科大学": {
+      "school": "赣南医科大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.gmu.cn/",
+      "verification_url": "https://zs.gmu.cn/",
+      "domain": "zs.gmu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "赣南师范大学": {
+      "school": "赣南师范大学",
+      "province": "江西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.gnnu.edu.cn/",
+      "verification_url": "https://zs.gnnu.edu.cn/",
+      "domain": "zs.gnnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "辽宁中医药大学": {
+      "school": "辽宁中医药大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.lnutcm.edu.cn/",
+      "verification_url": "https://zs.lnutcm.edu.cn/",
+      "domain": "zs.lnutcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "辽宁大学": {
+      "school": "辽宁大学",
+      "province": "辽宁、吉林、黑龙江",
+      "school_type": "双一流",
+      "admissions_url": "https://zs.lnu.edu.cn/",
+      "verification_url": "https://zs.lnu.edu.cn/",
+      "domain": "zs.lnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "辽宁工程技术大学": {
+      "school": "辽宁工程技术大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsxxw.lntu.edu.cn/",
+      "verification_url": "https://zsxxw.lntu.edu.cn/",
+      "domain": "zsxxw.lntu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "辽宁师范大学": {
+      "school": "辽宁师范大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.lnnu.edu.cn/",
+      "verification_url": "https://zsb.lnnu.edu.cn/",
+      "domain": "zsb.lnnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "辽宁石油化工大学": {
+      "school": "辽宁石油化工大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.lnpu.edu.cn/",
+      "verification_url": "https://zs.lnpu.edu.cn/",
+      "domain": "zs.lnpu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "遵义医科大学": {
+      "school": "遵义医科大学",
+      "province": "贵州",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.zmu.edu.cn/",
+      "verification_url": "https://zsb.zmu.edu.cn/",
+      "domain": "zsb.zmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "郑州大学": {
+      "school": "郑州大学",
+      "province": "山东、河南、湖北",
+      "school_type": "双一流",
+      "admissions_url": "https://ao.zzu.edu.cn/",
+      "verification_url": "https://ao.zzu.edu.cn/",
+      "domain": "ao.zzu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "郑州航空工业管理学院": {
+      "school": "郑州航空工业管理学院",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsjyc.zua.edu.cn/",
+      "verification_url": "https://zsjyc.zua.edu.cn/",
+      "domain": "zsjyc.zua.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "郑州轻工业大学": {
+      "school": "郑州轻工业大学",
+      "province": "河南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.zzuli.edu.cn/",
+      "verification_url": "https://zhaosheng.zzuli.edu.cn/",
+      "domain": "zhaosheng.zzuli.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "重庆交通大学": {
+      "school": "重庆交通大学",
+      "province": "重庆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.cqjtu.edu.cn/",
+      "verification_url": "https://zs.cqjtu.edu.cn/",
+      "domain": "zs.cqjtu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "重庆医科大学": {
+      "school": "重庆医科大学",
+      "province": "重庆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.cqmu.edu.cn/",
+      "verification_url": "https://zsb.cqmu.edu.cn/",
+      "domain": "zsb.cqmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "重庆大学": {
+      "school": "重庆大学",
+      "province": "重庆、四川、贵州、云南、西藏",
+      "school_type": "双一流",
+      "admissions_url": "https://zhaosheng.cqu.edu.cn/",
+      "verification_url": "https://zhaosheng.cqu.edu.cn/",
+      "domain": "zhaosheng.cqu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "重庆工商大学": {
+      "school": "重庆工商大学",
+      "province": "重庆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.ctbu.edu.cn/",
+      "verification_url": "https://zhaosheng.ctbu.edu.cn/",
+      "domain": "zhaosheng.ctbu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "重庆师范大学": {
+      "school": "重庆师范大学",
+      "province": "重庆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.cqnu.edu.cn/",
+      "verification_url": "https://zsb.cqnu.edu.cn/",
+      "domain": "zsb.cqnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "重庆理工大学": {
+      "school": "重庆理工大学",
+      "province": "重庆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.cqut.edu.cn/",
+      "verification_url": "https://zs.cqut.edu.cn/",
+      "domain": "zs.cqut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "重庆科技大学": {
+      "school": "重庆科技大学",
+      "province": "重庆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.cqust.edu.cn/",
+      "verification_url": "https://zsb.cqust.edu.cn/",
+      "domain": "zsb.cqust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "重庆邮电大学": {
+      "school": "重庆邮电大学",
+      "province": "重庆",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.cqupt.edu.cn/",
+      "verification_url": "https://zs.cqupt.edu.cn/",
+      "domain": "zs.cqupt.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "锦州医科大学": {
+      "school": "锦州医科大学",
+      "province": "辽宁",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.jzmu.edu.cn/",
+      "verification_url": "https://zsb.jzmu.edu.cn/",
+      "domain": "zsb.jzmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "长安大学": {
+      "school": "长安大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.chd.edu.cn/",
+      "verification_url": "https://zsb.chd.edu.cn/",
+      "domain": "zsb.chd.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "长春中医药大学": {
+      "school": "长春中医药大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ccucm.edu.cn/",
+      "verification_url": "https://zs.ccucm.edu.cn/",
+      "domain": "zs.ccucm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "长春大学": {
+      "school": "长春大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.ccu.edu.cn/",
+      "verification_url": "https://zsb.ccu.edu.cn/",
+      "domain": "zsb.ccu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "长春工业大学": {
+      "school": "长春工业大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ccut.edu.cn/",
+      "verification_url": "https://zs.ccut.edu.cn/",
+      "domain": "zs.ccut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "长春师范大学": {
+      "school": "长春师范大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.ccsfu.edu.cn/",
+      "verification_url": "https://zhaosheng.ccsfu.edu.cn/",
+      "domain": "zhaosheng.ccsfu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "长春理工大学": {
+      "school": "长春理工大学",
+      "province": "吉林",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.cust.edu.cn/",
+      "verification_url": "https://zsb.cust.edu.cn/",
+      "domain": "zsb.cust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "长江大学": {
+      "school": "长江大学",
+      "province": "湖北",
+      "school_type": "非双一流",
+      "admissions_url": "https://zszc.yangtzeu.edu.cn/",
+      "verification_url": "https://zszc.yangtzeu.edu.cn/",
+      "domain": "zszc.yangtzeu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "长沙理工大学": {
+      "school": "长沙理工大学",
+      "province": "湖南",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.csust.edu.cn/",
+      "verification_url": "https://zhaosheng.csust.edu.cn/",
+      "domain": "zhaosheng.csust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "闽南师范大学": {
+      "school": "闽南师范大学",
+      "province": "福建",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.mnnu.edu.cn/",
+      "verification_url": "https://zsb.mnnu.edu.cn/",
+      "domain": "zsb.mnnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "陕西中医药大学": {
+      "school": "陕西中医药大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.sntcm.edu.cn/",
+      "verification_url": "https://zsb.sntcm.edu.cn/",
+      "domain": "zsb.sntcm.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "陕西师范大学": {
+      "school": "陕西师范大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zsb.snnu.edu.cn/",
+      "verification_url": "https://zsb.snnu.edu.cn/",
+      "domain": "zsb.snnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "陕西科技大学": {
+      "school": "陕西科技大学",
+      "province": "陕西",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.sust.edu.cn/",
+      "verification_url": "https://zs.sust.edu.cn/",
+      "domain": "zs.sust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "集美大学": {
+      "school": "集美大学",
+      "province": "福建",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.jmu.edu.cn/",
+      "verification_url": "https://zsb.jmu.edu.cn/",
+      "domain": "zsb.jmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "青岛农业大学": {
+      "school": "青岛农业大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsw.qau.edu.cn/",
+      "verification_url": "https://zsw.qau.edu.cn/",
+      "domain": "zsw.qau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "青岛大学": {
+      "school": "青岛大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.qdu.edu.cn/",
+      "verification_url": "https://zs.qdu.edu.cn/",
+      "domain": "zs.qdu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "青岛理工大学": {
+      "school": "青岛理工大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhaosheng.qut.edu.cn/",
+      "verification_url": "https://zhaosheng.qut.edu.cn/",
+      "domain": "zhaosheng.qut.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "青岛科技大学": {
+      "school": "青岛科技大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.qust.edu.cn/",
+      "verification_url": "https://zs.qust.edu.cn/",
+      "domain": "zs.qust.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "青海大学": {
+      "school": "青海大学",
+      "province": "陕西、甘肃、青海、宁夏、新疆",
+      "school_type": "双一流",
+      "admissions_url": "https://zsw.qhu.edu.cn/",
+      "verification_url": "https://zsw.qhu.edu.cn/",
+      "domain": "zsw.qhu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "青海师范大学": {
+      "school": "青海师范大学",
+      "province": "青海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.qhnu.edu.cn/",
+      "verification_url": "https://zsb.qhnu.edu.cn/",
+      "domain": "zsb.qhnu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "青海民族大学": {
+      "school": "青海民族大学",
+      "province": "青海",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.qhmu.edu.cn/",
+      "verification_url": "https://zsb.qhmu.edu.cn/",
+      "domain": "zsb.qhmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "首都体育学院": {
+      "school": "首都体育学院",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.cupes.edu.cn/",
+      "verification_url": "https://zs.cupes.edu.cn/",
+      "domain": "zs.cupes.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "首都医科大学": {
+      "school": "首都医科大学",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zhsh.ccmu.edu.cn/",
+      "verification_url": "https://zhsh.ccmu.edu.cn/",
+      "domain": "zhsh.ccmu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "首都师范大学": {
+      "school": "首都师范大学",
+      "province": "北京",
+      "school_type": "双一流",
+      "admissions_url": "https://bkzs.cnu.edu.cn/",
+      "verification_url": "https://bkzs.cnu.edu.cn/",
+      "domain": "bkzs.cnu.edu.cn",
+      "note": "与另一分类表重名，请核对",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "首都经济贸易大学": {
+      "school": "首都经济贸易大学",
+      "province": "北京",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.cueb.edu.cn/",
+      "verification_url": "https://zs.cueb.edu.cn/",
+      "domain": "zs.cueb.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "香港中文大学（深圳）": {
+      "school": "香港中文大学（深圳）",
+      "province": "广东",
+      "school_type": "非双一流",
+      "admissions_url": "https://admissions.cuhk.edu.cn/",
+      "verification_url": "https://admissions.cuhk.edu.cn/",
+      "domain": "admissions.cuhk.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "鲁东大学": {
+      "school": "鲁东大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.ldu.edu.cn/",
+      "verification_url": "https://zs.ldu.edu.cn/",
+      "domain": "zs.ldu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "黑龙江中医药大学": {
+      "school": "黑龙江中医药大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hljucm.net/",
+      "verification_url": "https://zs.hljucm.net/",
+      "domain": "zs.hljucm.net",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "黑龙江八一农垦大学": {
+      "school": "黑龙江八一农垦大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.byau.edu.cn/",
+      "verification_url": "https://zsb.byau.edu.cn/",
+      "domain": "zsb.byau.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "黑龙江大学": {
+      "school": "黑龙江大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.hlju.edu.cn/",
+      "verification_url": "https://zs.hlju.edu.cn/",
+      "domain": "zs.hlju.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "黑龙江科技大学": {
+      "school": "黑龙江科技大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.usth.edu.cn/",
+      "verification_url": "https://zs.usth.edu.cn/",
+      "domain": "zs.usth.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "齐鲁工业大学": {
+      "school": "齐鲁工业大学",
+      "province": "山东",
+      "school_type": "非双一流",
+      "admissions_url": "https://zsb.qlu.edu.cn/",
+      "verification_url": "https://zsb.qlu.edu.cn/",
+      "domain": "zsb.qlu.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    },
+    "齐齐哈尔大学": {
+      "school": "齐齐哈尔大学",
+      "province": "黑龙江",
+      "school_type": "非双一流",
+      "admissions_url": "https://zs.qqhru.edu.cn/",
+      "verification_url": "https://zs.qqhru.edu.cn/",
+      "domain": "zs.qqhru.edu.cn",
+      "note": "",
+      "source": "全国双一流及非双一流高校本科招生网统一表.xlsx"
+    }
+  }
+}
